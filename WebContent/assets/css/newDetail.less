@@ -1,0 +1,43 @@
+@import "var";
+
+.main-content {
+  .nd-m-c{
+    width: @baseWidth;
+    margin:0 auto;
+  }
+  .nd-nav{
+    margin:20px 0px 20px 0px;
+    color: @fontcolorhoverbase;
+    background: url("../img/dqwz.png");
+    height: 35px;
+    line-height: 35px;
+    a{
+      color:@fontcolorhoverbase;
+    }
+  }
+  .nd-content{
+    border:solid 1px @borderColor;
+    padding:20px;
+    color:@backFootBlack;
+    .nd-c-title{
+      margin-bottom:20px;
+     // text-align: center;
+      font-weight:700;
+      font-family: 微软雅黑;
+      .nd-c-t-1{
+        text-align: center;
+        font-size: 20px;
+      }
+      .nd-c-t-2{
+        font-size: 16px;
+        text-align: center;
+        font-weight: normal;
+      }
+    }
+    .nd-c-c{
+      img{
+        max-width:100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,213 @@
+<%
+layout("../layouts/platform.html"){
+%>
+    <div class="nd-m-c">
+        <div class="nd-nav">
+            当前位置：
+            <%for(var i = (channels.~size -1) ; i >= 0 ; i --){
+            if(channels[i].url == "#"){
+            %>
+            <a href="${channels[i].url}" >${channels[i].name}</a>
+            <%
+            }else{
+            %>
+            <a href="${AppDomain!}${base!}/${channels[i].url}?id=${channels[i].id}" target="${channels[i].target}">${channels[i].name}</a>
+            <%}%>
+            ${i == 0 ? '' : '&rarr;'}
+            <%}%>
+        </div>
+        <div class="team-content">
+            <form method="get" id="formSub" >
+                <input type="hidden" name="serviceType" value="${sericeType!}">
+                <input type="hidden" name="teamType" value="${teamType!}">
+                <input type="hidden" name="teamNum" value="${teamNum!}">
+                <input type="hidden" name = "type" value="${type!}">
+                <input type="hidden" name="channelId" value="${channelId}">
+                <div class="team-tag" >
+                    <div class="tt-li" >
+                        <div class="tt-label">
+                            ${pname.name}:
+                        </div>
+                        <div class="tt-search-cnd servieType">
+                            <ul>
+                                <li data-val = "" class="${serviceType == '' ? 'act':'' }"  >全部</li>
+                                <% for(item in dicts){ %>
+                                <li data-val = "${item.id}"  class="${serviceType == item.id ? 'act':'' }" >${item.name}</li>
+                                <%}%>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tt-li">
+                        <div class="tt-label">
+                            ${unitDict.name}:
+                        </div>
+                        <div class="tt-search-cnd teamType">
+                            <ul>
+                                <li data-val = "" class="${teamType == '' ? 'act':'' }" >全部</li>
+                                <% for(item in unitDicts){ %>
+                                <li data-val = "${item.id}" class="${teamType == item.id ? 'act':'' }">${item.name}</li>
+                                <%}%>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tt-li">
+                        <div class="tt-label">
+                            团队人数:
+                        </div>
+                        <div class="tt-search-cnd teamNum">
+                            <ul>
+                                <li data-val = "" class="${teamNum == '' ? 'act':'' }"  >全部</li>
+                                <li data-val = "-1~0" class="${teamNum == '-1~0' ? 'act':'' }">0</li>
+                                <li data-val = "1~100" class="${teamNum == '1~100' ? 'act':'' }">1-100</li>
+                                <li data-val = "101~200" class="${teamNum == '101~200' ? 'act':'' }">101-200</li>
+                                <li data-val = "201~500" class="${teamNum == '201~500' ? 'act':'' }">201-500</li>
+                                <li data-val = "501~1000" class="${teamNum == '501~1000' ? 'act':'' }">501-1000</li>
+                                <li data-val = "1000~999999" class="${teamNum == '1000~999999' ? 'act':'' }">1000以上</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="team-search-cnd">
+                    <div class="tsc">
+
+                        <div class="tsc-in">
+                            <label  >团体登记日期</label>
+                            <input type="text" id="startDate" name="startDate" value = '${startDate!}'>至 <input type="text" id="endDate" name="endDate" value = '${endDate!}'>
+                        </div>
+                        <div class="tsc-in">
+                            <label >团体ID</label>
+                            <input type="text" name="teamId" value="${teamId!}">
+                        </div>
+                        <div class="tsc-in">
+                            <label >团体名称</label>
+                            <input type="text" class="tsc-in-d" value="${teamName!}" name="teamName">
+                        </div>
+                        <div class="tsc-in">
+                            <button class="btn btn-default" id="searM">搜索</button>
+                            <button class="btn btn-default" id="listM">列表模式</button>
+                            <button class="btn btn-default" id="mapM">地图模式</button>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+            <div class="tc-listView">
+            <% for(item in list){ %>
+                <div class="tc-pro-include">
+                    <div class="tc-l-pro">
+                        <div class="tc-l-pro-c">
+                            <div class="tc-1pro-img">
+                                <img src="${base!}${item.logo}" alt="">
+                            </div>
+                            <div class="tc-1pro-title">
+                                <a target="_blank" href="${AppDomain!}${base!}/team/detail?channelId=${channelId}&teamId=${item.id}&id=123132">${item.groupName}</a>
+                            </div>
+                            <div class="tc-1pro-teamnum">
+                                团队人数:${item.pnum}
+                            </div>
+                            <div class="tc-1pro-service">
+                                服务时长:${item.init_time}小时
+                            </div>
+                        </div>
+                        <div class="tc-pro-line">
+                            <div class="pro-line">
+
+                            </div>
+                        </div>
+                        <div class="tc-l-pro-foo">
+                            <div class="tc-pro-foo-tab">
+                                <div class="tc-pro-peixun">培训满意度</div>
+                                <div class="tc-pro-grade">5.0</div>
+                            </div>
+                            <div class="tc-pro-foo-tab">
+                                <div class="tc-pro-peixun">合作满意度</div>
+                                <div class="tc-pro-grade">5.0</div>
+                            </div>
+                            <div class="tc-pro-foo-tab">
+                                <div class="tc-pro-peixun">计划符合度</div>
+                                <div class="tc-pro-grade">5.0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <%}%>
+                <div class="tc-listView-page">
+                    <!--<input type="text" id="startDate" name="startDate" value = '${startDate!}'>至 <input type="text" id="endDate" name="endDate" value = '${endDate!}'>-->
+                <!--</div>-->
+                <!--<div class="tsc-in">-->
+                    <!--<label >团体ID</label>-->
+                    <!--<input type="text" name="teamId" value="${teamId!}">-->
+                <!--</div>-->
+                <!--<div class="tsc-in">-->
+                    <!--<label >团体名称</label>-->
+                    <!--<input type="text" class="tsc-in-d" value="${teamName!}" name="teamName">-->
+                    <%
+                    var requrl = AppDomain!+base! + "/team/list?channelId="+(channelId!)+"&type="+(type!)+
+                    "&teamNum"+(teamNum!)+"&serviceType"+(serviceType!)+"&teamType"+(teamType!)+
+                    "&startDate"+(startDate!)+"&endDate"+(endDate!)+"&teamId"+(teamId!)+"&teamName"+(teamName!);
+                    include("../layouts/page.html",{page:pageCount,len:length,cur:draw,url:requrl}){}
+                    %>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="${base!}/assets/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="${base!}/assets/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script>
+
+        $(function(){
+            $("#sbtn").on("click",function(){
+                console.log("搜索")
+                local.search($("#search").val());
+            });
+            function subForm(){
+                $("#formSub").submit();
+            }
+
+            $(".teamNum").find("li").on("click",function(){
+                $("input[name='teamNum']").val($(this).attr("data-val"));
+                subForm();
+            });
+
+            $(".servieType").find("li").on("click",function(){
+                $("input[name='serviceType']").val($(this).attr("data-val"));
+                subForm();
+            })
+
+            $(".teamType").find("li").on("click",function(){
+                $("input[name='teamType']").val($(this).attr("data-val"));
+                subForm();
+            });
+
+            $("#mapM").on("click",function(){
+                $("input[name='type']").val("map");
+            })
+            $("#listM").on("click",function(){
+                $("input[name='type']").val("list");
+            });
+            $("#startDate").datetimepicker({
+                anguage:  'zh-CN',
+                format: 'yyyy-mm-dd',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2, //这里就设置了默认视图为年视图
+                minView: 2, //设置最小视图为年视图
+                forceParse: 0});
+            $("#endDate").datetimepicker({
+                anguage:  'zh-CN',
+                format: 'yyyy-mm-dd',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2, //这里就设置了默认视图为年视图
+                minView: 2, //设置最小视图为年视图
+                forceParse: 0});
+        })
+    </script>
+<%}%>

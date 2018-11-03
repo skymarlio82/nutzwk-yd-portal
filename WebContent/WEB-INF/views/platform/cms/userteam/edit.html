@@ -1,0 +1,380 @@
+<%
+layout("/layouts/platform.html"){
+%>
+<script src="${base!}/assets/plugins/ueditor/ueditor.config.js"></script>
+<script src="${base!}/assets/plugins/ueditor/ueditor.all.min.js"></script>
+<header class="header navbar bg-white shadow">
+    <div class="btn-group tool-button">
+        <a class="btn btn-primary navbar-btn" href="${base}/platform/cms/userteam" id="goBack" data-pjax><i class="ti-angle-left"></i>${msg['globals.button.back']}</a>
+    </div>
+</header>
+
+<div class="content-wrap">
+    <div class="wrapper" style="min-height:500px;">
+        <section class="panel panel-form">
+            <form id="editForm" role="form" class="form-horizontal parsley-form" data-parsley-validate
+                  action="${base}/platform/cms/userteam/editDo" method="post">
+                <input name="id" type="hidden" value="${obj.id}">
+                <div class="row mb10">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="tid" class="col-sm-2 control-label">${msg['cms.userteam.column.tid']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="tid" class="form-control" name="tid" data-parsley-required="true"
+                                       placeholder="${msg['cms.userteam.column.tid']}" value="${obj.tid}"  >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">${msg['cms.userteam.column.username']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="username" class="form-control" name="username" data-parsley-required="true"
+                                       placeholder="${msg['cms.userteam.column.username']}" value="${obj.username}"  >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label">${msg['cms.userteam.column.password']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="password" class="form-control" name="password"
+                                       placeholder="${msg['cms.userteam.column.password']}" value="${obj.password}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="init_time" class="col-sm-2 control-label">服务时长</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="init_time" class="form-control" name="init_time" value="${obj.init_time}" placeholder="服务时长">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">${msg['cms.userteam.column.email']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="email" class="form-control" name="email" data-parsley-required="true"
+                                       placeholder="${msg['cms.userteam.column.email']}" value="${obj.email}"  >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="groupName" class="col-sm-2 control-label">${msg['cms.userteam.column.groupName']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="groupName" id="groupName" value="${obj.groupName}">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="logo" class="col-sm-2 control-label">${msg['cms.userteam.column.logo']}</label>
+                            <div class="col-sm-8">
+                                <div id="queue"></div>
+                                <div>
+                                    <input id="file_upload" name="file_upload" type="file" multiple="false">
+                                </div>
+                                <div id="img" style="padding: 5px;">
+                                    <img src="${obj.logo}" alt="">
+                                </div>
+                                <input type="hidden" id="logo" name="logo" value="${obj.logo}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="teamIntro" class="col-sm-2 control-label">团体简介</label>
+                            <div class="col-sm-8">
+                                <textarea type="text" style="width:100%;height:200px;" id="teamIntro" name="teamIntro"  >${obj.teamIntro!}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signStatus" class="col-sm-2 control-label">${msg['cms.userteam.column.signStatus']}</label>
+                            <div class="col-sm-8">
+                                <select id="signStatus" class="form-control" name="signStatus" data-parsley-required="true" >
+                                    <option value = "0" value="${obj.signStatus == 0?'selected':''}"   >在民政部门登记成立的法人组织</option>
+                                    <option value = "1" value="${obj.signStatus == 1?'selected':''}">未登记的社会组织或其他组织</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="constractGroup" class="col-sm-2 control-label">${msg['cms.userteam.column.constractGroup']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="constractGroup" class="form-control" name="constractGroup" data-parsley-required="true"
+                                       placeholder="${msg['cms.userteam.column.constractGroup']}" value="${obj.constractGroup}"  >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="unitType" class="col-sm-2 control-label">${msg['cms.userteam.column.unitType']}</label>
+                            <div class="col-sm-8">
+                                <select id="unitType" class="form-control" name="unitType" data-parsley-required="true"  >
+                                    <%for( item in unitType ){%>
+                                    <option value = "${item.id}"  ${obj.unitType == item.id?'selected':''}>${item.name}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="unitName" class="col-sm-2 control-label">${msg['cms.userteam.column.unitName']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="unitName" class="form-control" name="unitName"
+                                       placeholder="${msg['cms.userteam.column.unitName']}" value="${obj.unitName}"  >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="region" class="col-sm-2 control-label">${msg['cms.userteam.column.region']}</label>
+                            <div class="col-sm-8">
+                                <select id="region" class="form-control" name="region" data-parsley-required="true"  >
+                                    <%for( item in region ){%>
+                                    <option value = "${item.id}"  ${obj.region == item.id?'selected':''}>${item.name}</option>
+                                    <%}%>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="col-sm-2 control-label">${msg['cms.userteam.column.address']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="address" class="form-control" name="address" data-parsley-required="true"
+                                       placeholder="${msg['cms.userteam.column.address']}" value="${obj.address}"  >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="regionCode" class="col-sm-2 control-label">地图选择</label>
+                            <div class="col-sm-8">
+                                <div id="allmap" style="width: 100%;height: 400px;"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="regionCode" class="col-sm-2 control-label">${msg['cms.userteam.column.regionCode']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="regionCode" class="form-control" name="regionCode" data-parsley-required="false"
+                                       placeholder="${msg['cms.userteam.column.regionCode']}" value="${obj.regionCode}"  >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bothDate" class="col-sm-2 control-label">${msg['cms.userteam.column.bothDate']}</label>
+                            <div class="col-sm-8 input-group date form_datetime "
+                                 style="padding-left: 16px;padding-right: 16px;" data-link-field="at">
+                                <input type="text" size="16" id="bothDate" readonly class="form-control" name="bothDate"
+                                       data-parsley-required="true" value="${obj.bothDate}">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="joinWay" class="col-sm-2 control-label">加入方式</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="joinWay" class="form-control" value="${obj.joinWay}" name="joinWay"  placeholder="加入方式">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pnum" class="col-sm-2 control-label">${msg['cms.userteam.column.pnum']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="pnum" class="form-control" name="pnum" data-parsley-required="true"
+                                       placeholder="${msg['cms.userteam.column.pnum']}" value="${obj.pnum}"  >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceType" class="col-sm-2 control-label">${msg['cms.userteam.column.serviceType']}</label>
+                            <div class="col-sm-8">
+                                <%
+                                for( item in serviceType ){
+                                var c = false;
+                                for(ts in stypes){
+                                    if(ts == item.id){
+                                    c = true;
+                                    }
+                                }
+                                %>
+                                <input type="checkbox" id="serviceType" name="serviceType"  value=${item.id } ${c?'checked':''} />${item.name}
+                                <%
+                                }
+                                %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="constractName" class="col-sm-2 control-label">${msg['cms.userteam.column.constractName']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="constractName" class="form-control" name="constractName" data-parsley-required="true"
+                                       placeholder="${msg['cms.userteam.column.constractName']}" value="${obj.constractName}"  >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="constractPhone" class="col-sm-2 control-label">${msg['cms.userteam.column.constractPhone']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="constractPhone" class="form-control" name="constractPhone" data-parsley-required="true"
+                                       placeholder="${msg['cms.userteam.column.constractPhone']}" value="${obj.constractPhone}"  >
+                                <input type="radio" value="0" name="phonestate" checked="checked">公开<input type="radio" value="1" name="phonestate">非公开
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="constractTel" class="col-sm-2 control-label">${msg['cms.userteam.column.constractTel']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="constractTel" class="form-control" name="constractTel" data-parsley-required="true"
+                                       placeholder="${msg['cms.userteam.column.constractTel']}" value="${obj.constractTel}"  >
+                                <input type="radio" value="0" name="telstate" checked="checked">公开<input type="radio" value="1" name="telstate">非公开
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="constractQQ" class="col-sm-2 control-label">${msg['cms.userteam.column.constractQQ']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="constractQQ" class="form-control" name="constractQQ"
+                                       placeholder="${msg['cms.userteam.column.constractQQ']}" value="${obj.constractQQ}"  >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pochargeName" class="col-sm-2 control-label">${msg['cms.userteam.column.pochargeName']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="pochargeName" class="form-control" name="pochargeName" data-parsley-required="true"
+                                       placeholder="${msg['cms.userteam.column.pochargeName']}" value="${obj.pochargeName}"  >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pochargeCardId" class="col-sm-2 control-label">${msg['cms.userteam.column.pochargeCardId']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="pochargeCardId" class="form-control" name="pochargeCardId" data-parsley-required="true"
+                                       placeholder="${msg['cms.userteam.column.pochargeCardId']}" value="${obj.pochargeCardId}"  >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pochargePhone" class="col-sm-2 control-label">${msg['cms.userteam.column.pochargePhone']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="pochargePhone" class="form-control" name="pochargePhone" data-parsley-required="true"
+                                       placeholder="${msg['cms.userteam.column.pochargePhone']}" value="${obj.pochargePhone}"  >
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                            <label for="authStatus" class="col-sm-2 control-label">${msg['cms.user.column.authStatus']}</label>
+                            <div class="col-sm-8">
+                                <select id="authStatus" class="form-control" name="authStatus" data-parsley-required="true"  >
+                                    <%for( item in authState ){%>
+                                    <option value = "${item.id}"  ${obj.authStatus == item.id?'selected':''}>${item.name}</option>
+                                    <%}%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="authReason" class="col-sm-2 control-label">${msg['cms.userteam.column.authReason']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="authReason" class="form-control" name="authReason" data-parsley-required="true" placeholder="${msg['cms.user.column.authReason']}">
+                            </div>
+                        </div>-->
+                        <div class="form-group" style="display: none">
+                            <label for="longitude" class="col-sm-2 control-label">${msg['cms.user.column.longitude']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="longitude" class="form-control" name="longitude" data-parsley-required="true" value="${obj.longitude}">
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none">
+                            <label for="atitude" class="col-sm-2 control-label">${msg['cms.user.column.atitude']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="atitude" class="form-control" name="atitude" data-parsley-required="true" value="${obj.atitude}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6" style="height: 80px;">
+                    <div class="form-group text-center">
+                        <label></label>
+                        <div>
+                            <button class="btn btn-primary btn-block btn-lg btn-parsley" data-loading-text="${msg['globals.button.submit.tip']}">${msg['globals.button.submit']}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
+            </form>
+        </section>
+    </div>
+</div>
+<script language="JavaScript">
+    function clearFile() {
+        $("#img").html("");
+        $("#queue").html("");
+        $("#logo").val("");
+    }
+    $(document).ready(function () {
+        $('#file_upload').uploadifive({
+            'auto': true,
+            'multi': false,
+            'width': '100%',
+            'height': '35',
+            'buttonText': '请选择图片',
+            'fileType': 'image/jpg,image/jpeg,image/png',
+            'fileSizeLimit': 1024,
+            'queueSizeLimit': 1,
+            'formData': {},
+            'queueID': 'queue',
+            'uploadScript': '${base}/open/file/upload/image',
+            'onUploadComplete': function (file, data) {
+                data = JSON.parse(data);
+                if (data.code == 0) {
+                    Toast.success(data.msg);
+                    $("#img").html("<img src='" + data.data + "' style='width:150px;height:95px;'>");
+                    $("#logo").val(data.data);
+                } else {
+                    clearFile();
+                    Toast.error(data.msg);
+                }
+            },
+            'onDrop': function (file, fileDropCount) {
+                clearFile();
+            },
+            'onClearQueue': function (queue) {
+                clearFile();
+            },
+            'onCancel': function () {
+                clearFile();
+            }
+        });
+    });
+    $(document).ready(function () {
+
+        var ue;
+        setTimeout(function () {
+            ue= new baidu.editor.ui.Editor();
+            ue.render('teamIntro');
+        },500);
+
+        $(".form_datetime").datetimepicker({language:"zh-CN",format: 'yyyy-mm-dd', minView: 'month'});
+        // 百度地图API功能
+        var map = new BMap.Map("allmap");
+        map.centerAndZoom(new BMap.Point(121.369524,31.284815), 15);
+        function showInfo(e){
+            console.log(e.point.lng + ", " + e.point.lat);
+            $("#longitude").val(e.point.lng);
+            $("#atitude").val(e.point.lat);
+            var point = e.point;
+            var gc = new BMap.Geocoder();
+            gc.getLocation(point, function(rs) {
+                console.log(rs.sematic_description);
+                var addComp = rs.addressComponents;
+                var mapAddress = addComp.province+addComp.city + addComp.district
+                    + addComp.street + addComp.streetNumber;
+                $("#address").val(mapAddress)
+            });
+        }
+
+
+
+        //        map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+        var local = new BMap.LocalSearch(map, {
+            renderOptions:{map: map}
+        });
+
+        map.addEventListener("click", showInfo);
+
+        $("#address").on("blur",function(){
+            console.log("搜索")
+            local.search($("#address").val());
+        })
+        $('#editForm').ajaxForm({
+            dataType: 'json',
+            beforeSubmit: function (arr, form, options) {
+                form.find("button:submit").button("loading");
+            },
+            success: function (data, statusText, xhr, form) {
+                if (data.code == 0) {
+                    Toast.success(data.msg);
+                    setTimeout(function () {
+                        $("#goBack").trigger("click");
+                    }, 1000);
+                } else {
+                    Toast.error(data.msg);
+                }
+                form.find("button:submit").button("reset");
+            }
+        });
+    });
+</script>
+<%}%>

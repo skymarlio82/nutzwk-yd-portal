@@ -1,0 +1,15 @@
+*{padding: 0;margin: 0;font-family: "微软雅黑";}
+.ditu{width: 80%;height: 900px;margin: 0 auto;}
+.ditu_0{width: 100%;height: 100%;}
+.ditu_1{width: 85%;height: 3%;margin:2% auto;background-image: url("../img/twelveth/tuanti_03.jpg");background-size: 100% 100%;line-height: 30px;}
+.ditu_1 p{color:#EA6523;}
+.ditu_2{width: 80%;height: 85%;margin:3% auto;border: 1px solid #F0F0F0;border-radius: 10px}
+.ditu2_txt{width: 90%;height: 20%;margin: 1% auto;}
+.ditu2_txt button{padding: 5px;background-color: #FD8B00;border-radius: 5px;color: white;margin-left: 10px}
+.ditu2_txt a{font-size: 13px;padding-left: 15px;text-decoration: none;color:#FD8B00 }
+.ditu2_txt div{margin-top: 1%;width: 100%;height: 32%}
+.ditu2_1{width: 100%;height:5%;background: #F7F7F7;line-height: 40px;}
+.ditu2_1 p{display: inline-block;font-size: 15px;}
+.ditu2_1 button{padding: 3px;border-radius: 5px}
+.ditu2_img{width: 90%;height: 65%;margin: 2% auto;border: 1px solid red}
+.ditu2_img img{width: 100%;height: 100%}

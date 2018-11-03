@@ -1,0 +1,72 @@
+.tg-main {
+
+  #subform{
+    display: block;
+    height:40px;
+    line-height: 27px;
+    color: #fff;
+    position: relative;
+    margin:0 auto;
+    width:200px;
+    background: url("../img/reg-btn.png") no-repeat 100% 100%;
+  }
+
+  margin-top: 30px;
+  padding: 20px 20px;
+  color: #000;
+  border: solid 1px #c3c3c3;
+
+  .tp-header-title {
+    margin: 20px 0px;
+    background: #888888;
+    height: 30px;
+    padding-left: 20px;
+    line-height: 30px;
+    border-radius: 5px;
+    color: #fff;
+  }
+
+  .f-group {
+    display: flex;
+    flex-direction: row;
+    padding:5px;
+    vertical-align: middle;
+    position: relative;
+    .parsley-errors-list{
+      float: right;
+      color: red;
+      list-style: none;
+    }
+    .username{
+      text-align: right;
+      width:200px;
+    }
+    .req:before{
+      content: '*';
+      color: red;
+      font-size: 26px;
+      position: absolute;
+      top: -8px;
+      left: 9px;
+    }
+    .f-input {
+      width: 300px;
+      input[name=text] {
+        height:30px;
+        width: 100%;
+      }
+
+      select{
+        height:30px;
+      }
+    }
+  }
+
+  label {
+    position: relative;
+    width:128px;
+    padding-left:20px;
+    font-weight: normal;
+  }
+
+}

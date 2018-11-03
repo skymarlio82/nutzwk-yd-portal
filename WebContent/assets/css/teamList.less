@@ -1,0 +1,165 @@
+@import "var";
+.team-content {
+  color: @backFootBlack;
+  a {
+    color: @backFootBlack;
+  }
+  label {
+    color: @backFootBlack;
+  }
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  width: 90%;
+  border: solid 1px @borderColor;
+  border-radius: 5px;
+  .map {
+    margin: 0 auto;
+    width: 95%;
+  }
+  .tc-listView {
+    width: 95%;
+    display: table;
+    margin: 0 auto;
+    .tc-pro-include {
+      width: 33%;
+      display: inline-table;
+      .tc-l-pro {
+        border: 1px solid @borderColor;
+        margin: 5px;
+        color: @borderColor;
+        .tc-l-pro-c {
+          display: flex;
+          flex-direction: column;
+          padding: 5px 5px 0px 5px;
+          .tc-1pro-img {
+            height: 290px;
+            overflow-y: hidden;
+            width: 100%;
+            img {
+              width: 100%;
+            }
+          }
+          .tc-1pro-title {
+            font-size: @fontColorNav;
+            color: @backFootBlack;
+          }
+        }
+
+        .tc-pro-line {
+          height: 5px;
+          width: 100%;
+          margin: 10px 0px;
+          background: @borderColor;
+          .pro-line {
+            height: 100%;
+            width: 1%;
+            background: @fontcolorhoverbase;
+          }
+        }
+
+        .tc-l-pro-foo {
+          width: 100%;
+          display: flex;
+          text-align: center;
+          color: @borderColor;
+          flex-direction: row;
+
+          .tc-pro-foo-tab {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+          }
+        }
+      }
+    }
+    .tc-listView-page {
+      width: 95%;
+      text-align: center;
+    }
+  }
+
+  .team-search-cnd {
+    background: #F7F7F7;
+    height: 50px;
+    width: 100%;
+    margin-bottom: 20px;
+    .tsc {
+      display: flex;
+      flex-direction: row;
+      padding: 13px 0px;
+      width: 95%;
+      margin: 0 auto;
+      input {
+        width: 100px;
+      }
+      button {
+        height: 27px;
+        line-height: 14px;
+      }
+      .tsc-in{
+        display: flex;
+        flex-direction: row;
+      }
+      .tsc-in-d {
+        width: 150px;
+      }
+      .tsc-in:last-child {
+        text-align: right;
+        width: 274px;
+      }
+    }
+  }
+  .team-tag {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0px;
+    .tt-li {
+      display: flex;
+      flex-direction: row;
+      width: 95%;
+
+      margin: 0 auto;
+      .tt-label {
+        line-height: 32px;
+        width: 65px;
+      }
+      .tt-search-cnd {
+        text-align: left;
+        width: 100%;
+
+        ul {
+          margin-left: 0px;
+          padding-left: 0px;
+          display: table;
+
+          li {
+            cursor: pointer;
+            display: inline-table;
+            list-style: none;
+            padding: 1px 10px;
+            margin: 5px;
+            border-radius: 3px;
+            color: @fontcolorhoverbase;
+          }
+          li:hover {
+            background: @fontcolorhoverbase;
+            color: @fontColorNav;
+          }
+          li.act {
+            background: @fontcolorhoverbase;
+            color: @fontColorNav;
+          }
+        }
+
+        span {
+          line-height: 28px;
+          color: @fontcolorhoverbase;
+          padding: 5px 10px;
+          margin: 5px;
+        }
+      }
+    }
+  }
+}
+

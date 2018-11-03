@@ -1,0 +1,64 @@
+*{padding: 0;margin: 0;font-family: "微软雅黑";}
+.haorenhaoshi{width: 73%; height: 1700px;margin: 0 auto;}
+.weizhi{color:#EB7A4A;background: #f1f1f1 ; width: 100% ;margin-top: 20px;}
+.taopuzhen{width: 100%; height: 100%; margin-top: 30px;position: relative;}
+.taopuzhen img{width: 100% ;height: 20%;}
+.denglu{width: 100%;height: 15%;/*border: 1px solid #A39EA0;*/margin-top: 3%}
+.denglu .tuanti{float:left;width: 65%;height: 100%;border: 1px solid red;background-color:#F56B12;}
+.tuanti li{float: left;list-style: none;text-align: center;width: 20%;height: 100%;margin-left: 1%;}
+.tuanti li div{width: 100%;height: 50%;border:1px solid white;margin-top: 30%;border-radius: 50%;background-image: url("../img/eleventh/zyuan2_03.jpg");background-position: center;}
+.tuanti li a{padding-top: 20px;color: white;text-decoration: none;display: block;}
+.tuanti li a:hover{color: black;}
+.denglu .dl{float:right;width: 30%;height: 100%;border: 1px solid #ECECEC;}
+.dl_1{ width: 100%;height: 18%;background-image: url("../img/eleventh/dlu_03.jpg");background-size:100% 100%;line-height: 40px;font-size: 15px;}
+.dl_1 a{text-decoration: none;}
+.dl_2{width: 100%;height: 50%;border: 1px solid #FFFFFF;position: relative;}
+.dl_2 li{width: 70%;height: 40%;list-style: none;font-size: 13px;}
+.dl_2 li img{float: left;height: 40%;width: 10%;margin-top: 1%;margin-left: 2%}
+.dl_2 li input{height: 40%;width: 80%}
+.dl_3{width: 100%;height: 30%;border: 1px solid #FFFFFF;}
+.dl_3 input{width: 33%;height: 50%;margin-left: 10%;margin-top: 5%;background-color: #FF8B0F;border-radius: 5px;color: #FFFFFF;}
+.huodong{width: 100%;height: 40%;}
+.huodong .part1{width: 65%;height: 100%;float: left;}
+.huodong .part1 .a1{height: 40%;width: 100%;margin-top: 6%;}
+.a1_1{background-image: url(../img/gonggao.png);height: 15%;width: 100%;background-size: 100% 100%;background-position:-10px;line-height: 30px;}
+.a1_1 p{display: inline-block;padding-left: 20px;color: white;}
+.a1_1 a{font-size: 14px;float: right;padding-right: 20px;text-decoration: none;color:#F56B12 ;}
+.a1_1 a:hover{color: black;}
+.a1_2{height:80%;width: 100%;margin-top:2%;position: relative}
+.a1_2 img{height: 100%;width:35%;float: left}
+.txt{right: 0;height: 100%;width: 60%; top: -1%;position: absolute}
+.txt li{width: 100%;height: 9%;list-style: none;margin-top: 1%;line-height: 20px;border-bottom: dashed 1px #000000}
+.txt li a{text-decoration: none;color: #a9a9a9;font-size: 15px;}
+.txt li a:hover{color: black;}
+.txt li span{font-size: 13px;float: right;padding-right: 10px;color: #a9a9a9}
+.txt li>img{width:5px;height: 10px;}
+.huodong .part1 .a2{height: 40%;width: 100%;margin-top: 6%;border: 1px solid #DFDFDF}
+.a2_2{ width: 100%;height: 75%;margin-top: 2%}
+.a2_2 img{width: 30%;height: 100%;padding-left: 2%;cursor: pointer}
+.huodong .part2{width: 30%;height: 100%;float: right;}
+.part2 .a3{height: 88%;width: 100%;margin-top: 13%;border: 1px solid #DFDFDF;}
+.a3_1{background-image: url(../img/gonggao.png);height: 7%;width: 100%;background-size: 100% 100%;background-position:-10px;line-height: 30px;}
+.a3_1 p{display: inline-block;padding-left: 20px;color: white;}
+.a3_1 a{font-size: 14px;float: right;padding-right: 20px;text-decoration: none;color:#F56B12 ;}
+.a3_1 a:hover{color: black;}
+.a3_2{width: 95%;height: 40%;margin: 2% auto;border-bottom: dashed 1px #000000 }
+.a3_2>img{width: 100%;height: 70%}
+.a3_2 p{padding-left: 10px;padding-top: 5px; }
+.a3_3{width: 95%;height: 40%;margin: 5% auto;}
+.a3_3 li{list-style: none;font-size: 11px;margin-left: 1%;margin-top: 2%;padding-left: 1%;}
+.a3_3 li a{text-decoration: none;color:#8d8d8d; }
+.a3_3 li img{width:5px;height: 10px;}
+
+.program{width: 100%;height: 15%;border: 1px solid #A39EA0}
+.pro1{width: 100%;height: 18%;background-image: url(../img/pinpaixiangmu.png);background-size: 100% 100%;line-height: 38px;}
+.pro1 a{padding-left: 20px;text-decoration: none;color: white}
+.pro2{width: 100%;height:80%;margin-top: 1%}
+.pro2 img{float: left;margin-left: 1.5%;margin-top: 3%}
+.program2{width: 100%;border: 1px solid #A39EA0;margin-top: 10px;}
+.lianJie{width:100%;height:98px;}
+.ljie{width: 100%;height: 30px;background-image: url(../img/youqinglianjie.png);background-size: 100% 100%}
+.ljie a{line-height:30px ;color: #FFFFFF;padding-left:20px;text-decoration: none;}
+.ljie a:hover{text-decoration: underline;}
+.xiala{width: 100%;height: 68px;background:#FFFFFF;}
+.xiala select{margin-top: 20px;margin-left:8%;}

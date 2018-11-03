@@ -1,0 +1,64 @@
+<%
+layout("../layouts/platform.html"){
+%>
+<div class="cu-m-c">
+    <div class="cu-u-content">
+        <%if(childChannels.~size > 0 ){%>
+        <div class="cu-t-util">
+            <ul>
+                <% if ('ab806c93b2004603b9ec065c7c4c79c9'==id){%>
+                <li class="first"><a href="javascript:void(0);">>>文明单位</a></li>
+                <%}%>
+                <% if('ec08c3bd098e4f8a9bea61a98583618d'==id){ %>
+                <li class="first"><a href="javascript:void(0);">>>文明小区</a></li>
+                <%}%>
+                <%for(item in childChannels){%>
+                <li class="${item.id == childId ?'selected' :''}"><a target="_blank"
+                        href="/article/newsList?id=ec08c3bd098e4f8a9bea61a98583618d&childId=${item.id}&length=10&start=0&draw=0">>>${item.name}</a>
+                </li>
+                <%}%>
+            </ul>
+        </div>
+        <%}%>
+        <div class="cu-t-list">
+            <div class="cu-nav">
+                当前位置：
+                <%for(var i = (channels.~size -1) ; i >= 0 ; i --){
+                if(i == 0){
+                %>
+                ${channels[i].name}
+                <%
+                }else{
+                %>
+                <a href="${AppDomain!}${base!}/${channels[i].url}?id=${channels[i].id}" target="${channels[i].target}">${channels[i].name}</a>
+                &rarr;
+                <%}
+                }
+                %>
+            </div>
+            <ul>
+                <%for(item in articleList){%>
+                <li>
+                    <img src="${base!}${item.picurl}" alt="${item.title}"/>
+                    <div class="cu-l-text">
+                        <a target="_blank" href="${AppDomain!}${base!}/article/detail?id=${item.id}">
+                            <h4 class="cu-l-t-title">${item.title}</h4>
+                            <p class="cu-l-t-info">${item.info} </p>
+                            <p class="cu-l-desp">${item.desp} </p>
+                            <span class="cu-l-date">${@date.getDate(item.opat,"yyyy/MM/dd")}</span>
+                        </a>
+                    </div>
+                </li>
+                <%}%>
+            </ul>
+            <div class="cu-page">
+                <%
+                var requrl = AppDomain! + base! + "/article/newsList?id="+id+"&childId=";//+childId;
+                include("../layouts/page.html",{page:pageCount,len:length,cur:draw,url:requrl}){}
+                %>
+            </div>
+        </div>
+    </div>
+</div>
+<%}%>
+

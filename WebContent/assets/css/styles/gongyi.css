@@ -1,0 +1,161 @@
+.wrap_c {
+    margin: 0px auto;
+    padding: 0px;
+}
+
+.ayy_01 a {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.ayy_01 a em.em1 {
+    width: 40%;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    max-height: 350px;
+}
+
+.ayy_01 a em {
+    display: block;
+    overflow: hidden;
+    font-style: normal;
+}
+
+
+.ayy_01 a em.em2 {
+    width: 55%;
+    float: left;
+}
+
+.ayy_01 a em.em1 img {
+    width: 100%;
+    display: block;
+}
+
+.ayy_01 a em.em2 span {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+}
+
+.ayy_01 a em.em2 span.sp1 {
+    font-size: 20px;
+    color: #222;
+    line-height: 40px;
+    font-weight: bold;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.ayy_01 a em.em2 span.sp2 {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #666;
+    line-height: 26px;
+    text-align: justify;
+    text-justify: inter-ideograph;
+    position: relative;
+}
+
+.ayy_01 a em.em2 span {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+}
+
+.ayy_01 a em.em2 span.sp3 {
+    margin-top: 40px;
+}
+
+.ayy_01 a em.em2 span.sp3 i {
+    display: inline-block;
+    line-height: 40px;
+    padding: 0px 40px;
+    background-color: #c81233;
+    font-size: 15px;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.ayy_01 a:hover em.em2 span.sp3 i {
+    opacity: 0.9;
+}
+
+
+
+
+
+.ayln_01 {
+    overflow: hidden;
+    margin-top: 70px;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.ayln_01 ul li {
+    width: 45%;
+    min-height: 240px;
+    padding:10px;
+    overflow: hidden;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+.ayln_01 ul li:nth-child(n){
+    background: url(../../img/gongyi/gy-red.jpg) no-repeat center / cover;
+}
+.ayln_01 ul li:nth-child(2n){
+    background: url(../../img/gongyi/gy-blue.jpg) no-repeat center / cover;
+}
+
+
+.ayln_01 ul li em {
+    display: inline-block;
+    padding: 0px 10%;
+    font-style: normal;
+}
+.ayln_01 em {
+    display: block;
+    float: left;
+    font-style: normal;
+}
+
+.ayln_01 ul li em span {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    color: #fff;
+}
+
+.ayln_01 ul li em span.sp1 {
+    font-size: 26px;
+    line-height: 40px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.ayln_01 ul li em span.sp2 {
+    font-size: 18px;
+    line-height: 28px;
+    margin-top: 2px;
+}
+
+.ayln_01 ul li em span.sp3 {
+    position: relative;
+    padding-top: 15px;
+    margin-bottom: 30px;
+    font-size: 12px;
+    color: #f2abae;
+    text-transform: uppercase;
+}
+
+

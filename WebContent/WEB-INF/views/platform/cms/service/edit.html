@@ -1,0 +1,84 @@
+<%
+layout("/layouts/platform.html"){
+%>
+<header class="header navbar bg-white shadow">
+    <div class="btn-group tool-button">
+        <a class="btn btn-primary navbar-btn" href="${base}/platform/cms/service" id="goBack" data-pjax><i class="ti-angle-left"></i>${msg['globals.button.back']}</a>
+    </div>
+</header>
+
+<div class="content-wrap">
+    <div class="wrapper" style="min-height:500px;">
+        <section class="panel panel-form">
+            <form id="editForm" role="form" class="form-horizontal parsley-form" data-parsley-validate
+                  action="${base}/platform/cms/service/editDo" method="post">
+                <input name="id" type="hidden" value="${obj.id}">
+                <div class="row mb10">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="userid" class="col-sm-2 control-label">${msg['cms.service.column.userid']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="userid" class="form-control" name="userid" data-parsley-required="true"
+                                       placeholder="${msg['cms.service.column.userid']}" value="${obj.userid}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceTime" class="col-sm-2 control-label">${msg['cms.service.column.serviceTime']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="serviceTime" class="form-control" name="serviceTime" data-parsley-required="true"
+                                       placeholder="${msg['cms.service.column.serviceTime']}" value="${obj.serviceTime}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pid" class="col-sm-2 control-label">${msg['cms.service.column.pid']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="pid" class="form-control" name="pid" data-parsley-required="true"
+                                       placeholder="${msg['cms.service.column.pid']}" value="${obj.pid}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="marks" class="col-sm-2 control-label">${msg['cms.service.column.marks']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="marks" class="form-control" name="marks" data-parsley-required="true"
+                                       placeholder="${msg['cms.service.column.marsk']}" value="${obj.marks}" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="form-group text-center">
+                        <label></label>
+
+                        <div>
+                            <button class="btn btn-primary btn-block btn-lg btn-parsley" data-loading-text="${msg['globals.button.submit.tip']}">${msg['globals.button.submit']}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+    </div>
+</div>
+<script language="JavaScript">
+    $(document).ready(function () {
+        $('#editForm').ajaxForm({
+            dataType: 'json',
+            beforeSubmit: function (arr, form, options) {
+                form.find("button:submit").button("loading");
+            },
+            success: function (data, statusText, xhr, form) {
+                if (data.code == 0) {
+                    Toast.success(data.msg);
+                    setTimeout(function () {
+                        $("#goBack").trigger("click");
+                    }, 1000);
+                } else {
+                    Toast.error(data.msg);
+                }
+                form.find("button:submit").button("reset");
+            }
+        });
+    });
+</script>
+<%}%>

@@ -1,0 +1,144 @@
+<%
+layout("../layouts/platform.html"){
+%>
+<div class="co-content">
+    <div class="ced-banner">
+        <div class="ced-carousel">
+            <div id="myCarousel" class="carousel slide">
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators">
+                    <% for(b in banner!){
+                    %>
+                    <li data-target="#myCarousel" data-slide-to="${bLP.index - 1}" class=" ${bLP.index == 1?'active':''}">
+                        <img src="${base!}${b.picurl}" alt="${b.name}" >
+                        <div class="libak"></div>
+                    </li>
+                    <%}%>
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+                    <% for(b in banner!){
+                    var finalUrl = "";
+                    if(b.type == "img" || b.type == "img_link"){
+                    finalUrl = base!+"/article/detail?id="+b.url;
+                    }else{
+                    finalUrl = b.url;
+                    }
+                    %>
+                    <div class="item ${bLP.index == 1?'active':''}">
+                        <a href="${finalUrl}" target="${b.target}">
+                            <img src="${base!}${b.picurl}" alt="${b.name}">
+                        </a>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+        <div class="ced-hotNews">
+            <div class="hn-title">
+                <!--${hotBase.name}-->
+                头条新闻
+            </div>
+            <div class="ced-hn-c">
+                <div class="hn-two">
+                    <% if(fisrtArt.~size > 0){
+                            for(var i = 0 ; i < 2 ; i ++){
+                                if(!(fisrtArt.~size > i))
+                                    break;
+                    %>
+                            <div class="hn-two-li">
+                                <div class="hn-tli-t">
+                                    <a href="${AppDomain!}${base!}/article/detail?id=${fisrtArt[i].id}"target="_blank">${fisrtArt[i].title}</a>
+                                </div>
+                                <div class="hn-tlit-info">
+                                    ${fisrtArt[i].info}
+                                </div>
+                            </div>
+                    <%
+                            }
+                        }
+                    %>
+
+                </div>
+                <div class="hn-list">
+                    <%
+                        if(fisrtArt.~size >2){
+                            for(var i = 2 ; i < fisrtArt.~size && i < 6 ; i ++){
+                    %>
+                    <div class="hn-listc">
+                        <a href="${AppDomain!}${base!}/article/detail?id=${fisrtArt[i].id}"target="_blank">${fisrtArt[i].title}</a>
+                    </div>
+                    <%
+                            }
+                        }
+                    %>
+
+                    <div class="hn-list-more">
+                        <!--<a href="${AppDomain!}${base!}/article/newsList?id=${hotBase.id}" target="_blank" >查看更多》</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="co-newAad">
+        <div class="co-news">
+            <div class="co-news-list">
+                <%
+                for(var i = draw == 1 || draw == 0?6:0 ; i < articleList.~size ; i ++ ){
+
+                var item = articleList[i];
+                %>
+                <div class="co-n-l-c">
+                    <div class="co-n-l-img">
+                        <a href="${AppDomain!}${base!}/article/detail?id=${item.id}" target="_blank"><img src="${base!}${item.picurl}" attr-picurl="${item.picurl}" alt="${item.title}"></a>
+                    </div>
+                    <div class="co-n-l-funame">
+                        <div class="co-funame-title">
+                            <a href="${AppDomain!}${base!}/article/detail?id=${item.id}" target="_blank">${item.title}</a>
+                        </div>
+                        <p class="co-funame-desp">
+                            ${item.info}
+                        </p>
+                        <p class="co-funame-desp">
+                            ${item.desp}
+                        </p>
+                        <div class="co-funame-date">
+                            ${@date.getDate(item.opAt,"yyyy-MM-dd")}
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+            <div class="co-news-page">
+                <%
+                var requrl = AppDomain!+base! + "/home/childEd?id="+id+"&childId=";//+childId;
+                include("../layouts/page.html",{page:pageCount,len:length,cur:draw,url:requrl}){}
+                %>
+            </div>
+        </div>
+        <div class="co-ad">
+            <%for(item in adRightBottom!){%>
+            <div class="co-ad-img">
+                <a href="${item.url}" target="_blank"><img src="${base!}${item.picurl}"  alt="${item.title}"></a>
+            </div>
+            <%}%>
+        </div>
+    </div>
+</div>
+<%}%>
+
+<script type="text/javascript">
+
+    $(function(){
+        $("img").each(function(){
+            var piclist = $(this).attr("attr-picurl");
+            if(piclist) {
+                var picUrl = piclist.split(",");
+                $(this).attr("src", picUrl[0]);
+            }
+        });
+    })
+
+</script>

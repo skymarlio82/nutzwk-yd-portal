@@ -1,0 +1,13 @@
+*{padding: 0;margin: 0;font-family: "微软雅黑";}
+.pingpaiprogram{width: 73%; height: 1700px;margin: 0 auto;}
+.weizhi{color:#EB7A4A;background: #f1f1f1 ; width: 100% ;margin-top: 20px;}
+.programcontent{width:100%;margin-top: 0px;}
+.programcontent ul li{height:200px;list-style: none;margin-top: 40px; border: 1px solid #DFDDDE;position: relative;}
+.programcontent ul li .text{width: 74%; position: relative; top:-200px;right: -26%}
+.programcontent ul li h4{display: inline-block;padding: 10px;}
+.programcontent ul li p{padding: 0px;overflow: inherit;}
+.programcontent ul li span{position:absolute;right: 0; top: 200%;}
+.programcontent  img{width:25%;height:100%; }
+.num{margin:0 auto;height: 20px;width: 33%; padding-top: 100px;}
+.num li{cursor:pointer;color:blue;list-style: none;float: left;height: 15px;text-align:center;width: 15px;padding: 2px ;border: 1px solid #E2E2E2;margin-left: 5px;}
+

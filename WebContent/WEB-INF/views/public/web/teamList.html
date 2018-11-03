@@ -1,0 +1,265 @@
+<%
+layout("../layouts/platform.html"){
+%>
+    <div class="nd-m-c">
+        <div class="nd-nav">
+            当前位置：
+            <%for(var i = (channels.~size -1) ; i >= 0 ; i --){
+            if(channels[i].url == "#"){
+            %>
+            <a href="${channels[i].url}" >${channels[i].name}</a>
+            <%
+            }else{
+            %>
+            <a href="${AppDomain!}${base!}/${channels[i].url}?id=${channels[i].id}" target="${channels[i].target}">${channels[i].name}</a>
+            <%}%>
+            ${i == 0 ? '' : '&rarr;'}
+
+            <%}%>
+        </div>
+        <div class="team-content">
+            <form method="get" id="formSub" >
+                <input type="hidden" name="serviceType">
+                <input type="hidden" name="id" value="12321">
+                <input type="hidden" name="teamType" >
+                <input type="hidden" name="teamNum">
+                <input type="hidden" name = "type" value="map">
+                <input type="hidden" name="channelId" value="${channelId}">
+                <div class="team-tag">
+                    <div class="tt-li">
+                        <div class="tt-label">
+                            ${pname.name}:
+                        </div>
+                        <div class="tt-search-cnd servieType">
+                            <ul>
+                                <li data-val = "" class="${serviceType == '' ? 'act':'' }"  >全部</li>
+                                <% for(item in dicts){ %>
+                                <li data-val = "${item.id}"  class="${serviceType == item.id ? 'act':'' }" >${item.name}</li>
+                                <%}%>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tt-li">
+                        <div class="tt-label">
+                            ${unitDict.name}:
+                        </div>
+                        <div class="tt-search-cnd teamType">
+                            <ul>
+                                <li data-val = "" class="${teamType == '' ? 'act':'' }" >全部</li>
+                                <% for(item in unitDicts){ %>
+                                <li data-val = "${item.id}" class="${teamType == item.id ? 'act':'' }">${item.name}</li>
+                                <%}%>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tt-li">
+                        <div class="tt-label">
+                            团队人数:
+                        </div>
+                        <div class="tt-search-cnd teamNum">
+                            <ul>
+                                <li data-val = "" class="${teamNum == '' ? 'act':'' }"  >全部</li>
+                                <li data-val = "-1~0" class="${teamNum == '-1~0' ? 'act':'' }">0</li>
+                                <li data-val = "1~100" class="${teamNum == '1~100' ? 'act':'' }">1-100</li>
+                                <li data-val = "101~200" class="${teamNum == '101~200' ? 'act':'' }">101-200</li>
+                                <li data-val = "201~500" class="${teamNum == '201~500' ? 'act':'' }">201-500</li>
+                                <li data-val = "501~1000" class="${teamNum == '501~1000' ? 'act':'' }">501-1000</li>
+                                <li data-val = "1000~999999" class="${teamNum == '1000~999999' ? 'act':'' }">1000以上</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="team-search-cnd">
+                    <div class="tsc">
+
+                        <div class="tsc-in">
+                            <label  >团体登记日期</label>
+                            <input type="text" id="startDate" name="startDate" value = '${startDate!}'>至 <input type="text" id="endDate" name="endDate" value = '${endDate!}'>
+                        </div>
+                        <div class="tsc-in">
+                            <label >团体ID</label>
+                            <input type="text" name="teamId" value="${teamId!}">
+                        </div>
+                        <div class="tsc-in">
+                            <label >团体名称</label>
+                            <input type="text" class="tsc-in-d" value="${teamName!}" name="teamName">
+                        </div>
+                        <div class="tsc-in">
+                            <button class="btn btn-default" id="searM">搜索</button>
+                            <button class="btn btn-default" id="listM">列表模式</button>
+                            <button class="btn btn-default" id="mapM">地图模式</button>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+            <div class="map">
+                    <style type="text/css">
+                        body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";font-family:"微软雅黑";}
+                        #allmap{width:100%;height:500px;}
+                        p{margin-left:5px; font-size:14px;}
+                    </style>
+                    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ITjiriqFmzp0sUwkBTHzl0dG"></script>
+                <div id="allmap"></div>
+            </div>
+
+        </div>
+    </div>
+    <script src="${base!}/assets/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="${base!}/assets/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script>
+        var map = new BMap.Map("allmap");
+        map.centerAndZoom("普陀区",13);
+//        map.centerAndZoom(new BMap.Point(116.417854,39.921988),14);
+        var data_info = [];
+
+        <% for(item in list) { %>
+            var sContent${itemLP.index} = "<h4 style='margin:0 0 5px 0;padding:0.2em 0;color:#E95403;'>${item.groupname}</h4>" +
+                "<p style='margin:0;line-height:1.5;font-size:13px;'>联系人:${item.constractname}</p>" +
+                "<p style='margin:0;line-height:1.5;font-size:13px;'>地址:${item.address}</p>" +
+                "<p style='text-align: left;padding-top:15px;'><a href='${AppDomain!}${base!}/team/detail?channelId=${channelId}&teamId=${item.id}&id=123132'>查看详情</a></p>" +
+                "</div>";
+
+            data_info.push([${item.longitude},${item.atitude},sContent${itemLP.index}]);
+//            var data_info = [[116.417854, 39.921988, sContent],
+//                [116.406605, 39.921585, sContent],
+//                [116.412222, 39.912345, sContent]
+//            ];
+        <%}%>
+
+        var opts = {
+            width : 250,     // 信息窗口宽度
+            height: 120,     // 信息窗口高度
+            title : "" , // 信息窗口标题
+            enableMessage:true//设置允许信息窗发送短息
+        };
+
+        var myIcon = new BMap.Icon("http://www.remon.xin:8080/assets/img/logo.jpg", new BMap.Size(35,35));
+       // var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+
+        for(var i=0;i<data_info.length;i++){
+            var marker = new BMap.Marker(new BMap.Point(data_info[i][0],data_info[i][1]),{icon:myIcon});  // 创建标注
+            var content = data_info[i][2];
+            map.addOverlay(marker);               // 将标注添加到地图中
+            addClickHandler(content,marker);
+        }
+        function addClickHandler(content,marker){
+            marker.addEventListener("click",function(e){
+                openInfo(content,e)}
+            );
+        }
+        function openInfo(content,e){
+            var p = e.target;
+            var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+            var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象
+            map.openInfoWindow(infoWindow,point); //开启信息窗口
+        }
+
+
+
+        // 添加带有定位的导航控件
+        var navigationControl = new BMap.NavigationControl({
+            // 靠左上角位置
+            anchor: BMAP_ANCHOR_TOP_LEFT,
+            // LARGE类型
+            type: BMAP_NAVIGATION_CONTROL_LARGE,
+            // 启用显示定位
+            enableGeolocation: true
+        });
+        map.addControl(navigationControl);
+        // 添加定位控件
+        var geolocationControl = new BMap.GeolocationControl();
+        geolocationControl.addEventListener("locationSuccess", function(e){
+            // 定位成功事件
+            var address = '';
+            address += e.addressComponent.province;
+            address += e.addressComponent.city;
+            address += e.addressComponent.district;
+            address += e.addressComponent.street;
+            address += e.addressComponent.streetNumber;
+            alert("当前定位地址为：" + address);
+        });
+        geolocationControl.addEventListener("locationError",function(e){
+            // 定位失败事件
+            alert(e.message);
+        });
+        //http://img.qqzhi.com/upload/img_0_3311635127D1679227943_23.jpg
+        //上海志愿者图片地址
+        map.addControl(geolocationControl);
+        function showInfo(e){
+            console.log(e.point.lng + ", " + e.point.lat);
+            var point = e.point;
+            var gc = new BMap.Geocoder();
+            gc.getLocation(point, function(rs) {
+                console.log(rs.sematic_description);
+                var addComp = rs.addressComponents;
+                var mapAddress = addComp.province+addComp.city + addComp.district
+                        + addComp.street + addComp.streetNumber;
+                $("#search").val(mapAddress)
+            });
+        }
+        //        map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+        var local = new BMap.LocalSearch(map, {
+            renderOptions:{map: map}
+        });
+
+
+
+
+        $(function(){
+            $("#sbtn").on("click",function(){
+                console.log("搜索")
+                local.search($("#search").val());
+            });
+            function subForm(){
+                $("#formSub").submit();
+            }
+
+            $(".teamNum").find("li").on("click",function(){
+                $("input[name='teamNum']").val($(this).attr("data-val"));
+                subForm();
+            });
+
+            $(".servieType").find("li").on("click",function(){
+                $("input[name='serviceType']").val($(this).attr("data-val"));
+                subForm();
+            })
+
+            $(".teamType").find("li").on("click",function(){
+                $("input[name='teamType']").val($(this).attr("data-val"));
+                subForm();
+            });
+
+            $("#mapM").on("click",function(){
+
+                $("input[name='map']").val("map");
+            })
+            $("#listM").on("click",function(){
+
+                $("input[name='type']").val("list");
+            });
+            $("#startDate").datetimepicker({
+                anguage:  'zh-CN',
+                format: 'yyyy-mm-dd',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2, //这里就设置了默认视图为年视图
+                minView: 2, //设置最小视图为年视图
+                forceParse: 0});
+            $("#endDate").datetimepicker({
+                anguage:  'zh-CN',
+                format: 'yyyy-mm-dd',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2, //这里就设置了默认视图为年视图
+                minView: 2, //设置最小视图为年视图
+                forceParse: 0});
+        })
+    </script>
+<%}%>

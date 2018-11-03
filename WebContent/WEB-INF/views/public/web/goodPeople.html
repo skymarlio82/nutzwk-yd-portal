@@ -1,0 +1,72 @@
+<%
+layout("../layouts/platform.html"){
+%>
+
+<div class="co-content">
+    <div class="cu-nav">
+        当前位置：
+        <%for(var i = (channels.~size -1) ; i >= 0 ; i --){
+        if(i == 0){
+        %>
+        ${channels[i].name}
+        <%
+        }else{
+        %>
+        <a href="${AppDomain!}${base!}/${channels[i].url}?id=${channels[i].id}" target="${channels[i].target}">${channels[i].name}</a>
+        &rarr;
+        <%}
+        }
+        %>
+    </div>
+    <div class="co-nav">
+        <%
+        var navUrl = channel.url+"?id="+id+"&childId=";
+        for(item in channelsNAV){%>
+        <div class="co-nav-list ${item.id ==childId?'select':''}" style="width: 33.33%;">
+            <!--<a href="${base!}${navUrl}${item.id}">${item.name}</a>-->
+            <a href="${AppDomain!}${base!}/home/goodPeople?id=${id}&childId=${item.id}">${item.name}</a>
+        </div>
+        <%}%>
+    </div>
+    <div class="co-newAad">
+        <div class="co-news" style="padding-right: 0px;width: 100%;">
+            <div class="co-news-list" style="width: 100%;padding-right: 0px;">
+
+                <%
+                for(item in articleList){%>
+                    <div class="co-n-l-c" style="border: solid 1px #c3c3c3;">
+                        <div class="co-n-l-img">
+                            <a href="${AppDomain!}${base!}/article/detail?id=${item.id}" target="_blank"><img style="border-right: solid 1px #c3c3c3;" src="${base!}${item.picurl}" alt="${item.title}"></a>
+                        </div>
+                        <div class="co-n-l-funame" style="width: 73%;">
+                            <div class="co-funame-title">
+                                <a href="${AppDomain!}${base!}/article/detail?id=${item.id}" target="_blank">${item.title}</a>
+                            </div>
+                            <div class="co-funame-desp">
+                               ${item.info}
+                            </div>
+                            <div class="co-funame-desp" style="font-size: 14px;margin-top:10px;">
+                                ${item.desp}
+                            </div>
+                            <div class="co-funame-date">
+                                ${@date.getDate(item.opat,"yyyy-MM-dd")}
+                            </div>
+                        </div>
+                    </div>
+                <%}%>
+
+            </div>
+            <div class="co-news-page">
+                <%
+                    var requrl = AppDomain!+ base! + "/home/goodPeople?id="+id+"&childId="+childId;
+                    include("../layouts/page.html",{page:pageCount,len:length,cur:draw,url:requrl}){}
+                %>
+            </div>
+        </div>
+
+    </div>
+</div>
+<%
+}
+
+%>

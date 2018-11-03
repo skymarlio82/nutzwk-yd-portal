@@ -1,0 +1,173 @@
+<div class="modal-body no-p">
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="panel panel-primary no-b">
+                <header class="panel-heading clearfix brtl brtr">
+                    <div class="overflow-hidden">
+                        <a href="javascript:;" class="h4 show no-m pt5">志愿者详情</a>
+                        <!--<small>${obj.id}</small>-->
+                    </div>
+                </header>
+                <div class="list-group">
+                    <table class="table table-bordered table-striped mg-t datatable">
+                        <tbody>
+                                                        <tr>
+                                <td>${msg['cms.user.column.vid']}</td><td>${obj.data}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.username']}</td><td>${obj.username}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.password']}</td><td>${obj.password}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.email']}</td><td>${obj.email}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.contry']}</td><td>${obj.contry}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.realyName']}</td><td>${obj.realyName}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.cardType']}</td><td>${obj.cardType}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.cardId']}</td><td>${obj.cardId}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.gender']}</td><td>${obj.gender}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.uboth']}</td><td>${obj.uboth}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.ubation']}</td><td>${obj.ubation}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.placeOforigin']}</td><td>${obj.placeOforigin}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.mp']}</td><td>${obj.mp}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.tel']}</td><td>${obj.tel}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.qq']}</td><td>${obj.qq}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.weibo']}</td><td>${obj.weibo}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.region']}</td><td>${obj.region}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.address']}</td><td>${obj.address}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.youCode']}</td><td>${obj.youCode}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.political']}</td><td>${obj.political}</td>
+                            </tr>
+
+                                                        <tr>
+                                <td>${msg['cms.user.column.education']}</td><td>${obj.education}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.employmentStatus']}</td><td>${obj.employmentStatus}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.invatToPro']}</td><td>${obj.invatToPro}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.invatToregion']}</td><td>${obj.invatToregion}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.invatType']}</td><td>${obj.invatType}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.serviceRegion']}</td><td>${obj.serviceRegion}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.authStatus']}</td><td>${obj.authStatus}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.user.column.authReason']}</td><td>${obj.authStatus}</td>
+                            </tr>
+
+                                                        <tr>
+                                <td>${msg['cms.user.column.serviceTime']}</td><td>${obj.serviceTime}</td>
+                            </tr>
+                                                    </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">${msg['globals.button.ok']}</button>
+</div>
+<!--
+<script language="JavaScript">
+    var datatable;
+    function initDatatable() {
+        datatable = $('.datatable').DataTable({
+            "dom": '<"toolbar">frtip',
+            "searching":false,
+            "processing": false,
+            "serverSide": true,
+            "select": true,
+            "ordering": true,
+            "language": {
+                "url": "${base}/assets/plugins/datatables/${lang}.json"
+            },
+            "preDrawCallback": function () {
+                sublime.showLoadingbar($(".main-content"));
+            },
+            "drawCallback": function () {
+                sublime.closeLoadingbar($(".main-content"));
+            },
+            "order": [[0, "desc"]],
+            "columns": [
+                {"data": "vid", "bSortable": true},
+                {"data": "username", "bSortable": true},
+                /*{"data": "password", "bSortable": false},*/
+                {"data": "email", "bSortable": true},
+                {"data": "contry", "bSortable": true},
+                {"data": "realyname", "bSortable": true},
+                {"data": "cardtype", "bSortable": true},
+                {"data": "cardid", "bSortable": true},
+                {"data": "gender", "bSortable": true},
+                {"data": "uboth", "bSortable": true},
+                {"data": "ubation", "bSortable": true},
+                {"data": "placeoforigin", "bSortable": true},
+                {"data": "mp", "bSortable": true},
+                {"data": "tel", "bSortable": true},
+                {"data": "qq", "bSortable": true},
+                {"data": "weibo", "bSortable": true},
+                {"data": "region", "bSortable": true},
+                {"data": "address", "bSortable": true},
+                {"data": "youcode", "bSortable": true},
+                {"data": "political", "bSortable": true},
+                {"data": "education", "bSortable": true},
+                {"data": "employmentstatus", "bSortable": true},
+                {"data": "invattopro", "bSortable": true},
+                {"data": "invattoregion", "bSortable": true},
+                {"data": "invattype", "bSortable": true},
+                {"data": "serviceregion", "bSortable": true},
+                {"data": "authstatus", "bSortable": true},
+                {"data": "authreason", "bSortable": true},
+                {"data": "servicetime", "bSortable": true},
+            ]
+        });
+    }
+    $(function () {
+        initDatatable();
+        $("#dialogDetail").on("hidden.bs.modal", function () {
+            $(this).removeData("bs.modal");
+        });
+    });
+    </script>-->

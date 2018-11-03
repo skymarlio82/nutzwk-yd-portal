@@ -1,0 +1,120 @@
+<div class="modal-body no-p">
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="panel panel-primary no-b">
+                <header class="panel-heading clearfix brtl brtr">
+                    <div class="overflow-hidden">
+                        <a href="javascript:;" class="h4 show no-m pt5">Cms_banner</a>
+                        <small>${obj.id}</small>
+                    </div>
+                </header>
+                <form action="${base!}/platform/cms/article/toplink" id="subForm">
+                    <div class="list-group">
+                        <input type="hidden" name="type" value="img">
+                        <input type="hidden" name="id" value="${obj.id}">
+                        <table class="table table-bordered table-striped mg-t datatable">
+                            <tbody>
+                            <tr>
+                                <td style="width: 100%;">
+                                    <select type="text" name="classId" style="width: 100%;" id="urlSel"
+                                            class="form-control "
+                                            name="urlSel">
+                                        <option value="${article.topLink!}" selected>
+                                        </option>
+                                    </select>
+                                </td>
+                                <!--<td>${msg['cms.banner.column.title']}</td><td>${obj.title}</td>-->
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+
+            </section>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" id="sub" class="btn btn-primary btn-block" data-dismiss="modal">${msg['globals.button.ok']}
+    </button>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $("#sub").click(function () {
+            $('#subForm').submit();
+        });
+    });
+
+    $('#subForm').ajaxForm({
+        dataType: 'json',
+        beforeSubmit: function (arr, form, options) {
+            console.log(arr);
+            form.find("button:submit").button("loading");
+        },
+        success: function (data, statusText, xhr, form) {
+            if (data.code == 0) {
+                Toast.success(data.msg);
+                //刷新父级菜单
+                //form.resetForm();
+            } else {
+                Toast.error(data.msg);
+            }
+            form.find("button:submit").button("reset");
+            datatable.ajax.reload();
+        }
+    });
+
+
+    $("#urlSel").select2({
+        ajax: {
+            url: '${base}/platform/cms/article/treeObj',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    mp: params.term,
+                    start: 0, // search term
+                    length: 30,
+                    draw: params.draw
+                };
+            },
+            processResults: function (data, params) {
+                params.draw = params.draw || 1;
+                var items = [];
+                var itemData = data;
+                console.log(itemData);
+                items.push({id: "", text: "请选择链接文章地址"});
+                for (var i = 0; i < itemData.length; i++) {
+                    var obj = {}
+                    obj.id = itemData[i].id;
+                    obj.text = itemData[i].text;
+                    items.push(obj);
+                }
+                return {
+                    results: items,
+                    pagination: {
+                        more: (params.draw * 30) < data.recordsTotal
+                    }
+                };
+            },
+            cache: true
+        },
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+        minimumInputLength: 0,
+        templateResult: formatRepo,
+        templateSelection: formatRepoSelection
+    });
+
+    function formatRepo(repo) {
+        return repo.text;
+    }
+
+    function formatRepoSelection(repo) {
+        return repo.text;
+    }
+
+</script>

@@ -1,0 +1,95 @@
+<%
+layout("../layouts/platform.html"){
+%>
+<div class="teamDetail">
+    <div class="nd-nav">
+        当前位置：
+        <%for(var i = (channels.~size -1) ; i >= 0 ; i --){
+        if(channels[i].url == "#"){
+        %>
+        <a href="${channels[i].url}" >${channels[i].name}</a>
+        <%
+        }else{
+        %>
+        <a href="${AppDomain!}${base!}/${channels[i].url}?channelId=${channels[i].id}&id=${channels[i].id}" target="${channels[i].target}">${channels[i].name}</a>
+        <%}%>
+        ${i == 0 ? '' : '&rarr;'}
+
+        <%}%>
+    </div>
+    <div class="team-detail-title">
+        志愿者团体ID:【${teamObj.tid!}】 志愿者团体名称：${teamObj.groupName}
+    </div>
+    <div class="team-detail-content">
+
+        <div class="t-d-c-info">
+            <div class="tdci-img">
+                <img src="${AppDomain!}${base!}/${teamObj.logo!}" onerror="errorImg(this)" alt="">
+            </div>
+            <div class="tdci-info">
+                <p><label for="">区域:</label>${teamObj.region!}</p>
+                <p><label for="">详细地址:</label>${teamObj.address!}</p>
+                <p><label for="">人员规模:</label>${teamObj.pnum!}</p>
+                <p><label for="">正式成员:</label>${teamObj.pnum!}</p>
+                <p><label for="">加入方式:</label>${teamObj.joinWay!}</p>
+                <p><label for="">成立日期:</label>${teamObj.bothDate!}</p>
+                <p><label for="">联络团体:</label>${teamObj.constractGroup!}</p>
+                <p><label for="">联系人手机:</label>${teamObj.constractName!}</p>
+                <p><label for="">联系人邮箱:</label>${teamObj.constractPhone!}</p>
+            </div>
+        </div>
+        <div class="t-d-c-list">
+            <div class="tdcl-btn">
+                <div class="tdcl-left">
+                    <div class="btn_team"
+                         style="background: url('/assets/img/team_back.png') no-repeat center 100%;-webkit-background-size: 100% 100%;background-size: 100% 100%;">
+                        <div class="pro-list">
+                            发起的项目
+                        </div>
+                        <div class="pro-introl">
+                            团队简介
+                        </div>
+                    </div>
+                </div>
+                <div class="tdcl-right">
+                    <div class="btn-jointeam">
+                        加入团体
+                    </div>
+                </div>
+            </div>
+            <div class="tdcllist list">
+                <div class="tdtablelist">
+                    <div class="t1"><label for="">团队项目</label></div>
+                    <div class="t2"><label for="">立项日期</label></div>
+                    <div class="t3"><label for="">项目状态</label></div>
+                </div>
+                <% for(item in pros){%>
+                <div class="tdtablelist ">
+                    <div class="t1">${item.pname}</div>
+                    <div class="t2">${@date.getDate(item.opat,'yyyy-MM-dd')}</div>
+                    <div class="t3">${item.pstatus}</div>
+                </div>
+                <%}%>
+
+            </div>
+            <div class="tdcllist intro" style="padding: 10px;">
+                ${teamObj.teamIntro}
+            </div>
+        </div>
+    </div>
+    <script>
+
+        $(function () {
+            $(".pro-list").on("click", function () {
+                $(".list").show();
+                $(".intro").hide();
+            });
+            $(".pro-introl").on("click", function () {
+                $(".list").hide();
+                $(".intro").show();
+            })
+            $(".list").show();
+            $(".intro").hide();
+        })
+    </script>
+    <%}%>

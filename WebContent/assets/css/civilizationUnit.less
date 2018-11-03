@@ -1,0 +1,138 @@
+.main-content {
+  .cu-m-c {
+    width: @baseWidth;
+    margin: 0 auto;
+  }
+  .cu-nav {
+    margin: 20px 0px 20px 0px;
+    color: @fontcolorhoverbase;
+    background: url("../img/dqwz.png");
+    height: 35px;
+    line-height: 35px;
+    a {
+      color: @fontcolorhoverbase;
+    }
+  }
+  .cu-u-content {
+    display: flex;
+    flex-direction: row;
+    .cu-t-util {
+      width: 300px;
+      margin: 20px 20px 20px 0px;
+
+      ul {
+        padding-left: 0px;
+        border: 1px solid #861E1B;
+
+        li {
+          width: 100%;
+          list-style: none;
+          height: 40px;
+          line-height: 40px;
+          padding-left: 15px;
+          background: url("../img/nav.png");
+          margin-top:2px;
+        }
+
+        li.first {
+          margin-top:0px;
+          width: 100%;
+          list-style: none;
+          height: 40px;
+          line-height: 40px;
+          background: url("../img/zhiyuantiao.png");
+        }
+        li.first:hover{
+          background: url("../img/zhiyuantiao.png");
+        }
+
+        li:hover {
+          width: 100%;
+          background: #c3c3c3;
+        }
+        li.selected {
+          width: 100%;
+          background: #c3c3c3;
+        }
+      }
+      a {
+        color: #FFFFFF;
+      }
+    }
+    .cu-t-list {
+      width: 100%;
+      ul {
+        padding-left: 0px;
+        li {
+          display: flex;
+          flex-direction: row;
+          list-style: none;
+          line-height: 40px;
+          margin-bottom: 35px;;
+        }
+        li.notice-list {
+          border-bottom: dotted 1px #c3c3c3;
+          margin-bottom: 10px;
+          .cu-l-t-title {
+            font-weight: normal;
+            font-size: 14px;
+            margin: 0px;
+            width: 80%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          span {
+            bottom: 15px;
+          }
+
+        }
+      }
+      img {
+        width: 300px;
+        height: 200px;
+      }
+      .cu-l-text {
+        width: 100%;
+        padding-left: 20px;
+        position: relative;
+        background: url(@backNewsRed) no-repeat left;
+        .cu-l-t-title {
+          display: block;
+          font: 700 20px 微软雅黑;
+        }
+        .cu-l-t-info {
+          font: 16px 微软雅黑;
+        }
+        .cu-l-desp {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+        }
+        .cu-l-date {
+          position: absolute;
+          right: 0px;
+          bottom: 0px;
+          vertical-align: bottom;
+          line-height: normal;
+        }
+        a {
+          color: black;
+        }
+        span {
+          float: right;
+        }
+      }
+    }
+  }
+  .cu-page {
+    text-align: center;
+    margin: 0px 5px;
+    display: block;
+    .pagination {
+      display: inline-flex;
+    }
+  }
+
+}

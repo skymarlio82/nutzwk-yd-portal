@@ -1,0 +1,22 @@
+*{padding: 0;margin: 0;font-family: "微软雅黑";}
+.huodonggonggao{width: 73%; height: 1200px;padding-top:20px;margin: 0 auto;/* border:2px solid #b15315;*/}
+
+.zuo{ float: left;width: 30% ;height: 100%;}
+.huoDong{ width: 100% ;height: 40%; border:1px solid red;}
+.huodong,.gongg{width:100%;height: 30px;background-image: url(../img/zhiyuantiao.png); }
+.huodong a,.gongg a{color: #FFFFFF ;text-decoration: none;}
+.gongGao{ width: 100% ;height: 40%; margin-top: 2%; border:1px solid red;}
+.fuw ul li{ list-style: none ;line-height: 42px;padding-left: 5%;border-bottom: dashed 1px #000000;}
+.fuw ul li a{color: black;text-decoration: none;}
+.fuw ul li a:hover{color: blue;text-decoration: underline;}
+.fuw span{position: relative; left:18%;font-size: 12px;}
+
+.you{float:right; width: 69% ;height: 100%;}
+.you .weizhi{color:#EB7A4A;background: #f1f1f1 ; width: 100% ; height: 30px}
+.neirong{width: 100%;height: 78% ;margin-top:1%;}
+.neirong ul li{list-style: none ;padding-left: 2%; line-height: 45px;border-bottom: dashed 1px #000000;}
+.neirong ul li a{color: black; text-decoration: none}
+.neirong span{position: relative;  left: 68%;}
+.num{margin:0 auto;height: 20px;width: 60%;position: relative;padding-left: 150px;padding-top: 20px;}
+.num a{float: left;text-decoration: none;padding-left: 10px;}
+.num li{cursor:pointer;color:blue;list-style: none;float: left;height: 15px;text-align:center;width: 15px;padding: 2px ;border: 1px solid #E2E2E2;margin-left: 5px;}

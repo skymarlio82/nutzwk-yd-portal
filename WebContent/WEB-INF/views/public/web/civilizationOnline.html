@@ -1,0 +1,103 @@
+<%
+layout("../layouts/platform.html"){
+%>
+<div class="co-content">
+    <div class="co-banner">
+        <div id="myCarousel" class="carousel slide">
+
+            <!-- 轮播（Carousel）指标 -->
+            <ol class="carousel-indicators">
+                <% for(item in banner!){ %>
+                <li data-target="#myCarousel" data-slide-to="0" class=" ${itemLP.index == 1?'active':''}"></li>
+                <%}%>
+            </ol>
+            <!-- 轮播（Carousel）项目 -->
+            <div class="carousel-inner">
+                <% for(b in banner!){
+                var finalUrl = "";
+                if(b.type == "img" || b.type == "img_link"){
+                finalUrl = base!+"/article/detail?id="+b.url;
+                }else{
+                finalUrl = b.url;
+                }
+                %>
+                <div class="item ${bLP.index == 1?'active':''}">
+                    <a href="${b.url}" target="${b.target}">
+                        <img src="${base!}${b.picurl}" alt="${b.name}">
+                    </a>
+                </div>
+                <%}%>
+                <!--<div class="item">-->
+                <!--<img src="/assets/img/lun-1.jpg" alt="First slide">-->
+                <!--</div>-->
+                <!--<div class="item">-->
+                <!--<img src="/assets/img/lun-1.jpg" alt="First slide">-->
+                <!--</div>-->
+            </div>
+
+        </div>
+    </div>
+    <div class="co-nav">
+        <%
+        var navUrl = channel.url+"?id="+id+"&childId=";
+        for(item in channels){%>
+        <div class="co-nav-list ${item.id ==childId?'select':''}" style = "width:25%">
+            <!--<a href="${base!}${navUrl}${item.id}">${item.name}</a>-->
+            <a href="${AppDomain!}${base!}/article/newsList?id=${item.id}" target="_blank">${item.name}</a>
+        </div>
+        <%}%>
+    </div>
+    <div class="co-newAad">
+        <div class="co-news">
+            <div class="co-news-list">
+
+                <%
+                for(item in articleList){%>
+                    <div class="co-n-l-c">
+                        <div class="co-n-l-img">
+                            <a href="${AppDomain!}${base!}/article/detail?id=${item.id}" target="_blank"><img src="${base!}${item.picurl}" alt="${item.title}"></a>
+                        </div>
+                        <div class="co-n-l-funame">
+                            <div class="co-funame-title">
+                                <a href="${AppDomain!}${base!}/article/detail?id=${item.id}" target="_blank">${item.title}</a>
+                            </div>
+                            <p class="co-funame-desp">
+                               ${item.info}
+                            </p>
+                            <p class="co-funame-desp" style="font-size: 14px;">
+                                ${item.desp}
+                            </p>
+                            <div class="co-funame-date">
+                                ${@date.getDate(item.opat,"yyyy-MM-dd")}
+                            </div>
+                        </div>
+                    </div>
+                <%}%>
+
+            </div>
+            <div class="co-news-page">
+                <%
+                    var requrl = AppDomain!+ base! + channel.url+"?id="+id+"&childId="+childId;
+                    include("../layouts/page.html",{page:pageCount,len:length,cur:draw,url:requrl}){}
+                %>
+            </div>
+        </div>
+        <div class="co-ad">
+            <%for(item in adRightVideo!){%>
+            <div class="co-ad-img">
+                <a href="${item.url}" target="_blank"><img src="${base!}${item.picurl}" alt="${item.title}"></a>
+                <div class="co-ad-img-msg">${item.name}</div>
+            </div>
+            <%}%>
+            <%for(item in adRightBottom!){%>
+            <div class="co-ad-img">
+                <a href="${item.url}" target="_blank"><img src="${base!}${item.picurl}" alt="${item.title}"></a>
+            </div>
+            <%}%>
+        </div>
+    </div>
+</div>
+<%
+}
+
+%>

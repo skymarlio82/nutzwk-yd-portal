@@ -1,0 +1,191 @@
+@import "var";
+@backListTitle:#F7F7F7;/* 志愿者详情项目列表的头部颜色 */
+@backListTitleColor:#118FD1;/* 志愿者详情项目项目标题颜色 */
+@backListStatusColor:#0708FE;
+.teamDetail {
+  display: flex;
+  flex-direction: column;
+  width: @baseWidth;
+  margin: 0 auto;
+  color: @backFootBlack;
+  .nd-nav {
+    margin-bottom: 0px;
+  }
+
+  .team-detail-title {
+    font-size: @fontNav;
+    padding-left: 15px;
+    margin-top: -5px;
+    border: solid 1px @borderColor;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    broder-top: none;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .team-detail-content {
+    margin-top: 20px;
+    border: solid 1px @borderColor;
+    border-radius: 10px;
+    padding: 15px;
+    .t-d-c-gw{
+      margin-top:20px;
+      border:solid 1px #EEEEEE;
+      .t-d-v-nav{
+        background: #EEEEEE;
+        height:40px;
+        line-height: 40px;
+        padding-left:10px;
+        width:100%;
+      }
+      .tdci-info{
+        padding-top:20px;
+        p{
+          height:20px;
+          padding-left:10px;
+          line-height: 20px;
+        }
+        p.act{
+          color: #43703E;
+        }
+      }
+    }
+    .t-d-c-info {
+      display: flex;
+      flex-direction: row;
+      border: solid 1px @borderColor;
+      img {
+        width: 200px;
+        height: 200px;
+      }
+      .tdci-info {
+        padding: 9px 15px 9px 20px;
+        p {
+          label {
+            color: @backFootBlack;
+            padding-right: 20px;
+            width: 100px;
+          }
+          height: 21px;
+          margin: 0px;
+          padding: 0px;
+        }
+      }
+    }
+    .t-d-c-list {
+      display: flex;
+      flex-direction: column;
+
+      .tdcl-btn {
+        display: flex;
+        flex-direction: row;
+        margin:40px 0px 0px 0px;
+        height: 40px;
+        .tdcl-left{
+          width:80%;
+          .pro_btn_team{
+            width:300px;
+            height: 38px;
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            .act{
+              background: url("../img/pro_act_btn.png") no-repeat 100% ;
+              -webkit-background-size: 100% 100%;
+              background-size: 100% 100%;
+            }
+            div{
+              background: url("../img/pro_act_un_btn.png") no-repeat 100%;
+              background-size: 100% 100%;
+              color: #fff;
+              width:50%;
+              height:38px;
+              margin-right:10px;
+              line-height: 38px;
+            }
+          }
+          .btn_team{
+            width:300px;
+            height: 38px;
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            div{
+              width:50%;
+              height:38px;
+              line-height: 38px;
+            }
+
+            .pro-list{
+              color: #fff;
+            }
+            .pro-introl{
+              color: #EB6A18;
+            }
+          }
+        }
+        .tdcl-right{
+          width:20%;
+          position: relative;
+          .btn-jointeam{
+            position: absolute;
+            right:0px;
+            width:120px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 5px;
+            padding:0px;
+            text-align: center;
+            bottom:-3px;
+            color: @backgroundbase;
+            background: url(@backNavImg) no-repeat;
+          }
+        }
+
+      }
+      .tdcllist {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        border: solid 1px @borderColor;
+        .tdtablelist {
+          height: 40px;
+          border: solid 1px @borderColor;
+          border-left: none;
+          border-right: none;
+          line-height: 40px;
+          display: flex;
+          flex-direction: row;
+          .t1 {
+            padding-left: 15px;
+            width: 80%;
+            color: @backListTitleColor;
+            label {
+              color: @backFootBlack;
+            }
+          }
+          .t2 {
+            width: 10%;
+          }
+          .t3 {
+            color: @backListStatusColor;
+            width: 10%;
+            label {
+              color: @backFootBlack;
+            }
+          }
+        }
+
+        .tdtablelist:first-child {
+          height: 20px;
+          line-height: 20px;
+          background: @backListTitle;
+        }
+      }
+    }
+  }
+
+}

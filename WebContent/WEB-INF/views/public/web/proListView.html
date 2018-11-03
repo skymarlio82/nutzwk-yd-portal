@@ -1,0 +1,284 @@
+<%
+layout("../layouts/platform.html"){
+%>
+<div class="nd-m-c">
+    <div class="nd-nav">
+        当前位置：
+        <%for(var i = (channels.~size -1) ; i >= 0 ; i --){
+        if(i == 0){
+        %>
+        ${channels[i].name}
+        <%
+        }else{
+        %>
+        <a href="${AppDomain!}${base!}/${channels[i].url}?id=${channels[i].id}" target="${channels[i].target}">${channels[i].name}</a>
+        &rarr;
+        <%}
+        }
+        %>
+    </div>
+    <div class="team-content">
+        <form method="get" id="formSub">
+
+
+            <input type="hidden" name="serviceRange" value="${serviceRange!}">
+            <input type="hidden" name="serviceObj" value="${serviceObj!}">
+            <input type="hidden" name="serviceClass" value="${serviceClass!}">
+
+            <input type="hidden" name="prostate" value="${prostate!}">
+            <input type="hidden" name="pnum" value="${pnum!}">
+            <input type="hidden" name="channelId" value="${channelId}">
+
+            <div class="team-tag">
+                <div class="tt-li">
+                    <div class="tt-label">
+                        服务类别:
+                    </div>
+                    <div class="tt-search-cnd serviceClass">
+                        <ul>
+                            <li data-val="" class="${serviceClass == '' ? 'act':'' }">全部</li>
+                            <% for(item in objDict){ %>
+                            <li data-val="${item.id}" class="${serviceClass == item.id ? 'act':'' }">${item.name}</li>
+                            <%}%>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tt-li">
+                    <div class="tt-label">
+                        项目状态:
+                    </div>
+                    <div class="tt-search-cnd prostate">
+                        <ul>
+                            <li data-val="" class="${prostate == '' ? 'act':'' }">全部</li>
+                            <% for(item in stateDict){ %>
+                            <li data-val="${item.id}" class="${prostate == item.id ? 'act':'' }">${item.name}</li>
+                            <%}%>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tt-li">
+                    <div class="tt-label">
+                        报名范围:
+                    </div>
+                    <div class="tt-search-cnd serviceRange">
+                        <ul>
+                            <li data-val="" class="${serviceRange == '' ? 'act':'' }">全部</li>
+                            <% for(item in rangeDict){ %>
+                            <li data-val="${item.id}" class="${serviceRange == item.id ? 'act':'' }">${item.name}</li>
+                            <%}%>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tt-li">
+                    <div class="tt-label">
+                        报名对象:
+                    </div>
+                    <div class="tt-search-cnd serviceObj">
+                        <ul>
+                            <li data-val="" class="${serviceObj == '' ? 'act':'' }">全部</li>
+                            <% for(item in serviceDict){ %>
+                            <li data-val="${item.id}" class="${serviceObj == item.id ? 'act':'' }">${item.name}</li>
+                            <%}%>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tt-li">
+                    <div class="tt-label">
+                        项目人数:
+                    </div>
+                    <div class="tt-search-cnd pnum">
+                        <ul>
+                            <li data-val="" class="${pnum! == ''? 'act':'' }">全部</li>
+                            <li data-val="-1~0" class="${pnum! == '-1~0' ? 'act':'' }">0</li>
+                            <li data-val="1~100" class="${pnum! == '1~100' ? 'act':'' }">1-100</li>
+                            <li data-val="101~200" class="${pnum! == '101~200' ? 'act':'' }">101-200</li>
+                            <li data-val="201~500" class="${pnum! == '201~500' ? 'act':'' }">201-500</li>
+                            <li data-val="501~1000" class="${pnum! == '501~1000' ? 'act':'' }">501-1000</li>
+                            <li data-val="1000~999999" class="${pnum! == '1000~999999' ? 'act':'' }">1000以上</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-search-cnd">
+                <div class="tsc">
+                    <div class="tsc-in">
+                        <label  >项目起止日期</label>
+                        <input type="text" id="startDate" name="startDate" value = '${startDate!}'>至 <input type="text" id="endDate" name="endDate" value = '${endDate!}'>
+                    </div>
+                    <div class="tsc-in">
+                        <label >项目ID</label>
+                        <input type="text" name="pid" value="${pid!}">
+                    </div>
+                    <div class="tsc-in">
+                        <label >项目名称</label>
+                        <input type="text" class="tsc-in-d" value="${pname!}" name="pname">
+                    </div>
+                    <div class="tsc-in">
+                        <button class="btn btn-default" id="searM">搜索</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="tc-listView" style="color: #9D9D9D;">
+            <% for(item in list){ %>
+            <div class="tc-pro-include">
+                <div class="tc-l-pro">
+                    <div class="tc-l-pro-c">
+                        <div class="tc-1pro-img">
+                            <img src="${base!}${item.pimg}" onerror="errorImg(this)" alt="">
+                        </div>
+                        <div class="tc-1pro-title">
+                            <a target="_blank" href="${base!}/pro/desc?channelId=${channelId}&id=${item.id}">${item.pname}</a>
+                        </div>
+                        <div class="tc-1pro-teamnum">
+                            发起团体:${item.gpname!}
+                        </div>
+                        <div class="tc-1pro-service">
+                            招募人数：${item.pnum!}
+                        </div>
+                    </div>
+                    <div class="tc-pro-line">
+
+                        <div class="pro-line" data-pnum="${item.pnum!}"
+                             data-signcount="${item.signupcount!}" data-startime="${item.recruitstarttime!}"
+                             data-endtime="${item.recruitendtime!}">
+
+                        </div>
+                    </div>
+                    <div class="tc-l-pro-foo" style="font-size: 12px;">
+                        <div class="tc-pro-foo-tab">
+                            <div class="tc-pro-peixun">项目进度</div>
+                            <div class="tc-pro-grade procount">${count!}</div>
+                        </div>
+                        <div class="tc-pro-foo-tab">
+                            <div class="tc-pro-peixun">报名人数</div>
+                            <div class="tc-pro-grade">${item.signupcount!}</div>
+                        </div>
+                        <div class="tc-pro-foo-tab">
+                            <div class="tc-pro-peixun">招募日期</div>
+                            <div class="tc-pro-grade">
+                                ${@date.getDate(item.recruitstarttime,"yyyy.MM.dd")}-${@date.getDate(item.recruitendtime,"MM.dd")}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+            <div class="tc-listView-page">
+                <!--<input type="text" id="startDate" name="startDate" value = '${startDate!}'>至 <input type="text" id="endDate" name="endDate" value = '${endDate!}'>-->
+                <!--</div>-->
+                <!--<div class="tsc-in">-->
+                <!--<label >团体ID</label>-->
+                <!--<input type="text" name="teamId" value="${teamId!}">-->
+                <!--</div>-->
+                <!--<div class="tsc-in">-->
+                <!--<label >团体名称</label>-->
+                <!--<input type="text" class="tsc-in-d" value="${teamName!}" name="teamName">-->
+                <%
+                var requrl = base! + "/pro/list?channelId="+(channelId!)+"&type="+(type!)+
+                "&teamNum"+(teamNum!)+"&serviceType"+(serviceType!)+"&teamType"+(teamType!)+
+                "&startDate"+(startDate!)+"&endDate"+(endDate!)+"&teamId"+(teamId!)+"&teamName"+(teamName!);
+                include("../layouts/page.html",{page:pageCount,len:length,cur:draw,url:requrl}){}
+                %>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${base!}/assets/js/bootstrap-datetimepicker.min.js"></script>
+<script src="${base!}/assets/js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script>
+
+    $(function () {
+
+        $(".pro-line").each(function () {
+            var pnum = $(this).attr("data-pnum");
+            var psigncount = $(this).attr("data-signcount");
+            var startime = $(this).attr("data-startime");
+            var endtime = $(this).attr("data-endtime");
+            var time = new Date().getTime() / 1000;
+            var count = 0;
+            count = parseFloat(psigncount) / parseFloat(pnum);
+
+            if (startime > time) {
+                count = 0;
+            } else if (time > endtime) {
+                count = 100;
+            }
+            $(this).css("width", count + "%");
+            var ec = count.toFixed(0);
+            $(this).parent().parent().find(".procount").text(ec + "%");
+        });
+
+        $("#sbtn").on("click", function () {
+            console.log("搜索")
+            local.search($("#search").val());
+        });
+
+        function subForm() {
+            $("#formSub").submit();
+        }
+
+        $(".pnum").find("li").on("click", function () {
+            $("input[name='pnum']").val($(this).attr("data-val"));
+            subForm();
+        });
+
+        $(".prostate").find("li").on('click',function(){
+            $("input[name='prostate']").val($(this).attr("data-val"));
+            subForm();
+        });
+
+
+        $(".serviceRange").find("li").on('click',function(){
+            $("input[name='serviceRange']").val($(this).attr("data-val"));
+            subForm();
+        })
+
+
+
+        $(".serviceClass").find("li").on("click", function () {
+            $("input[name='serviceClass']").val($(this).attr("data-val"));
+            subForm();
+        })
+
+        $(".serviceObj").find("li").on("click", function () {
+            $("input[name='serviceObj']").val($(this).attr("data-val"));
+            subForm();
+        });
+
+        $("#mapM").on("click", function () {
+
+            $("input[name='map']").val("map");
+        })
+        $("#listM").on("click", function () {
+
+            $("input[name='type']").val("list");
+        });
+        $("#startDate").datetimepicker({
+            anguage: 'zh-CN',
+            format: 'yyyy-mm-dd',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2, //这里就设置了默认视图为年视图
+            minView: 2, //设置最小视图为年视图
+            forceParse: 0
+        });
+        $("#endDate").datetimepicker({
+            anguage: 'zh-CN',
+            format: 'yyyy-mm-dd',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2, //这里就设置了默认视图为年视图
+            minView: 2, //设置最小视图为年视图
+            forceParse: 0
+        });
+    })
+</script>
+<%}%>

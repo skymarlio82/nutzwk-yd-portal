@@ -1,0 +1,315 @@
+<%
+layout("../layouts/platform.html"){
+%>
+<div class="content">
+    <form action="${base}/home/personalReg" class="parsley-form" data-parsley-validate id="regForm" method="post">
+        <div class="tg-main">
+
+            <div class="tg-groups">
+
+                <div class="tp-header-title">
+                    账号信息
+                </div>
+                <div class="tp-content">
+                    <div class="f-group">
+                        <label for="username" class="req">用户信息</label>
+                        <div class="f-input">
+                            <input type="text" name="username" data-parsley-equalto-message="两次输入的用户名不一致"
+                                   data-parsley-required="true" id="username" data-parsley-equalto="#reusername">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="reusername" class="req">确认用户名</label>
+                        <div class="f-input">
+                            <input type="text" name="reusername" data-parsley-equalto-message="两次输入的用户名不一致"
+                                   data-parsley-required="true" data-parsley-equalto="#username" id="reusername">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="password" class="req">密码</label>
+                        <div class="f-input">
+                            <input type="password" name="password" data-parsley-required="true"
+                                   data-parsley-equalto-message="两次输入的密码不一致" data-parsley-equalto="#repassword"
+                                   id="password">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="repassword" class="req">确认密码</label>
+                        <div class="f-input">
+                            <input type="password" name="repassword" data-parsley-required="true" id="repassword"
+                                   data-parsley-equalto-message="两次输入的密码不一致" data-parsley-equalto="#password">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="email" class="req">电子邮箱</label>
+                        <div class="f-input">
+                            <input type="text" name="email" data-parsley-required="true" data-parsley-type="email"
+                                   data-parsley-equalto-message="两次输入的邮箱不一致" data-parsley-equalto="#reemail" id="email">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="reemail" class="req">确认电子邮箱</label>
+                        <div class="f-input">
+                            <input type="text" name="remail" data-parsley-equalto-message="两次输入的邮箱不一致"
+                                   data-parsley-required="true" data-parsley-equalto="#email" data-parsley-type="email"
+                                   id="reemail">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tg-groups">
+
+                <div class="tp-header-title">
+                    个人基本信息
+                </div>
+                <div class="tp-content">
+                    <div class="f-group">
+                        <label for="contry" class="req">国家地区</label>
+                        <div class="f-input">
+                            <input type="text" style="width: 250px;" name="contry" data-parsley-required="true"
+                                   id="contry" value="中国">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label class="req">真实姓名</label>
+                        <div class="f-input">
+                            <input type="text" name="realyName" data-parsley-required="true" id="realyName">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="cardType" class="req">证件类型</label>
+                        <div class="f-input">
+                            <select name="cardType" id="cardType">
+                                <% for( item in cmsCardType){ %>
+                                <option value="${item.name}">${item.name}</option>
+                                <%}%>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="cardId" class="req">证件号码</label>
+                        <div class="f-input">
+                            <input type="text" name="cardId" data-parsley-required="true" id="cardId">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label class="req">性别</label>
+                        <div class="f-input">
+                            <input type="radio" checked name="gender">男
+                            <input type="radio" name="gender">女
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="uboth" class="req">出生日期</label>
+                        <div class="f-input">
+                            <input type="text" name="uboth" data-parsley-required="true" id="uboth">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="political" class="req">政治面貌</label>
+                        <div class="f-input">
+                            <select name="political" id="political">
+                                <% for(item in cmsUserPolitical){ %>
+                                <option value="${item.name}">${item.name}</option>
+                                <%}%>
+                            </select>
+                            <!--<input type="text" name="political"  data-parsley-required="true"  id="political">-->
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="political" class="req">民族</label>
+                        <div class="f-input">
+                            <input type="text" name="ubation" data-parsley-required="true" id="ubation">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="political" class="req">籍贯</label>
+                        <div class="f-input">
+                            <input type="text" name="placeOforigin" data-parsley-required="true" id="placeOforigin">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="mp" class="req">手机</label>
+                        <div class="f-input">
+                            <input type="text" name="mp" data-parsley-required="true" id="mp">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="political">固话</label>
+                        <div class="f-input">
+                            <input type="text" name="tel" id="tel">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="political">QQ</label>
+                        <div class="f-input">
+                            <input type="text" name="qq" id="qq">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="weibo">微博</label>
+                        <div class="f-input">
+                            <input type="text" name="weibo" id="weibo">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="region" class="req">居住区域</label>
+                        <div class="f-input">
+                            <select name="region" id="region">
+                                <%for(item in region){%>
+                                <option value="${item.id}">${item.name}</option>
+                                <%}%>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="address" class="req">详细地址</label>
+                        <div class="f-input">
+                            <input type="text" id="address" data-parsley-required="true" style="width: 300px;"
+                                   name="address">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="regionCode" class="req">邮编</label>
+                        <div class="f-input">
+                            <input type="text" id="regionCode" data-parsley-required="true" name="regionCode">
+                        </div>
+                    </div>
+
+                    <div class="f-group">
+                        <label for="education" class="req">最高学历</label>
+                        <div class="f-input">
+                            <select name="education" id="education">
+                                <% for(item in educations){ %>
+                                <option value="${item.id}">${item.name}</option>
+                                <%}%>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="f-group">
+                        <label for="employmentStatus" class="req">从业状态</label>
+                        <div class="f-input">
+                            <select name="employmentStatus" id="employmentStatus">
+                                <% for(item in employmentStatus){ %>
+                                <option value="${item.id}">${item.name}</option>
+                                <%}%>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="f-group">
+                        <label for="invatToregion" class="req">受邀服务区域</label>
+                        <div class="f-input">
+                            <select name="invatToregion" id="invatToregion">
+                                <% for(item in region){ %>
+                                <option value="${item.id}">${item.name}</option>
+                                <%}%>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="invatType" class="req">服务类别</label>
+                        <div class="f-input" style="width: 80%;">
+                            <%for(item in invatType){%>
+                            <input type="checkbox" id="invatType" data-parsley-mincheck="1"
+                                   data-parsley-required="true" name="invatType" value="${item.id}"> ${item.name}
+                            <%}%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tg-groups">
+                <a href="javascript:void(0);" class="btn btn-inverse" id="subform">申请成为实名注册志愿者</a>
+            </div>
+            <div class="tg-groups" style="text-align: center;">
+                <textarea name="registerInfo" id="registerInfo" cols="100" style="margin: 0 auto    ;" rows="10">
+                    本网站及与本网站链接的网站，仅提供志愿者、志愿服务团体、志愿服务机构及其它与此相关联之志愿服务项目。志愿者、志愿服务团体、志愿服务机构以及因 其它任何目的进入本网站的访问者接受本协议书条款，注册成为上海志愿者网网站会员，并遵守本协议所述之条款使用本网站所提供之服务。如果您不接受本声明之条 款，请勿使用本网站。接受本声明之条款，您将遵守本协议之规定。
+
+1.信息的发布
+
+·不得发布任何违反有关法律规定信息；
+·不得发布任何与本网站志愿服务目的不适之信息；
+·不得发布任何不完整、虚假的信息；
+·用户对所发布的信息承担完全责任。
+
+2.信息的使用
+
+·志愿服务团体、志愿服务机构仅可就志愿服务目的使用志愿者之个人信息；
+·志愿者仅可因参加某志愿服务项目，使用志愿服务团体、志愿服务机构发布之项目招募信息；
+·本网站提供的其它信息，仅与其相应内容有关的目的而被使用；
+·不得将任何本网站的信息用作任何商业目的。
+
+3.信息的公开
+
+在本网站所登录的任何信息，均有可能被任何本网站的访问者浏览，也可能被错误使用。本网站对此将不予承担任何责任。
+
+4.信息的准确性
+
+任何在本网站发布的信息，均必须符合合法、准确、及时、完整的原则。但本网站将不能保证所有由第三方提供的信息，或本网站自行采集的信息完全准确。使用 者了解，对这些信息的使用，需要经过进一步核实。本网站对访问者未经自行核实误用本网站信息造成的任何损失不予承担任何责任。
+
+5.信息更改与删除
+
+除了信息的发布者外，任何访问者不得更改或删除他人发布的任何信息。本网站有权根据其判断保留修改或删除任何不适信息之权利。
+
+6.版权、商标权
+
+本网站的图形、图像、文字及其程序等均属上海志愿者网网站之版权，受商标法及相关知识产权法律保护，未经上海志愿者网网站书面许可，任何人不得下载、复制、再使用。在本网发布信息之商标，归其相应的商标所有权人，受商标法保护。
+
+7、注册信息使用
+
+注册会员所提供的个人信息将会被上海志愿者网网站统计、汇总，在我们的严格管理下，为上海志愿者网网站的合作者提供依据。上海志愿者网网站会不定期地通过注册会员留下的电子邮件、电话或通信地址同该会员保持联系。
+
+上海志愿者网网站承诺：在未经访问者授权同意的情况下，上海志愿者网网站不会将访问者的个人资料泄露给第三方。但以下情况除外。
+·根据执法单位之要求或为公共之目的向相关单位提供个人资料；
+·由于您将用户密码告知他人或与他人共享注册帐户，由此导致的任何个人资料泄露；
+·由于计算机2000年问题、黑客攻击、计算机病毒侵入或发作、因政府管制而造成的暂时性关闭等影响网络正常经营之不可抗力而造成的个人资料泄露、丢失、被盗用或被窜改等；
+·由于与上海志愿者网网站链接的其它网站所造成之个人资料泄露及由此而导致的任何法律争议和后果；
+·为免除访问者在生命、身体或财产方面之急迫危险。
+
+8.自责
+
+所有使用本网站的用户，对使用本网站信息和在本网站发布信息的被使用，承担完全责任。本网站对任何因使用本网站而产生的第三方之间的纠纷，不负任何责任。
+
+9.服务终止
+
+本网站有权在预先通知或不予通知的情况下终止任何免费服务。
+
+10.争议处理
+
+本网站因正常的系统维护、系统升级，或者因网络拥塞而导致网站不能访问，本网站不承担任何责任。
+
+11.免责条款
+
+本网并无随时监视此网址，但保留对其实施实时监视的权利。对于他方输入的，不是本网发布的材料，本网概不负任何法律责任。对于其他网址链接在本网址的内容，本网概不负法律责任。
+                </textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+
+        $("#subform").on("click", function () {
+            $('#regForm').ajaxForm({
+                dataType: 'json',
+                beforeSubmit: function (arr, form, options) {
+                },
+                success: function (data, statusText, xhr, form) {
+                    if (data.code == 0) {
+                        alert(data.msg);
+                        history.go(-1);
+                    } else {
+                        alert(data.msg)
+                    }
+                }
+            });
+            $('#regForm').submit()
+        })
+    });
+
+
+</script>
+<%}%>

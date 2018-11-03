@@ -1,0 +1,106 @@
+<div class="modal-body no-p">
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="panel panel-primary no-b">
+                <header class="panel-heading clearfix brtl brtr">
+                    <div class="overflow-hidden">
+                        <a href="javascript:;" class="h4 show no-m pt5">团体详情</a>
+                        <!--<small>${obj.id}</small>-->
+                    </div>
+                </header>
+                <div class="list-group" style = "${lookup == 'df'?'display:block':'display:none'};">
+                    <table class="table table-bordered table-striped mg-t datatable">
+                        <tbody>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.tid']}</td><td>${obj.tid}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.username']}</td><td>${obj.username}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.password']}</td><td>${obj.password}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.email']}</td><td>${obj.email}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.groupName']}</td><td>${obj.groupName}</td>
+                            </tr>
+                                                        <tr>
+                                                            <!--if (data==0){
+                            return' 在民政部门登记成立的法人组织'
+                        }
+                        return ' 未登记的社会组织或其他组织'-->
+                                <td>${msg['cms.userteam.column.signStatus']}</td><td>${obj.signStatus == 0?"在民政部门登记成立的法人组织":"未登记的社会组织或其他组织"}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.constractGroup']}</td><td>${obj.constractGroup}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.unitType']}</td><td>${obj.unitType}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.unitName']}</td><td>${obj.unitName}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.region']}</td><td>${obj.region}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.address']}</td><td>${obj.address}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.regionCode']}</td><td>${obj.regionCode}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.bothDate']}</td><td>${obj.bothDate}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.pnum']}</td><td>${obj.pnum}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.serviceType']}</td><td>${obj.serviceType}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.constractName']}</td><td>${obj.constractName}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.constractPhone']}</td><td>${obj.constractPhone}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.constractTel']}</td><td>${obj.constractTel}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.constractQQ']}</td><td>${obj.constractQQ}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.pochargeName']}</td><td>${obj.pochargeName}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.pochargeCardId']}</td><td>${obj.pochargeCardId}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.pochargePhone']}</td><td>${obj.pochargePhone}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.authStatus']}</td><td>${obj.authStatus}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.authReason']}</td><td>${obj.authReason}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.userteam.column.registtime']}</td><td>${obj.registtime}</td>
+                            </tr>
+
+                                                    </tbody>
+                    </table>
+                </div>
+                <div class="list-group"  style = "${lookup == 'df'?'display:none':'display:block'};">
+                    ${obj.teamintro}
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">${msg['globals.button.ok']}</button>
+</div>

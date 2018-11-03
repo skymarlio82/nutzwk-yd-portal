@@ -1,0 +1,56 @@
+<ul class="pagination">
+    <%
+        var prev = cur -1;
+        var next = cur + 1;
+        prev = prev <= 0 ?0:prev;
+        next = next>= page?page:next;
+        var start = 0;
+        if(cur<=6){
+            start = 0;
+        }else{
+            start = cur - 6;
+        }
+        var end = 0;
+        if((start + 10 ) >= page){
+            end = page;
+        }else {
+            end  = start + 10;
+        }
+
+        if(end - start < 10){
+            start = end - 10;
+        }
+        if(start < 0){
+            start = 0;
+        }
+        var prevUrl = url+'&length='+len+'&start='+(prev-1)*len+'&draw='+prev;
+        var prevClass = '';
+        var nextClass = '';
+        if(cur <= 1)
+        {
+            prevClass = "disabled";
+            prevUrl = "javascript:void(0);";
+            next  = 2;
+        }
+        var nextUrl = url+'&length='+len+'&start='+(next-1)*len+'&draw='+next;
+        if(cur >= page){
+            nextClass = "disabled";
+            nextUrl = "javascript:void(0);";
+        }
+    %>
+
+    <li class="${prevClass}"><a href="${prevUrl}">&lt;上一页</a></li>
+    <%for(var i = start ; i < end ; i ++){
+        var tarUrl = url+'&length='+len+'&start='+(i*len)+'&draw='+(i+1);
+    %>
+        <li class="${i == (cur - 1) || (i == 0 && cur == 0)? 'active disabled':'' }">
+            <a href="${i == (cur - 1) || (i == 0 && cur == 0)? 'javascript:void(0);' :tarUrl}">${i+1}</a>
+        </li>
+    <%}
+    %>
+    <!--<li class="disabled"><a href="#">2</a></li>-->
+    <!--<li><a href="#">3</a></li>-->
+    <!--<li><a href="#">4</a></li>-->
+    <!--<li><a href="#">5</a></li>-->
+    <li class="${nextClass}" ><a href="${nextUrl}">下一页&gt;</a></li>
+</ul>

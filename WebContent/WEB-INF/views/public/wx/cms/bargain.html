@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0"/>
+    <title>${config.bargainName}</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300"/>
+    <link rel="stylesheet" href="${base}/assets/countdown/jquery.countdown.css"/>
+    <link rel="stylesheet" href="${base}/assets/css/animate.css">
+    <link rel="stylesheet" href="${base}/assets/css/mui.min.css">
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+        .space {
+            padding-left: 5px;
+            font-size: 10px;
+            padding-right: 5px;
+        }
+
+        .timer {
+            position: relative;
+            background-color: #FFFFFF;
+            border-left: solid 2px #CCCCCB;
+            border-top: solid 2px #CCCCCB;
+            border-radius: 5px;
+            margin: -1px;
+        }
+
+        .timer p {
+            margin-top: 0px;
+            color: #000;
+        }
+
+        .timerMarginBorder {
+            position: relative;
+            width: 76%;
+            margin: -6px auto;
+            border: solid 18px #FFBB45;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        .timerBorder {
+            position: relative;
+            padding-bottom: 20px;
+            border: solid 4px #DC8F23;
+            border-radius: 5px;
+            margin: -2px;
+        }
+
+        body {
+            background-color: #FF6C00;
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .clearfix {
+            clear: both;
+        }
+
+        .whiteDiv {
+            background: #FFFFFF;
+        }
+
+        .lefttop {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            top: -12px;
+            left: -12px;
+        }
+
+        .righttop {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            top: -12px;
+            right: -12px;
+        }
+
+        .leftbottom {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            bottom: -12px;
+            left: -12px;
+        }
+
+        .rightbottom {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            bottom: -12px;
+            right: -12px;
+        }
+
+        .basicborder {
+            border: solid 2px #310F14;
+            color: #310F14;
+            border-radius: 10px;
+            background: #FEE12E;
+        }
+
+        .join {
+            text-align: center;
+            font-size: 30px;
+            padding-top: 5px;
+            font-weight: bold;
+            padding-bottom: 5px;
+            width: 45%;
+            z-index: 2;
+        }
+
+        .bargain {
+            text-align: center;
+            font-size: 30px;
+            padding-top: 5px;
+            font-weight: bold;
+            padding-bottom: 5px;
+            width: 45%;
+            z-index: 2;
+        }
+
+        .op-btn {
+            margin-top: 30px;
+        }
+
+        .actinfo {
+            text-align: center;
+            width: 92%;
+            position: relative;
+            margin: 60px auto;
+            padding-bottom: 10px;
+        }
+
+        .foodDesc {
+            text-align: right;
+            position: relative;
+            z-index: 2;
+            padding-top: 14px;
+            border: solid 4px #2E0E15;
+            width: 90%;
+            border-radius: 10px;
+            background: #FF6C00;
+            color: #fff;
+            margin: 20px auto;
+            margin-bottom: 10px;
+        }
+
+        .foodTitle {
+            text-align: left;
+        }
+
+        .foodTitle .title {
+            padding-left: 20px;
+            font-size: 22px;
+            /*width: 257px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;*/
+        }
+
+        .actinfo img {
+            border-radius: 10px;
+            width: 95%;
+            margin-top: 10px;
+            height: auto;
+        }
+
+        .actinfo table {
+            width: 95%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .actinfo table img {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+        }
+
+        .actinfo table tr {
+            border-top: solid 1px #310F14;
+        }
+
+        .foodPrice {
+            position: absolute;
+            top: 50px;
+            text-align: left;
+            font-size: 22px;
+            line-height: 30px;
+            padding-left: 20px;
+        }
+
+        .foodPrice .yuan {
+            color: #823606;
+            font-size: 12px;
+            text-decoration: line-through;
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        .foodPrice p {
+            font-size: 20px;
+            text-align: left;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            color: #823606;
+            width: 257px;
+        }
+
+        .wenzi {
+            text-align: left;
+            padding: 15px;
+        }
+
+        .dmleft {
+            width: 0;
+            height: 0;
+            border-bottom: 40px solid transparent;
+            border-left: 120px solid #FB9006;
+            margin-top: -8px;
+            float: left;
+        }
+
+        .dmright {
+            width: 0;
+            height: 0;
+            border-bottom: 40px solid transparent;
+            border-right: 120px solid #FB9006;
+            margin-top: -8px;
+            margin-right: 0px;
+            float: right;
+
+        }
+
+        .acttitle {
+            background: url(${base}/assets/img/65.png) no-repeat 50% 50%;
+            background-size: cover;
+            width: 77%;
+            font-family: 微软雅黑;
+            font-size: 25px;
+            line-height: 40px;
+            padding-top: 10px;
+            color: #fff;
+            margin: -32px auto;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="orange"
+     style="position:absolute;right: 0px;top: 0px;width: 40px;height: 40px;z-index: 2;background: #FF6C00;border-radius:100%;"></div>
+<img src="${base}/assets/img/bg.jpg" style="text-align:center;margin:0 auto;max-width:720px;z-index: 1;"
+     width="100%"
+     alt="">
+<div class="dmleft">
+</div>
+<div class="dmright">
+</div>
+<div class="timerMarginBorder wow  " style="z-index: 2;background: #FF6C00;" data-wow-delay="0.1s">
+    <div class="lefttop whiteDiv"></div>
+    <div class="righttop whiteDiv"></div>
+    <div class="leftbottom whiteDiv"></div>
+    <div class="rightbottom whiteDiv"></div>
+    <div class="timerBorder wow zoomIn">
+        <div class="timer">
+            <p style="text-align: center;font-size: 16px;margin-bottom: 24px">开始倒计时</p>
+            <div id="countdown"></div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="foodDesc  wow fadeInUp">
+    <div class="foodTitle">
+        <div class="title">老板娘烤肉店“全牛宴”</div>
+    </div>
+    <div class="foodPrice">砍后价：￥ <span id="bargainUserPrice">${bargain.price}</span><span class="yuan">￥158</span>
+        <p>已有 <span>${count}</span> 人参与砍价</p>
+    </div>
+    <img src="${base}/assets/img/renzhe.jpg" style="width: 30%" alt="">
+</div>
+<div class="op-btn">
+    <div ${hasBargain?
+    'disabled=disabled':''} style="z-index: 2;" class="bargain mui-btn basicborder wow rollIn ">
+    ${hasBargain?'已砍':'砍一刀'}
+</div>
+<div style="z-index: 2;" ${hasMyBargain?
+'disabled=disabled':''} class="join mui-btn basicborder wow rollIn ">
+${hasMyBargain?'查看我的':'我也参加'}
+</div>
+</div>
+<div class="actinfo basicborder" style="z-index: 2;">
+    <div class="acttitle">
+        帮砍榜
+    </div>
+    <div class="wenzi wow fadeInUp">
+        亲：<br/>
+        来帮您的好友${bargain.name} 砍一刀吧！
+    </div>
+    <table>
+        <tr style="display:${detailsCount >0 ? 'none':'block'};">
+            <td style="width: 100%;text-align: center;">暂无信息</td>
+        </tr>
+        <% for(obj in details){
+        %>
+        <tr class="wow fadeInUp">
+            <td><img src="${obj.headimgurl}"></td>
+            <td style="text-align: left;max-width:100px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${obj.nickname}</td>
+            <td>已砍￥${obj.barginPrice}</td>
+        </tr>
+        <% }
+        %>
+    </table>
+</div>
+<div class="actinfo basicborder" style="z-index: 2;">
+    <div class="acttitle">
+        全牛宴
+    </div>
+    <div class="wenzi wow fadeInUp">
+        对于爱吃烤肉的吃货来说，够新鲜的肉肉总是充满了无限的诱惑，尤其是现在，正值夏季新上了“全牛宴”。
+    </div>
+
+    <img src="${base}/assets/img/1.jpg" class=" wow fadeInUp " alt="">
+    <div class="wenzi wow fadeInUp">
+        更重要的是价值158元的3--4人超值套餐砍价活动，您可以98.8元吃到一整头牛身上各部位的肉肉，（附赠：特殊蘸料、菌菇拼盘、蔬菜拼盘）不说了，馋的不要不要的，你闻到香味了嘛，哈哈~~
+    </div>
+
+    <img src="${base}/assets/img/2.jpg" class=" wow fadeInUp " alt="">
+    <div class="wenzi wow fadeInUp">
+        烤牛舌、烤鸡翅、烤口蘑、烤牛肉丸、烤……实在是太多了，每一份都那么触动味蕾，无论是口感还是味道都堪称完美，再说下去口水就“逆流成河”了！
+    </div>
+    <img src="${base}/assets/img/3.jpg" class=" wow fadeInUp " alt="">
+</div>
+
+<div class="actinfo basicborder" style="z-index: 2;">
+    <div class="acttitle">
+        活动规则
+    </div>
+    <div class="wenzi wow fadeInUp">
+        1.参与活动，输入姓名以及手机号码，即可邀请好友帮忙;
+    </div>
+    <div class="wenzi wow fadeInUp">
+        2.“全牛宴”原价158元，只需98.8元即可购买；
+    </div>
+    <div class="wenzi wow fadeInUp">
+        3.换购只以活动兑奖页面为准，截图或短信均为无效;
+    </div>
+    <div class="wenzi wow fadeInUp">
+        4.砍价成功后请到店面兑现就餐。
+    </div>
+    <div class="wenzi wow fadeInUp">
+        本活动与店内活动不可同步<br/>
+        本活动最终解释权归老板娘家烤肉专门店所有。<br/>
+        活动地址：呼兰区建设路79号</br>
+        电话：0451--55234777
+    </div>
+</div>
+<div class="actinfo basicborder" style="z-index: 2;">
+    <div class="acttitle">
+        参砍榜
+    </div>
+    <table id="bargainList">
+        <tr id="noInfo" style="display:${bargainsCount >0 ? 'none':'block'};">
+            <td style="width: 100%;text-align: center;">暂无信息</td>
+        </tr>
+        <% for(obj in bargains){
+        %>
+        <tr class="wow fadeInUp">
+            <td><img src="${obj.headimgurl}"></td>
+            <td style="text-align: left;max-width:100px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                ${obj.nickname}
+            </td>
+            <td>已砍￥${obj.price}</td>
+        </tr>
+        <% }
+        %>
+    </table>
+</div>
+<div class="mui-popup mui-popup-in" style="display: none;;">
+    <div class="mui-popup-inner">
+
+        <div class="mui-popup-title">我要参与</div>
+        <div class="mui-popup-text">请填写以下信息参与活动</div>
+        <div class="mui-popup-input"><input type="text" id="phone" autofocus="" placeholder="请输入手机号码"></div>
+        <div class="mui-popup-input"><input type="text" id="realyname" placeholder="请输入真实姓名"></div>
+    </div>
+    <div class="mui-popup-buttons"><span class="mui-popup-button cancle">取消</span><span
+            class="mui-popup-button mui-popup-button-bold">确定</span></div>
+</div>
+<div class="mui-popup-backdrop mui-active" style="display: none;;"></div>
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="${base}/assets/countdown/jquery.countdown.js"></script>
+<script src="${base}/assets/js/wow.min.js"></script>
+<script src="${base}/assets/js/mui.min.js"></script>
+<script>
+    var baseUrl = "${base}/";
+    var actEnd = ${actEnd};
+    var ts = ${config.endTime};
+    ts = ts * 1000;
+    if ($("#bargainUserPrice").text() == "98.8") {
+
+        $(".timerBorder").css("background", "#fff").css("font-size", "30px").css("font-weight", "bold").css("line-height", "80px");
+        $(".timerBorder").html("砍价成功");
+        //    $("#countdown").css("position", "relative").css("color","#310F14").css("background","#fff").css("font-size","35px").css("font-weight","bold").css("width", "100%").css("height", "50px").css("text-align", "center").css("vertical-align", "middle");
+        //  $('#countdown').text("砍价成功");
+
+    } else {
+        var currentTime = (new Date()).getTime();
+        if (ts <= currentTime) {
+            $(".timer").find("p").text("活动已结束");
+            $(".bargain").text("已结束");
+            $(".bargain").attr("disabled","disabled");
+            $(".bargain").on("click", function () {
+                mui.toast("当前活动已结束");
+            });
+        }
+
+        $('#countdown').countdown({
+            timestamp: ts,
+            callback: function (days, hours, minutes, seconds) {
+            }
+        });
+    }
+
+    if(actEnd) {
+        $(".bargain").text("已结束");
+        $(".bargain").attr("disabled","disabled");
+
+    }
+
+</script>
+<script src="${base}/assets/js/script.js"></script>
+</body>
+</html>
+

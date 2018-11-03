@@ -1,0 +1,41 @@
+<div class="modal-body no-p">
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="panel panel-primary no-b">
+                <header class="panel-heading clearfix brtl brtr">
+                    <div class="overflow-hidden">
+                        <a href="javascript:;" class="h4 show no-m pt5">Cms_feedback</a>
+                        <small>${obj.id}</small>
+                    </div>
+                </header>
+                <div class="list-group">
+                    <table class="table table-bordered table-striped mg-t datatable">
+                        <tbody>
+                                                        <tr>
+                                <td>${msg['cms.feedback.column.feedpeople']}</td><td>${obj.feedpeople}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.feedback.column.phone']}</td><td>${obj.phone}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.feedback.column.subject']}</td><td>${obj.subject}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.feedback.column.email']}</td><td>${obj.email}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.feedback.column.content']}</td><td>${obj.content}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.feedback.column.backDate']}</td><td>${obj.backDate}</td>
+                            </tr>
+                                                    </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">${msg['globals.button.ok']}</button>
+</div>

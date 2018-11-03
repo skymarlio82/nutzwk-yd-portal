@@ -1,0 +1,555 @@
+<%
+layout("../layouts/platform.html"){
+%>
+<div class="content">
+    <div class="banner-today">
+        <div class="banner">
+            <div id="myCarousel" class="carousel slide">
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators">
+                    <% for(b in banner!){ %>
+                    <li data-target="#myCarousel" data-slide-to="${bLP.index - 1}" class=" ${bLP.index == 1?'active':''}"></li>
+                    <%}%>
+                    <!--<li data-target="#myCarousel" data-slide-to="1"></li>-->
+                    <!--<li data-target="#myCarousel" data-slide-to="2"></li>-->
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+
+                    <% for(b in banner!){
+                    var finalUrl = "";
+                    if(b.type == "img" || b.type == "txt"){
+                    finalUrl = base!+"/article/detail?id="+b.url;
+                    }else{
+                    finalUrl = b.url;
+                    }
+                    %>
+                    <div class="item ${bLP.index == 1?'active':''}">
+                        <a href="${finalUrl}" target="${b.target}">
+                            <img src="${b.picurl}" alt="${b.name}">
+                            <div class="item-title-banner">
+                                <div class="i-t-b-w">
+                                    ${b.name}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+        <!-- 轮播 -->
+        <!--今日桃浦-->
+        <div class="today-taopu">
+            <div class="t-t-c-t">
+                ${todayTaopu.name!}
+            </div>
+            <div class="line"></div>
+            <div class="t-t-c">
+                <!--标题-->
+                <div class="t-t-c-t-d" id="td_tp">
+                </div>
+                <!--描述-->
+                <div class="t-t-c-desp" id="td_tp_id">
+                </div>
+                <!--列表-->
+                <div class="t-t-c-l" id="todaytaopu"
+                     data-channel-id="${todayTaopu.id}">
+                </div>
+
+                <div class="t-t-c-more">
+                    <a href="${base!}/article/newsList?id=${todayTaopu.id}"
+                       target="_blank">更多》</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="yangman-login">
+        <!--文明桃浦-->
+        <div class="tp-wen i-c">
+            <div class="i-c-title">
+                <span>文明桃浦</span>
+            </div>
+            <div class="ed-box-c">
+                <img src="${base!}/assets/img/wmtp_btn.png" alt="">
+                <div class="wmz"
+                     onclick="window.open('${base!}/article/newsList?id=c4783b5e36664b2fb13c988271df3e78') ">
+                    <div class="box1"></div>
+                    <div class="box2"></div>
+                    <div class="box3"></div>
+                </div>
+                <div class="wmxq"
+                     onclick="window.open('${base!}/article/newsList?id=ec08c3bd098e4f8a9bea61a98583618d') ">
+                    <div class="box1"></div>
+                    <div class="box2"></div>
+                    <div class="box3"></div>
+                </div>
+                <div class="wmdw"
+                     onclick="window.open('${base!}/article/newsList?id=ab806c93b2004603b9ec065c7c4c79c9') ">
+                    <div class="box1"></div>
+                    <div class="box2"></div>
+                    <div class="box3"></div>
+                </div>
+                <div class="wmc"
+                     onclick="window.open('${base!}/article/newsList?id=464d2650904447ddab81b56b8ef3cf28') ">
+                    <div class="box1"></div>
+                    <div class="box2"></div>
+                    <div class="box3"></div>
+                </div>
+            </div>
+        </div>
+        <!--未成年人教育-->
+        <div class="ed i-c">
+            <div class="i-c-title">
+                <span>未成年人教育</span>
+            </div>
+            <div class="ed-box-c" id="childEd"
+                 data-channel-id="${childEd.id}">
+
+
+            </div>
+        </div>
+        <!--志愿者登录或志愿者团队登录框-->
+        <div class="loginform i-c">
+            <div class="i-c-title">
+                <span class="v1">志愿者登录</span>
+                <span class="vt"><a href="${base}/sysadmin" style="color: #EB6A18;" target="_blank">志愿组织登录</a></span>
+            </div>
+            <div class="ed-box-c user">
+                <!-- <form action="${base!}/home/sign">-->
+                <div class="formbox">
+                    <% if(session.wx_login != null){ %>
+
+                    <img src="${base!}/assets/img/fl_03.png" alt="">
+
+                    <%}else{%>
+                    <input type="hidden" value="home/index" name="url">
+                    <div class="signBox">
+                        <div class="username"
+                             style="background: url('/assets/img/loginback.png') no-repeat;background-size:100% 100%; ">
+
+                            <input type="text" name="username" style="width: 80%;">
+                        </div>
+                        <div class="pass"
+                             style="background: url('/assets/img/passback.png') no-repeat ;background-size:100% 100%;">
+                            <input type="password" name="pass" style="width: 80%;">
+                        </div>
+                    </div>
+                    <div class="sign-btn">
+                        <button onclick="login()">登录</button>
+                    </div>
+                    <%}%>
+                </div>
+                <div class="btn_list">
+                    <a href="${base!}/home/uregister" class="re">志愿者注册</a>
+                    <a href="${base!}/home/register" class="tre">志愿团队注册</a>
+                </div>
+                <!--</form>-->
+            </div>
+            <!--<div class="ed-box-c userTeam" style="display: none;">
+
+                <div class="signBox">
+                    <input type="text" name="team_username">
+                    <input type="text" name="team_pass">
+                </div>
+                <div class="sign-btn">
+                    <button>登录</button>
+                </div>
+
+            </div>-->
+        </div>
+    </div>
+    <!--广告图-->
+    <%for(item in admiddel!){%>
+    <div class="ad">
+        <a href="${item.url}" target="${item.target}">
+            <img src="${item.picurl}" alt="${item.name}">
+        </a>
+    </div>
+    <%}%>
+    <!--咨询列表公告广告图品牌项目-->
+    <div class="c-c">
+        <!--咨询选项框 和 品牌项目-->
+        <div class="c-c-left">
+            <!--文章列表-->
+
+            <div class="c-c-left-wlist">
+                <div class="c-c-left-wlist-title ">
+                    <div class="c-c-l-w-t-b">
+                        <div class="c-c-l-w-t-b-t">
+                            志愿团队
+                        </div>
+                        <div class="c-c-l-w-more">
+                            <a href="${base!}/team/list?&channelId=560a0eb542d445189fc7152faeb26adc&type=map"
+                               target="_blank">更多》</a>
+                        </div>
+                    </div>
+                    <div class="c-c-l-w-t-c " data-news-id=" ">
+                        <% if(teams.~size >0){ %>
+                        <div class="c-c-l-w-t-c-f ">
+                            <div class="c-c-l-w-t-c-f-img"><a
+                                    href="${base!}/team/detail?channelId=560a0eb542d445189fc7152faeb26adc&teamId=${teams[0].id}"
+                                    target="_blank"><img onerror="errorImg(this)"
+                                                         src="${base!}${teams[0].logo}" alt=""></a>
+                            </div>
+                            <div class="c-c-l-w-t-c-f-desc"><a
+                                    href="${base!}/team/detail?channelId=560a0eb542d445189fc7152faeb26adc&teamId=${teams[0].id}"
+                                    target="_blank">
+                                ${teams[0].groupName} </a></div>
+                        </div>
+                        <%}%>
+                        <div class="c-c-l-w-t-c-l newsListChid">
+
+                            <%for(var i = 1 ; i < teams.~size && i<4 ; i++){
+                            var item = teams[i];
+                            %>
+                            <a href="${base!}/team/detail?channelId=560a0eb542d445189fc7152faeb26adc&teamId=${teams[i].id}"
+                               target="_blank">
+                                <div class="c-c-l-w-t-c-l-c">
+                                    <div class="c-c-l-w-t-c-l-c-t">${item.groupName}</div>
+                                    <div class="c-c-l-w-t-c-l-c-d">[${@date.getDate(item.opAt,"yyyy.MM.dd")}]
+                                    </div>
+                                </div>
+                            </a>
+                            <%}%>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-c-left-wlist-title ">
+                    <div class="c-c-l-w-t-b">
+                        <div class="c-c-l-w-t-b-t">
+                            志愿项目
+                        </div>
+                        <div class="c-c-l-w-more">
+                            <a href="${base!}/pro/list?channelId=560a0eb542d445189fc7152faeb26adc"
+                               target="_blank">更多》</a>
+                        </div>
+                    </div>
+                    <div class="c-c-l-w-t-c " data-news-id=" ">
+                        <% if(pros.~size >0){ %>
+                        <div class="c-c-l-w-t-c-f ">
+                            <div class="c-c-l-w-t-c-f-img"><a
+                                    href="${base!}/pro/desc?channelId=560a0eb542d445189fc7152faeb26adc&id=${pros[0].id}"
+                                    target="_blank"><img onerror="errorImg(this)"
+                                                         src="${base!}${pros[0].pimg}" alt=""></a>
+                            </div>
+                            <div class="c-c-l-w-t-c-f-desc"><a
+                                    href="${base!}/pro/desc?channelId=560a0eb542d445189fc7152faeb26adc&id=${pros[0].id}"
+                                    target="_blank">
+                                ${pros[0].pname} </a></div>
+                        </div>
+                        <%}%>
+                        <div class="c-c-l-w-t-c-l newsListChid">
+
+                            <%for(var i = 1 ; i < pros.~size && i<4 ; i++){
+                            var item = pros[i];
+                            %>
+                            <a href="${base!}/pro/desc?channelId=560a0eb542d445189fc7152faeb26adc&id=${pros[i].id}"
+                               target="_blank">
+                                <div class="c-c-l-w-t-c-l-c">
+                                    <div class="c-c-l-w-t-c-l-c-t">${item.pname}</div>
+                                    <div class="c-c-l-w-t-c-l-c-d">[${@date.getDate(item.opat,"yyyy.MM.dd")}]
+                                    </div>
+                                </div>
+                            </a>
+                            <%}%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="c-c-left-wlist">
+                <div class="c-c-left-wlist-title ">
+                    <div class="c-c-l-w-t-b">
+                        <div class="c-c-l-w-t-b-t">
+                            桃浦好人
+                        </div>
+                        <div class="c-c-l-w-more">
+                            <a href="${base!}/home/goodPeople?id=52eb3bb2e45c4ebc9bcc9f6112c550dd"
+                               target="_blank">更多》</a>
+                        </div>
+                    </div>
+                    <div class="c-c-l-w-t-c newsListDiv" data-news-id="7ea4cabbd6ee42aebf7ee50dce2c24af">
+                        <a href="#" class="newsChild">
+
+
+                        </a>
+                        <div class="c-c-l-w-t-c-l newsListChid">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="c-c-left-wlist-title ">
+                    <div class="c-c-l-w-t-b">
+                        <div class="c-c-l-w-t-b-t">
+                            我们的活动
+                        </div>
+                        <div class="c-c-l-w-more">
+                            <a href="${base!}/article/newsList?id=54cc14de00c7448dbfed0e9dbc8cbd22"
+                               target="_blank">更多》</a>
+                        </div>
+                    </div>
+                    <div class="c-c-l-w-t-c newsListDiv" data-news-id="54cc14de00c7448dbfed0e9dbc8cbd22">
+                        <a href="#" class="newsChild">
+
+
+                        </a>
+                        <div class="c-c-l-w-t-c-l newsListChid">
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--品牌项目-->
+            <div class="c-c-left-nlist">
+                <div class="c-c-l-n-b">
+                    <div class="c-c-l-nt">品牌项目</div>
+                </div>
+                <div class="c-c-l-banner">
+                    <div class="prev"
+                         style="position: absolute;background: url('${base!}/assets/img/left-btn.png') no-repeat center center;left: 0px;height: 100%;width: 40px;"></div>
+                    <div class="prenext"
+                         style="position: absolute;right: 0px;background: url('${base!}/assets/img/right-btn.png') no-repeat center center;height: 100%;width: 40px;"></div>
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <%
+                            for(var item in ppList){
+                            %>
+                            <div class="swiper-slide">
+                                <a href="${AppDomain!}${base!}/article/detail?id=${item.id}" target="_blank">
+                                    <img src="${base!}${item.picurl}" alt="${item.title}">
+                                    <p style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                        ${item.title}</p>
+                                </a>
+                            </div>
+                            <%}%>
+                        </div>
+                        <!-- Add Pagination -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--右侧内容-->
+        <div class="c-c-right">
+            <!--公告列表-->
+            <div class="c-c-right-notice" id="noticeList" data-notice-id="${notice.id}"
+                 data-notice-name="${notice.name}">
+
+
+            </div>
+            <!--广告-->
+            <%for ( item in adRightBottom!){%>
+            <div class="c-c-right-ad">
+                <a href="${item.url}" target="${item.target}"><img src="${base!}${item.picurl}"
+                                                                   alt="${item.name}"></a>
+            </div>
+            <%}%>
+            <!--<div class="c-c-right-ad">-->
+            <!--<a href="#"><img src="${base!}/assets/img/zhongguomeng.png" alt=""></a>-->
+            <!--</div>-->
+            <!--<div class="c-c-right-ad">-->
+            <!--<a href="#"><img src="${base!}/assets/img/qibu.png" alt=""></a>-->
+            <!--</div>-->
+            <!--<div class="c-c-right-ad">-->
+            <!--<a href="#"><img src="${base!}/assets/img/liangxue.png" alt=""></a>-->
+            <!--</div>-->
+        </div>
+    </div>
+
+    <!--友情链接-->
+    <div class="c-f-link">
+        <div class="volunteer-link">
+            <div class="v-link">
+                <div class="v-l-link">
+                    <a href="javascript:">友情链接 </a>
+                </div>
+                <div class="v-l-info">
+                    <select class="jump_">
+                        <option value="">--请选择--</option>
+                        <option onclick="jump('http://sh.chinavolunteer.cn/')" value="http://sh.chinavolunteer.cn/">
+                            —上海市志愿者网—
+                        </option>
+                    </select>
+                    <select class="jump_">
+                        <option value="">--请选择--</option>
+                        <option onclick="jump('http://sh.wenming.cn/wmw/')" value="http://sh.wenming.cn/wmw/">—上海文明网—
+                        </option>
+                    </select>
+                    <select class="jump_">
+                        <option value="">--请选择--</option>
+                        <option onclick="jump('http://www.zsptwm.cn/')" value="http://www.zsptwm.cn/">—普陀文明网—</option>
+                    </select>
+                    <select class="jump_">
+                        <option value="">--请选择--</option>
+                        <option onclick="jump('http://www.sfic.org.cn/')" value="http://www.sfic.org.cn/">—上海市工商业联合会—
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+
+
+
+    $(function () {
+
+        setTimeout(function(){
+            var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 4,
+                spaceBetween: 30,
+                autoplay: 3000,
+                loop: true,
+                onInit: function (swiper) {
+                    console.log("swiper 初始化成功")
+                    //Swiper初始化了
+                    //alert(swiper.activeIndex);提示Swiper的当前索引
+                }
+
+            });
+            $('.prev').click(function () {
+                console.log("上一个")
+                swiper.slidePrev();
+            })
+            $('.prenext').click(function () {
+                console.log("上一个")
+                swiper.slideNext();
+            })
+            swiper.updateSlidesSize();
+        },100);
+
+        var todayid = $("#todaytaopu").attr("data-channel-id");
+        var todayParam = {"type": "list", "start": 0, "length": 5, "draw": 0, "id": todayid};
+        var articleurl = "${AppDomain!}${base!}/article";
+        var childEdurl = "${AppDomain!}${base!}/article/jsonNews";
+        // 加载今日桃浦
+        $.getJSON(articleurl, todayParam, function (data) {
+            $("#todaytaopu").html("");
+            if (data.code == 0) {
+                var newList = data.data.data;
+                for (var i = 0; i < newList.length; i++) {
+
+                    if (i == 0) {
+
+                        $("#td_tp").html('<a href="' + articleurl + '/detail?id=' + newList[i].id + '" target="_blank">' + newList[i].title + '</a>');
+                        $("#td_tp_id").text(newList[i].desp);
+
+                        continue;
+                    }
+                    var html = '<a href="' + articleurl + '/detail?id=' + newList[i].id + '" target="_blank"> ' +
+                        '<div class="t-t-c-l-c"> <div class="t">' + newList[i].title + '</div>' +
+                        '<div class="date">' + formatDate(new Date(parseInt(newList[i].opat) * 1000), "-") + '</div> </div> </a>';
+                    $("#todaytaopu").append(html);
+                }
+            } else {
+                alert(data.msg);
+            }
+        });
+
+
+        var childEdid = "d6acde7ddb8548d3b0261c82ec836845";
+        var childEdParam = {"type": "list", "start": 0, "length": 8, "draw": 0, "id": childEdid};
+        $.getJSON(childEdurl, childEdParam, function (data) {
+            $("#childEd").html("");
+            if (data.code == 0) {
+                var newList = data.data;
+                for (var i = 0; i < newList.length; i++) {
+                    var html = '<a href="' + articleurl + '/detail?id=' + newList[i].id + '" target="_blank"> <div class="cli">' +
+                        ' <div class="cli-title">' + newList[i].title + '</div> ' +
+                        '<div class="cli-date">  [' + formatDate(new Date(parseInt(newList[i].opat) * 1000)) + '] </div> </div> </a>';
+                    $("#childEd").append(html);
+                }
+            } else {
+                alert(data.msg);
+            }
+
+        });
+
+        $(".newsListDiv").each(function () {
+
+            var newsListid = $(this).attr("data-news-id");
+            var $newChildFirst = $(this).children(".newsChild");
+            $newChildFirst.html("");
+
+            var $newChildList = $(this).children(".newsListChid");
+            $newChildList.html("");
+
+            var newsListParam = {"type": "list", "start": 0, "length": 4, "draw": 0, "id": newsListid};
+
+            $.getJSON(childEdurl, newsListParam, function (data) {
+                if (data.code == 0) {
+
+                    var newList = data.data;
+                    for (var i = 0; i < newList.length; i++) {
+                        if (i == 0) {
+                            var html = '<div class="c-c-l-w-t-c-f "><div class="c-c-l-w-t-c-f-img"><a href="${base!}/article/detail?id=' + newList[i].id + '"  target="_blank"><img onerror="errorImg(this)" src="${base!}' + newList[i].picurl + '" alt=""></a>' +
+                                '</div><div class="c-c-l-w-t-c-f-desc"><a href="' + articleurl + '/detail?id=' + newList[i].id + '"  target="_blank">' + newList[i].title + '</a></div></div>';
+                            $newChildFirst.append(html);
+                        } else {
+                            var html = '<a href="' + articleurl + '/detail?id=' + newList[i].id + '"  target="_blank"> <div class="c-c-l-w-t-c-l-c"> ' +
+                                '<div class="c-c-l-w-t-c-l-c-t">  ' + newList[i].title +
+                                '</div><div class="c-c-l-w-t-c-l-c-d">[' + formatDate(new Date(parseInt(newList[i].opat) * 1000)) + ']</div>' +
+                                '</div></a>';
+                            $newChildList.append(html);
+                        }
+                    }
+
+                } else {
+                    alert(data.msg);
+                }
+            })
+
+        });
+
+        var $noticeObj = $("#noticeList");
+        var noticeId = $noticeObj.attr("data-notice-id");
+        var noticeName = $noticeObj.attr("data-notice-name");
+        var noticeParams = {"type": "list", "start": 0, "length": 10, "draw": 0, "id": noticeId};
+        $.getJSON(articleurl, noticeParams, function (data) {
+
+            $noticeObj.html("");
+            $noticeObj.append('<div class="notice-title">公告<a href="${base!}/article/noticeList?id=${notice.id}"' +
+                '                   target="_blank">更多》</a></div>');
+            if (data.code == 0) {
+                var newList = data.data.data;
+                for (var i = 0; i < newList.length; i++) {
+                    var html = '<div class="notice-list"><a href="' + articleurl + '/detail?id=' + newList[i].id + '"  target="_blank" ><div class="n-l-c">' + newList[i].title + '</div></a></div>';
+                    $noticeObj.append(html);
+                }
+            } else {
+                alert(data.msg);
+            }
+        })
+
+        /*$(".c-c-l-w-t-c-f-img").find("img").each(function(){
+            console.log(this);
+
+//            $(this).on("error",function(){});
+            $("img").error(function(){
+                $(this).attr("src","${AppDomain!}${base!}/assets/img/logo.png")
+            });
+        });*/
+    });
+
+
+    function formatDate(now, op) {
+        if (!op) {
+            op = ".";
+        }
+        var year = now.getYear() + 1900;
+        var month = now.getMonth() + 1;
+        var date = now.getDate();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var second = now.getSeconds();
+        return year + op + month + op + date;//+" "+hour+":"+minute+":"+second;
+    }
+
+</script>
+<%
+}
+%>

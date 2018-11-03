@@ -1,0 +1,254 @@
+package cn.wizzer.app.cms.modules.models;
+
+import org.nutz.dao.DB;
+import org.nutz.dao.entity.annotation.ColDefine;
+import org.nutz.dao.entity.annotation.ColType;
+import org.nutz.dao.entity.annotation.Column;
+import org.nutz.dao.entity.annotation.Comment;
+import org.nutz.dao.entity.annotation.EL;
+import org.nutz.dao.entity.annotation.Name;
+import org.nutz.dao.entity.annotation.One;
+import org.nutz.dao.entity.annotation.Prev;
+import org.nutz.dao.entity.annotation.SQL;
+import org.nutz.dao.entity.annotation.Table;
+
+import java.io.Serializable;
+
+import cn.wizzer.framework.base.model.BaseModel;
+
+/**
+ * Created by Wizzer on 2016/7/18.
+ */
+@Table("cms_article")
+public class Cms_article extends BaseModel implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Column
+    @Name
+    @Comment("ID")
+    @ColDefine(type = ColType.VARCHAR, width = 32)
+    @Prev(els = {@EL("uuid()")})
+    private String id;
+
+    @Column
+    @Comment("预留商城ID")
+    @ColDefine(type = ColType.VARCHAR, width = 32)
+    private String shopid;
+
+    @Column
+    @Comment("文章标题")
+    @ColDefine(type = ColType.VARCHAR, width = 120)
+    private String title;
+
+    @Column
+    @Comment("文章简介")
+    @ColDefine(type = ColType.VARCHAR, width = 500)
+    private String info;
+
+    @Column
+    @Comment("文章摘要")
+    @ColDefine(type = ColType.VARCHAR, width = 500)
+    private String desp;
+
+    @Column
+    @Comment("文章作者")
+    @ColDefine(type = ColType.VARCHAR, width = 50)
+    private String author;
+
+    @Column
+    @Comment("标题图")
+    @ColDefine(type = ColType.VARCHAR, width = 255)
+    private String picurl;
+
+    @Column
+    @Comment("文章内容")
+    @ColDefine(type = ColType.TEXT)
+    private String content;
+
+    @Column
+    @Comment("文章配置参数")
+    @ColDefine(type = ColType.TEXT)
+    private String cms_params;
+
+    @Column
+    @Comment("是否禁用")
+    @ColDefine(type = ColType.BOOLEAN)
+    private boolean disabled;
+
+    @Column("top_link")
+    @Comment("推荐的广告链接ID")
+    @ColDefine(type = ColType.VARCHAR,width = 32)
+    private String topLink;// 推荐的广告链接ID
+
+    @Column
+    @Comment("发布时间")
+    @ColDefine(type = ColType.INT)
+    private Integer publishAt;
+
+    @Column
+    @Comment("排序字段")
+    @Prev({
+            @SQL(db= DB.MYSQL,value = "SELECT IFNULL(MAX(location),0)+1 FROM cms_article"),
+            @SQL(db= DB.ORACLE,value = "SELECT COALESCE(MAX(location),0)+1 FROM cms_article")
+    })
+    private Integer location;
+    @Column
+    @Comment("资源文件")
+    private String file_data;
+
+    @Column
+    @Comment("栏目排序字段")
+    private Integer sort;
+
+    @Column
+    @ColDefine(type = ColType.VARCHAR, width = 32)
+    private String channelId;
+
+    @One(field = "channelId")
+    private Cms_channel channel;
+
+    private String topLinkName;
+
+    public String getDesp() {
+        return desp;
+    }
+
+    public void setDesp(String desp) {
+        this.desp = desp;
+    }
+
+    public String getTopLinkName() {
+        return topLinkName;
+    }
+
+    public void setTopLinkName(String topLinkName) {
+        this.topLinkName = topLinkName;
+    }
+
+    public String getTopLink() {
+        return topLink;
+    }
+
+    public void setTopLink(String topLink) {
+        this.topLink = topLink;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public String getCms_params() {
+        return cms_params;
+    }
+
+    public void setCms_params(String cms_params) {
+        this.cms_params = cms_params;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getShopid() {
+        return shopid;
+    }
+
+    public void setShopid(String shopid) {
+        this.shopid = shopid;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public String getFile_data() {
+        return file_data;
+    }
+
+    public void setFile_data(String file_data) {
+        this.file_data = file_data;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getPicurl() {
+        return picurl;
+    }
+
+    public void setPicurl(String picurl) {
+        this.picurl = picurl;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public Integer getPublishAt() {
+        return publishAt;
+    }
+
+    public void setPublishAt(Integer publishAt) {
+        this.publishAt = publishAt;
+    }
+
+    public Integer getLocation() {
+        return location;
+    }
+
+    public void setLocation(Integer location) {
+        this.location = location;
+    }
+
+    public String getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
+    }
+
+    public Cms_channel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(Cms_channel channel) {
+        this.channel = channel;
+    }
+}

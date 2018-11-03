@@ -1,0 +1,27 @@
+*{padding: 0;margin: 0;font-family: "微软雅黑";}
+.groupnews{width: 80%;height: 1200px;margin: 0 auto}
+.groupnews_1{width: 100%;height: 100%;}
+.groupnews1_1{width: 85%;height: 10%;margin: 2% auto}
+.groupnews1_txt{width: 100%;height: 25%;background-image: url("../img/twelveth/tuanti_03.jpg");background-size: 100% 100%;line-height: 30px;}
+.groupnews1_txt p{color:#EA6523;}
+.groupnews1_h{width: 100%;height: 50%;border: 1px solid #EBEBEB;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;line-height: 50px}
+.groupnews1_h h4{padding-left: 20px}
+.groupnews2_1{width: 85%;height: 80%;margin:0 auto}
+.groupnews2_img{width: 100%;height:20%;border: 1px solid red ;position: relative;}
+.groupnews2_img img{width: 30%;height: 100%}
+.txt1{height: 100%;position: absolute;left: 32%;top: 0;font-size: 13px;font-weight: bold;padding-top: 1%}
+.txt2{height: 100%;position: absolute;left: 45%;top: 0;font-size: 13px;padding-top: 1%}
+.groupnews2_list{width: 100%;height: 60%;margin-top: 5%;}
+.groupnews2_list1{width: 100%;height:8%;position: relative;}
+.groupnews2_list1 div{width:34%;height: 90%;top:5%;  position: absolute;left: 0;background-image: url("../img/eleventh/dlu_03.jpg");background-size:100% 100%;line-height: 40px;font-size: 15px;}
+.groupnews2_list1 a{text-decoration: none;display: inline-block;margin-left:18%}
+.groupnews2_list1 button{position: absolute;right: 0;height: 90%;top:5%;width:10%;border-radius: 10px;background-color: #FE7306;color: white }
+.groupnews2_list2{width: 100%;height:90%;border: 1px solid #CDCDCD;}
+.groupnews2_list2 li{list-style: none;width: 100%;height:7%;border-bottom:1px solid #CDCDCD;line-height: 30px;font-size: 14px;cursor: pointer}
+.groupnews2_list2 li:hover{background-color: #F1F1F1}
+.groupnews2_list2 li a{text-decoration: none;color: #0086CC}
+.span2{float: right;padding-right: 5%;color: #0000FC}
+.span1{padding-left: 60%;}
+.groupnews2_btn{width: 60%;height: 5%;line-height: 40px;margin-left: 20%;margin-top: 10%}
+.groupnews2_btn li{list-style: none;float: left;width: 20px;height: 20px;border: 1px solid #DEDEDE;text-align: center;line-height: 20px;margin-left: 3%;cursor:pointer;font-size: 15px;color: #0161D1}
+.list{width:80px !important;color: #01379B;font-weight: bold}

@@ -1,0 +1,130 @@
+<%
+layout("../layouts/platform.html"){
+%>
+<div class="teamDetail">
+    <div class="nd-nav">
+        当前位置：
+        <%for(var i = (channels.~size -1) ; i >= 0 ; i --){
+        if(i == 0){
+        %>
+        ${channels[i].name}
+        <%
+        }else{
+        %>
+        <a href="${AppDomain!}${base!}/${channels[i].url}?channelId=${channels[i].id}&id=${channels[i].id}" target="${channels[i].target}">${channels[i].name}</a>
+        &rarr;
+        <%}
+        }
+        %>
+    </div>
+    <div class="team-detail-title">
+        项目ID:【${proObj.pid!}】 项目名称：${proObj.pname!}
+    </div>
+    <div class="team-detail-content">
+
+        <div class="t-d-c-info">
+            <div class="tdci-img">
+                <img src="${AppDomain!}${base!}/${proObj.pimg!}" onerror="errorImg(this)" alt="">
+            </div>
+            <div class="tdci-info">
+                <p><label for="">项目地点:</label>${proObj.servicePlace!}</p>
+                <p><label for="">服务类别:</label>${proObj.serviceType!}</p>
+                <p><label for="">服务对象:</label>${proObj.serviceTarget!}</p>
+                <p><label for="">招募日期:</label>${@date.getDate(proObj.recruitStartTime!,"yyyy-MM-dd")}至${@date.getDate(proObj.recruitEndTime,"yyyy-MM-dd")}
+                </p>
+                <p><label for="">项目日期:</label>${@date.getDate(proObj.benginTime!,"yyyy-MM-dd")}至${@date.getDate(proObj.endTime!,"yyyy-MM-dd")}
+                </p>
+                <p><label for="">发布日期:</label>${@date.getDate(proObj.opAt!,"yyyy-MM-dd")}</p>
+                <p><label for="">服务时间:</label>${@date.getDate(proObj.serviceTime!,"yyyy-MM-dd")}</p>
+                <p><label for="">志愿者保障:</label>${proObj.volunteerProtection!}</p>
+                <p><label for="">项目发起人:</label>${team.groupName!}</p>
+            </div>
+            <div class="tdci-info">
+                <p><label for="">详细地址:</label>${team.address!}</p>
+                <p><label for="">项目联系人:</label>${team.constractName!}</p>
+                <p><label for="">联系手机:</label>${team.constractPhone!}</p>
+                <p><label for="">联系电话:</label>${team.constractTel!}</p>
+                <p><label for="">联系邮箱:</label>${team.email!}</p>
+            </div>
+        </div>
+
+        <div class="t-d-c-gw">
+            <div class="t-d-v-nav">
+                岗位1：${proObj.pname!} 计划招募：${proObj.pnum!} 已招募： ${signCount!}
+            </div>
+            <div class="tdci-info">
+                <!--<p class="act">岗位ID</p>
+                <p></p>-->
+                <p class="act">岗位描述</p>
+                <p>${proObj.desp!}</p>
+                <p class="act">岗位条件</p>
+                <p>${proObj.cnd!}</p>
+            </div>
+        </div>
+
+        <div class="t-d-c-list">
+            <div class="tdcl-btn">
+                <div class="tdcl-left">
+                    <div class="pro_btn_team">
+                        <div class="pro-introl act desc">
+                            项目详情
+                        </div>
+                        <div class="pro-introl sign">
+                            最新报名
+                        </div>
+                        <div class="pro-introl longtime">
+                            时长公示
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tdcllist intro" style="padding: 10px;">
+                ${proObj.content!}
+            </div>
+            <div class="tdcllist signList">
+                <% for(item in signList){ %>
+                <p>${item.username!}</p>
+                <%}%>
+            </div>
+            <div class="tdcllist timer">
+                <% for(item in signList){ %>
+                <p>${item.username!}</p>
+                <%}%>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        $(function () {
+
+            $(".desc").on("click", function () {
+                $(".pro-introl").removeClass("act");
+                $(this).addClass("act");
+                $(".intro").show();
+                $(".timer").hide();
+                $(".signList").hide();
+            });
+            $(".sign").on("click", function () {
+                $(".pro-introl").removeClass("act");
+                $(this).addClass("act");
+                $(".intro").hide();
+                $(".timer").hide();
+                $(".signList").show();
+            });
+
+            $(".longtime").on("click", function () {
+                $(".pro-introl").removeClass("act");
+                $(this).addClass("act");
+                $(".intro").hide();
+                $(".timer").show();
+                $(".signList").hide();
+            })
+
+            $(".intro").show();
+            $(".timer").hide();
+            $(".signList").hide();
+        })
+    </script>
+    <%}%>

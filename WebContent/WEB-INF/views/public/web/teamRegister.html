@@ -1,0 +1,234 @@
+<%
+layout("../layouts/platform.html"){
+%>
+<div class="content">
+    <form action="${base}/home/teamReg" class="parsley-form" data-parsley-validate id="regForm" method="post">
+        <div class="tg-main">
+
+            <div class="tg-groups">
+
+                <div class="tp-header-title">
+                    账号信息
+                </div>
+                <div class="tp-content">
+                    <div class="f-group">
+                        <label for="username" class="req">用户信息</label>
+                        <div class="f-input">
+                            <input type="text" name="username" data-parsley-equalto-message = "两次输入的用户名不一致"  data-parsley-required="true" id="username" data-parsley-equalto="#reusername"  >
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="reusername" class="req">确认用户名</label>
+                        <div class="f-input">
+                            <input type="text" name="reusername" data-parsley-equalto-message = "两次输入的用户名不一致" data-parsley-required="true" data-parsley-equalto="#username" id="reusername">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="password" class="req">密码</label>
+                        <div class="f-input">
+                            <input type="password" name="password" data-parsley-required="true" data-parsley-equalto-message = "两次输入的密码不一致"  data-parsley-equalto="#repassword"   id="password">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="repassword" class="req">确认密码</label>
+                        <div class="f-input">
+                            <input type="password" name="repassword" data-parsley-required="true"  id="repassword"  data-parsley-equalto-message = "两次输入的密码不一致"  data-parsley-equalto="#password"  >
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="email" class="req">电子邮箱</label>
+                        <div class="f-input">
+                            <input type="text" name="email" data-parsley-required="true" data-parsley-type="email" data-parsley-equalto-message="两次输入的邮箱不一致" data-parsley-equalto="#reemail" id="email">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="reemail" class="req">确认电子邮箱</label>
+                        <div class="f-input">
+                            <input type="text" name="remail" data-parsley-equalto-message="两次输入的邮箱不一致" data-parsley-required="true" data-parsley-equalto="#email" data-parsley-type="email" id="reemail">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tg-groups">
+
+                <div class="tp-header-title">
+                    团体基本信息
+                </div>
+                <div class="tp-content">
+                    <div class="f-group">
+                        <label for="groupName" class="req">志愿团体名称</label>
+                        <div class="f-input">
+                            <input type="text" style="width: 250px;" name="groupName" data-parsley-required="true"  id="groupName">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label class="req">登记状态</label>
+                        <div class="f-input">
+                            <input type="radio" name="signStatus" checked>未登记的志愿服务组织
+                            <input type="radio" name="signStatus">法人组织
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="constractGroup" class="req">联络团体</label>
+                        <div class="f-input">
+                            <input type="text" style="width: 250px;" data-parsley-required="true"  name="constractGroup" id="constractGroup">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="unitName" class="req">主管单位</label>
+                        <div class="f-input">
+                            <select name="unitName" id="unitName">
+                                <option value="桃浦镇社区服务中心">桃浦镇社区服务中心</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="unitType" class="req">主管单位类型</label>
+                        <div class="f-input">
+                            <!--<input type="text" name="unitType" id="unitType">-->
+                            <select name="unitType" id="unitType">
+                                <%for(item in unitType){%>
+                                <option value="${item.id}">${item.name}</option>
+                                <%}%>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="region" class="req">区域</label>
+                        <div class="f-input">
+                            <select name="region" id="region">
+                                <%for(item in region){%>
+                                <option value="${item.id}">${item.name}</option>
+                                <%}%>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="address" class="req">详细地址</label>
+                        <div class="f-input">
+                            <input type="text" id="address" data-parsley-required="true"  style="width: 300px;" name="address">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="regionCode" class="req">邮编</label>
+                        <div class="f-input">
+                            <input type="text" id="regionCode" data-parsley-required="true"  name="regionCode">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="pnum" class="req">志愿者人数</label>
+                        <div class="f-input">
+                            <input type="number" id="pnum" data-parsley-required="true"  name="pnum">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="serviceType" class="req">服务类别</label>
+                        <div class="f-input" style="width: 80%;">
+                            <%for(item in serviceType){%>
+                            <input type="checkbox" id="serviceType" data-parsley-mincheck="1" data-parsley-required="true" name="serviceType" value="${item.id}"> ${item.name}
+                            <%}%>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tg-groups">
+
+                <div class="tp-header-title">
+                    联系人姓名
+                </div>
+                <div class="tp-content">
+                    <div class="f-group">
+                        <label for="constractName" class="req">联系人姓名</label>
+                        <div class="f-input">
+                            <input type="text" name="constractName" data-parsley-required="true"  id="constractName">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="constractPhone" class="req">联系人手机</label>
+                        <div class="f-input">
+                            <input type="text" name="constractPhone" data-parsley-required="true"  id="constractPhone">
+                            <select name="phonestate" id="sel">
+                                <option value="0">公开</option>
+                                <option value="1">不公开</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="constractTel" class="req">联系人电话</label>
+                        <div class="f-input">
+                            <input type="text" name="constractTel" data-parsley-required="true"  id="constractTel">
+                            <select name="telstate" id="constracttelsel">
+                                <option value="0">公开</option>
+                                <option value="1">不公开</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="constractqq">联系人QQ</label>
+                        <div class="f-input">
+                            <input type="text" name="constractqq"  id="constractqq">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="tg-groups">
+
+                <div class="tp-header-title">
+                    负责人信息
+                </div>
+                <div class="tp-content">
+                    <div class="f-group">
+                        <label for="pochargeName" class="req">负责人姓名</label>
+                        <div class="f-input">
+                            <input type="text" name="pochargeName" data-parsley-required="true"  id="pochargeName">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="pochargeCardId" class="req">负责人身份证</label>
+                        <div class="f-input">
+                            <input type="text" name="pochargeCardId" data-parsley-required="true"  id="pochargeCardId">
+                        </div>
+                    </div>
+                    <div class="f-group">
+                        <label for="pochargePhone" class="req">负责人手机</label>
+                        <div class="f-input">
+                            <input type="text" name="pochargePhone" data-parsley-required="true"  id="pochargePhone">
+                        </div>
+                    </div>
+                </div>
+                <a href="javascript:void(0);" class="btn btn-inverse" id="subform">申请成为志愿团体</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+
+        $("#subform").on("click",function(){
+            $('#regForm').ajaxForm({
+                dataType: 'json',
+                beforeSubmit: function (arr, form, options) {
+                },
+                success: function (data, statusText, xhr, form) {
+                    if(data.code == 0){
+                        alert(data.msg);
+                        history.go(-1);
+                    }else{
+                        alert(data.msg)
+                    }
+                }
+            });
+            $('#regForm').submit()
+        })
+    });
+
+
+</script>
+<%}%>

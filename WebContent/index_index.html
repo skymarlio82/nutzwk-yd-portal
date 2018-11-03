@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="assets/img/favicon.ico" rel="shortcut icon" />
+
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/js/font-awesome-3.2.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/js/swiper-3.4.1/css/swiper.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/styles/main.css">
+    <link rel="stylesheet" href="assets/css/styles/style.css">
+    <title>Yongda Foundation - 永达公益基金会</title>
+    <script type="text/javascript">
+        $.ajax({
+            url: "/platform/interface/info/getCarouselList",
+            type: 'post',
+            dataType: 'json',
+            data: {
+            },
+            success: function(data){
+                if(data.data.list != null){
+                    $(".menu-firs ul").empty();
+                    $(".menu-firs ul").append("<li><a href=\"#\">主页</a></li>");
+                    $(data.data).each(function(i,event){
+                        var html = "";
+
+                        $(event.sys_dicts).each(function (j,e) {
+                            html +='<li><a href="<%=basePath%>pages/cswy.jsp?parent_id='+event.id+'&menu_id='+e.id+'">'+e.name+'</a></li>';
+                        })
+
+                        $(".menu-firs ul").append(
+                            '<li class="dropdown">'+
+                            '    <a href="#company=-project" class="dropdown-toggle" data-toggle="dropdown">'+event.name+'</a>'+
+                            '    <ul class="dropdown-menu">'+ html +
+                            '</ul>'+
+                            '</li>'
+                        );
+                    });
+
+                    $(".menu-firs ul").append('<li class="iconMenu" style="padding-left:30px;"><a id="wc-menu-icon" href="#wc-qr"><img src="../assets/img/top_02.png" /></a></li>');
+                    $(".menu-firs ul").append('<li class="iconMenu"><a id="en-menu-icon" href="#wc-qr">&nbsp;</a></li>');
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+<div class="main-header OpacitySet">
+    <div class="nav-wraper">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+                <a href="#top" class="navbar-brand"><img src="assets/img/logo.png" class="yd-logo" alt="" /></a>
+
+                <div id="main-nav" class="collapse navbar-collapse">
+                    <ul class="menu-first nav navbar-nav" style="margin-right:20px;">
+                        <li><a href="#">主页</a></li>
+                        <li class="dropdown">
+                            <a href="#company-project" class="dropdown-toggle" data-toggle="dropdown">永达公益</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/pages/cswy.html?">慈善晚宴</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">伴老活动</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">公益项目</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">爱心基金</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#section-jude" class="dropdown-toggle" data-toggle="dropdown">聚德慈善</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">关于聚德</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">公益项目</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">聚德慈善介绍</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">聚德慈善理念</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">规章制度</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">聚德“甘霖”计划</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">聚德“安心.宝贝”</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">中医大公益项目</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">聚德大不同学园</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">社会影响</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">永达公益动态</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">聚德慈善动态</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">媒体关注</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">永达公益视频</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#company-news" class="dropdown-toggle" data-toggle="dropdown">信息公开</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">关于我们</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">工作报告</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">审计报告</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">永达公益介绍</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">永达公益理念</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">组织结构</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">规章制度</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#contact-us" class="dropdown-toggle" data-toggle="dropdown">加入我们</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">成为捐赠人</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">成为志愿者</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">爱心企业</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">联系我们</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="iconMenu" style="padding-left:30px;"><a id="wc-menu-icon" href="#wc-qr"><img src="assets/img/top_02.png" /></a></li>
+                        <li class="iconMenu"><a id="en-menu-icon" href="#wc-qr">&nbsp;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="top_erm_01">
+    <div>
+        <img src="assets/img/wx_yd.jpg" />
+        <p>永达公益基金会</p>
+    </div>
+    <div>
+        <img src="assets/img/wx_jd.jpg" />
+        <p>聚德微信</p>
+    </div>
+</div>
+
+<div id="company-banner" class="banner">
+    <div class="container" style="width:100%;">
+        <div class="row">
+            <div class="page1" >
+                <div class="page1_slide">
+                    <div class="swiper-wrapper boot_swiper_wrapper" >
+                        <div class="swiper-slide"><div class="page1sw_bg" style="background: url('assets/img/banner-bg-1.jpg') no-repeat center/cover;"></div></div>
+                        <div class="swiper-slide"><div class="page1sw_bg" style="background: url('assets/img/banner-bg-2.jpg') no-repeat center/cover;"></div></div>
+                        <div class="swiper-slide"><div class="page1sw_bg" style="background: url('assets/img/banner-bg-3.jpg') no-repeat center/cover;"></div></div>
+                        <div class="swiper-slide"><div class="page1sw_bg" style="background: url('assets/img/banner-bg-4.jpg') no-repeat center/cover;"></div></div>
+                        <div class="swiper-slide"><div class="page1sw_bg" style="background: url('assets/img/banner-bg-5.jpg') no-repeat center/cover;"></div></div>
+                        <div class="swiper-slide"><div class="page1sw_bg" style="background: url('assets/img/banner-bg-6.jpg') no-repeat center/cover;"></div></div>
+                    </div>
+                    <div class="page1_sw_a" class ="boot_page1">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section id="company-project" class="page-section">
+    <div class="page4">
+        <div class="page4_slide">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><div class="page4c_bg" style="background: url('assets/img/page4_01.jpg') no-repeat center/cover;"></div></div>
+                <div class="swiper-slide"><div class="page4c_bg" style="background: url('assets/img/page4_02.jpg') no-repeat center/cover;"></div></div>
+                <div class="swiper-slide"><div class="page4c_bg" style="background: url('assets/img/page4_03.jpg') no-repeat center/cover;"></div></div>
+                <div class="swiper-slide"><div class="page4c_bg" style="background: url('assets/img/page4_04.jpg') no-repeat center/cover;"></div></div>
+            </div>
+        </div>
+        <div class="page4_c">
+
+        </div>
+    </div>
+</section>
+
+<div class="second-tabs-content what-we-do">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="wrapper">
+                <div class="col-md-12">
+                    <div class="row">
+                        <ul class="tabs tabs_news clearfix" data-tabgroup="second-tab-group">
+                            <li class="col-md-15 col-sm-12 col-xs-12">
+                                <a class="active" data-item="#unique" href="#">
+                                    <div class="list-item">
+                                        <div class="icon"><img src="assets/img/icons/gongyi_icon.png" alt="" /></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="col-md-15 col-sm-12 col-xs-12">
+                                <a data-item="#theme" href="#">
+                                    <div class="list-item">
+                                        <div class="icon"><img src="assets/img/icons/jiuhui_icon_1.png" alt="" /></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="col-md-15 col-sm-12 col-xs-12">
+                                <a data-item="#translation" href="#">
+                                    <div class="list-item">
+                                        <div class="icon"><img src="assets/img/icons/luntan_icon_1.png" alt="" /></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="col-md-15 col-sm-12 col-xs-12">
+                                <a data-item="#event" href="#">
+                                    <div class="list-item">
+                                        <div class="icon"><img src="assets/img/icons/shequ_icon_1.png" alt="" /></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="col-md-15 col-sm-12 col-xs-12">
+                                <a data-item="#photo" href="#">
+                                    <div class="list-item">
+                                        <div class="icon"><img src="assets/img/icons/fuqu_icon_1.png" alt="" /></div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <section id="second-tab-group" class="tabgroup">
+
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section id="company-timeline" class="timeline-bg">
+    <div class="time-container">
+        <div class="col-md-12">
+            <h1>永达公益大事记</h1>
+            <div class="swiper-container gallery-time">
+                <div class="swiper-wrapper">
+
+
+                </div>
+                <div class="tl_button_next"></div>
+                <div class="tl_button_prev"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="section-jude" class="jude_bg">
+    <div>
+        <h1>聚 德 慈 善</h1>
+    </div>
+    <div class="jude_Container swiper-container">
+        <div class="swiper-wrapper">
+
+        </div>
+        <div class="jd_button_next"></div>
+        <div class="jd_button_prev"></div>
+    </div>
+    <div class="jd-paging ">
+
+    </div>
+
+</section>
+
+<section id="company-news" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h2>永达动态消息推送</h2>
+                    <p>员工，志愿者与股东最关心的话题和消息尽在本栏目：最火博文，最新消息，最新企业动态，最棒志愿者反馈和留言 ...</p>
+                </div>
+            </div>
+        </div>
+        <div class="row news_wrapper">
+            <div class="wrapper">
+                <div class="col-md-6">
+                    <ul id="first_news_wrapper" class="tabs tabs_info clearfix" data-tabgroup="first-tab-group">
+
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <div id="first-tab-group" class="tabgroup">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact-us">
+    <div class="container contact-wrap">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="">
+                    <h1>联系我们</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form id="contact" action="#" method="post">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <fieldset border="0">
+                                <input name="name" type="text" class="form-control" id="name" placeholder="姓名：" required />
+                            </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                            <fieldset>
+                                <input name="email" type="email" class="form-control" id="email" placeholder="邮件：" required />
+                            </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                            <fieldset>
+                                <input name="subject" type="text" class="form-control" id="subject" placeholder="标题：" required />
+                            </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                            <fieldset>
+                                <input name="phone" type="phone" class="form-control" id="phone" placeholder="手机：" required />
+                            </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                            <fieldset>
+                                <textarea name="message" rows="6" class="form-control" id="message" placeholder="消息内容：" required></textarea>
+                            </fieldset>
+                        </div>
+                        <div class="col-md-12" style="text-align:right;">
+                            <fieldset>
+                                <button type="submit" id="form-submit" class="btn">发送您的消息</button>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6"><div id="map"><img src="assets/img/map-location.jpg" width="100%" height="492px" alt="" /></div></div>
+        </div>
+    </div>
+</section>
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-11">
+                <ul>
+                    <li>
+                        <h4>主页</h4>
+                        <p>
+                            <a href="/">返回首页</a>
+                        </p>
+                    </li>
+                    <li>
+                        <h4>关于我们</h4>
+                        <p>
+                            <a href="/">永达公益介绍</a>
+                            <a href="/">永达公益理念</a>
+                            <a href="/">组织结构</a>
+                            <a href="/">规章制度</a>
+                        </p>
+                    </li>
+                    <li>
+                        <h4>永达公益</h4>
+                        <p>
+                            <a href="/">慈善晚宴</a>
+                            <a href="/">伴老活动</a>
+                            <a href="/">公益项目</a>
+                            <a href="/">爱心基金</a>
+                        </p>
+                    </li>
+                    <li>
+                        <h4>聚德慈善</h4>
+                        <p>
+                            <a href="/">关于聚德</a>
+                            <a href="/">公益项目</a>
+                        </p>
+                    </li>
+                    <li>
+                        <h4>信息公开</h4>
+                        <p>
+                            <a href="/">关于我们</a>
+                            <a href="/">工作报告</a>
+                            <a href="/">审计报告</a>
+                        </p>
+                    </li>
+                    <li>
+                        <h4>加入我们</h4>
+                        <p>
+                            <a href="/">成为捐赠人</a>
+                            <a href="/">成为志愿者</a>
+                            <a href="/">爱心企业</a>
+                            <a href="/">联系我们</a>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-1">
+                <a href="#top"><img class="back-top" src="assets/img/backtop.png"/></a>
+            </div>
+        </div>
+        <div class="link">
+            <a href="#">Copyright © Yongda Foundation</a><a href="#">沪ICP备88009898号-1</a><a href="http://www.cec-ceda.org.cn/famousdb/qiye751/intro.html" target="_blank">上海永达控股（集团）有限公司</a>
+            <a href="http://www.ydauto.com.cn/cns/index/" target="_blank">中国永达汽车服务</a><a href="http://www.judew.com" target="_blank">聚德网</a><a href="http://shyd.ftms-dlr.com.cn/" target="_blank">上海永达</a>
+        </div>
+    </div>
+</footer>
+
+<!-- loading -->
+<div class="loading" style="display:block;">
+    <div class="load_img">
+        <div id="loading-center-absolute">
+            <div id="object_one" class="object"></div>
+            <div id="object_two" class="object" style="left:20px;"></div>
+            <div id="object_three" class="object" style="left:40px;"></div>
+            <div id="object_four" class="object" style="left:60px;"></div>
+            <div id="object_five" class="object" style="left:80px;"></div>
+        </div>
+    </div>
+</div>
+<script src="jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.js"></script>
+<script src="assets/js/imagesLoaded-4.1.2/js/imagesloaded.pkgd.min.js"></script>
+<script src="assets/js/swiper-3.4.1/js/swiper.min.js"></script>
+<script src="assets/js/velocity/js/velocity.ui-5.0.4.min.js"></script>
+<script src="assets/js/velocity/js/velocity-1.2.3.min.js"></script>
+<script src="assets/js/modernizr-2.6.1/js/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+<script src="assets/js/custom/main.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#nav-toggle').on('click', function (event) {
+            event.preventDefault();
+            $('#main-nav').toggleClass("open");
+        });
+    })
+</script>
+
+</body>
+</html>

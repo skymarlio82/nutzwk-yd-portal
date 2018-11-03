@@ -1,0 +1,35 @@
+<div class="modal-body no-p">
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="panel panel-primary no-b">
+                <header class="panel-heading clearfix brtl brtr">
+                    <div class="overflow-hidden">
+                        <a href="javascript:;" class="h4 show no-m pt5">Cms_myreward</a>
+                        <small>${obj.id}</small>
+                    </div>
+                </header>
+                <div class="list-group">
+                    <table class="table table-bordered table-striped mg-t datatable">
+                        <tbody>
+                                                        <tr>
+                                <td>${msg['cms.myreward.column.surplusServiceTime']}</td><td>${obj.surplusServiceTime}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.myreward.column.historyServiceTime']}</td><td>${obj.historyServiceTime}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.myreward.column.winningTime']}</td><td>${obj.winningTime}</td>
+                            </tr>
+                                                        <tr>
+                                <td>${msg['cms.myreward.column.winningName']}</td><td>${obj.winningName}</td>
+                            </tr>
+                                                    </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">${msg['globals.button.ok']}</button>
+</div>

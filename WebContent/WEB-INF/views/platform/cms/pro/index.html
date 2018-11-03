@@ -1,0 +1,378 @@
+<%
+layout("/layouts/platform.html"){
+%>
+<section class="content-wrap bg-white">
+    <header class="header navbar bg-white shadow">
+        <div class="btn-group tool-button">
+            <a id="add" class="btn btn-primary navbar-btn" href="${base}/platform/cms/pro/add" data-pjax><i class="ti-plus"></i> ${msg['globals.button.add']}</a>
+            <button class="btn btn-danger navbar-btn" onclick="delCheck()"><i class="ti-close"></i> ${msg['globals.button.delete.more']}</button>
+        </div>
+        <div class="pull-right offscreen-right">
+            <button class="btn btn-primary navbar-btn" onclick="sublime.toggleFilter('.cd-panel')"><i
+                    class="fa fa-sliders"></i> 筛选
+            </button>
+        </div>
+    </header>
+    <div class=panel-body style="padding-top: 50px;">
+        <div class="table-responsive no-border">
+            <table class="table table-bordered table-striped mg-t datatable">
+                <thead>
+                    <tr>
+                        <th>${msg['cms.pro.column.region']}</th>
+                        <th>${msg['cms.pro.column.serviceType']}</th>
+                        <th>${msg['cms.pro.column.pstatus']}</th>
+                        <th>${msg['cms.pro.column.signRange']}</th>
+                        <th>${msg['cms.pro.column.serviceTarget']}</th>
+
+                        <th>${msg['cms.pro.column.pnum']}</th>
+                        <th>${msg['cms.pro.column.pname']}</th>
+                        <!--<th>${msg['cms.pro.column.pimg']}</th>-->
+                        <th>招募开始时间</th>
+                        <th>招募结束时间</th>
+                        <th>${msg['cms.pro.column.endTime']}</th>
+                        <th>${msg['cms.pro.column.serviceTime']}</th>
+                        <th>${msg['cms.pro.column.benginTime']}</th>
+                        <th>${msg['cms.pro.column.pid']}</th>
+                        <!--<th>${msg['cms.pro.column.desp']}</th>-->
+                        <th>${msg['cms.pro.column.cnd']}</th>
+                        <th>${msg['cms.pro.column.volunteerProtection']}</th>
+                        <th>${msg['cms.pro.column.proOfTeam']}</th>
+                        <th>${msg['globals.table.column.operation']}</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="cd-panel from-right">
+            <header class="cd-panel-header">
+                <h4>高级筛选</h4>
+            </header>
+            <div class="cd-panel-container">
+                <div class="cd-panel-content shadow">
+                    <div class="form-group">
+                        <label for="region">${msg['cms.pro.column.region']}</label>
+                        <select id="region" class="form-control" name="region" data-parsley-required="true"  >
+                            <option>请选择</option>
+                            <%for( item in region ){%>
+                            <option value = "${item.code}">${item.name}</option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceType">${msg['cms.pro.column.serviceType']}</label>
+                        <select id="serviceType" class="form-control" name="serviceType" data-parsley-required="true"  >
+                            <option>请选择</option>
+                            <%for( item in serviceType ){%>
+                            <option value = "${item.code}">${item.name}</option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pstatus">${msg['cms.pro.column.pstatus']}</label>
+                        <select id="pstatus" class="form-control" name="pstatus" data-parsley-required="true"  >
+                            <option>请选择</option>
+                            <%for( item in pstatus ){%>
+                            <option value = "${item.code}">${item.name}</option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="signRange">${msg['cms.pro.column.signRange']}</label>
+                        <select id="signRange" class="form-control" name="signRange" data-parsley-required="true"  >
+                            <option>请选择</option>
+                            <%for( item in signRange ){%>
+                            <option value = "${item.code}">${item.name}</option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceTarget">${msg['cms.pro.column.serviceTarget']}</label>
+                        <select id="serviceTarget" class="form-control" name="serviceTarget" data-parsley-required="true"  >
+                            <option>请选择</option>
+                            <%for( item in serviceTarget ){%>
+                            <option value = "${item.code}">${item.name}</option>
+                            <%}%>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="pnum">${msg['cms.pro.column.pnum']}</label>
+                        <input type="text" id="pnum" name="pnum" onclick="this.value=''" class="form-control" placeholder="${msg['cms.pro.column.pnum']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="pname">${msg['cms.pro.column.pname']}</label>
+                        <input type="text" id="pname" name="pname" onclick="this.value=''" class="form-control" placeholder="${msg['cms.pro.column.pname']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="recruitStartTime">${msg['cms.pro.column.recruitStartTime']}</label>
+                        <div class="input-group date form_datetime " style="padding-left: 16px;padding-right: 16px;" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="at">
+                            <input type="text" size="16" id="recruitStartTime" readonly class="form-control" name="recruitStartTime"  data-parsley-required="true">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="recruitEndTime">${msg['cms.pro.column.recruitEndTime']}</label>
+                        <div class="input-group date form_datetime " style="padding-left: 16px;padding-right: 16px;" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="at">
+                            <input type="text" size="16" id="recruitEndTime" readonly class="form-control" name="recruitEndTime"  data-parsley-required="true">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="endTime">${msg['cms.pro.column.endTime']}</label>
+                        <div class="input-group date form_datetime " style="padding-left: 16px;padding-right: 16px;" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="at">
+                            <input type="text" size="16" id="endTime" readonly class="form-control" name="endTimeStr"  data-parsley-required="true">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceTime">${msg['cms.pro.column.serviceTime']}</label>
+                        <div class="input-group date form_datetime " style="padding-left: 16px;padding-right: 16px;" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="at">
+                            <input type="text" size="16" id="serviceTime" readonly class="form-control" name="serviceTimeStr"  data-parsley-required="true">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="benginTime">${msg['cms.pro.column.benginTime']}</label>
+                        <div class="input-group date form_datetime " style="padding-left: 16px;padding-right: 16px;" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="at">
+                            <input type="text" size="16" id="benginTime" readonly class="form-control" name="benginTimeStr"  data-parsley-required="true">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pid">${msg['cms.pro.column.pid']}</label>
+                        <input type="text" id="pid" name="pid" onclick="this.value=''" class="form-control" placeholder="${msg['cms.pro.column.pid']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="desp">${msg['cms.pro.column.desp']}</label>
+                        <input type="text" id="desp" name="desp" onclick="this.value=''" class="form-control" placeholder="${msg['cms.pro.column.desp']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="cnd">${msg['cms.pro.column.cnd']}</label>
+                        <input type="text" id="cnd" name="cnd" onclick="this.value=''" class="form-control" placeholder="${msg['cms.pro.column.cnd']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="content">${msg['cms.pro.column.content']}</label>
+                        <input type="text" id="content" name="content" onclick="this.value=''" class="form-control" placeholder="${msg['cms.pro.column.content']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteerProtection">${msg['cms.pro.column.volunteerProtection']}</label>
+                        <input type="text" id="volunteerProtection" name="volunteerProtection" onclick="this.value=''" class="form-control" placeholder="${msg['cms.pro.column.volunteerProtection']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="proOfTeam">${msg['cms.pro.column.proOfTeam']}</label>
+                        <input type="text" id="proOfTeam" name="proOfTeam" onclick="this.value=''" class="form-control" placeholder="${msg['cms.pro.column.proOfTeam']}">
+                    </div>
+                    <button id="searchBtn" type="button" class="btn btn-default">查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="dialogDelete" class="modal fade bs-modal-sm" tabindex="-2" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">${msg['globals.button.delete']}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        ${msg['globals.button.delete.notice']}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">${msg['globals.button.cancel']}</button>
+                <button id="okDel" type="button" class="btn btn-primary" data-loading-text="${msg['globals.button.delete.tip']}">${msg['globals.button.confirm']}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dialogDetail" class="modal fade bs-modal-sm" tabindex="-3" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<script language="JavaScript">
+    var datatable;
+    function initDatatable() {
+        $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd',minView:'month'});
+        datatable = $('.datatable').DataTable({
+            "dom": '<"toolbar">frtip',
+            "searching":false,
+            "processing": false,
+            "serverSide": true,
+            "select": true,
+            "ordering": true,
+            "language": {
+                "url": "${base}/assets/plugins/datatables/${lang}.json"
+            },
+            "preDrawCallback": function () {
+                sublime.showLoadingbar($(".main-content"));
+            },
+            "drawCallback": function () {
+                sublime.closeLoadingbar($(".main-content"));
+            },
+            "ajax": {
+                "url": "${base}/platform/cms/pro/data",
+                "type": "post",
+                "data": function (d) {
+                    d.region=$('#region').val();
+                    d.serviceType=$('#serviceType').val();
+                    d.pstatus=$('#pstatus').val();
+                    d.signRange=$('#signRange').val();
+                    d.serviceTarget=$('#serviceTarget').val();
+                    d.pnum=$('#pnum').val();
+
+                    d.pname=$('#pname').val();
+                    d.recruitStartTime=$('#recruitStartTime').val();
+                    d.recruitEndTime=$('#recruitEndTime').val();
+                    d.endTime=$('#endTime').val();
+                    d.serviceTime=$('#serviceTime').val();
+                    d.benginTime=$('#benginTime').val();
+                    d.pid=$('#pid').val();
+                    d.desp=$('#desp').val();
+                    d.cnd=$('#cnd').val();
+                    d.content=$('#content').val();
+                    d.volunteerProtection=$('#volunteerProtection').val();
+                    d.proOfTeam=$('#proOfTeam').val();
+                }
+            },
+            "order": [[0, "desc"]],
+            "columns": [
+                    {"data": "region", "bSortable": true},
+                    {"data": "servicetype", "bSortable": true},
+                    {"data": "pstatus", "bSortable": true},
+                    {"data": "signrange", "bSortable": true},
+                    {"data": "servicetarget", "bSortable": true},
+
+                    {"data": "pnum", "bSortable": true},
+                    {"data": "pname", "bSortable": true},
+                    /*{"data": "pimg", "bSortable": true},*/
+                    {"data": "recruitstarttime", "bSortable": true},
+                    {"data": "recruitendtime", "bSortable": true},
+                    {"data": "endtime", "bSortable": true},
+                    {"data": "servicetime", "bSortable": true},
+                    {"data": "bengintime", "bSortable": true},
+                    {"data": "pid", "bSortable": true},
+                    /*{"data": "desp", "bSortable": true},*/
+                    {"data": "cnd", "bSortable": true},
+                    /*{"data": "content", "bSortable": true},*/
+                    {"data": "volunteerprotection", "bSortable": true},
+                    {"data": "proofteam", "bSortable": true},
+            ],
+            "columnDefs": [
+//if (data) {
+//            return moment(parseInt(data*1000)).format("YYYY-MM-DD HH:mm:ss");
+//    }
+                {
+                    "render": function (data, type, row) {
+                        return moment(parseInt(data*1000)).format("YYYY-MM-DD HH:mm");
+                    },
+                    "targets": 7
+                },
+                {
+                    "render": function (data, type, row) {
+                        return moment(parseInt(data*1000)).format("YYYY-MM-DD HH:mm");
+                    },
+                    "targets": 8
+                },
+                {
+                    "render": function (data, type, row) {
+                        return moment(parseInt(data*1000)).format("YYYY-MM-DD HH:mm");
+                    },
+                    "targets": 9
+                },
+                {
+                    "render": function (data, type, row) {
+                        return moment(parseInt(data*1000)).format("YYYY-MM-DD HH:mm");
+                    },
+                    "targets": 10
+                },
+                {
+                    "render": function (data, type, row) {
+                        return moment(parseInt(data*1000)).format("YYYY-MM-DD HH:mm");
+                    },
+                    "targets": 11
+                },
+                {
+                    "render": function (data, type, row) {
+                        return '<div class="btn-group"><button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">' +
+                                ' <i class="ti-settings"></i> <span class="ti-angle-down"></span></button><ul class="dropdown-menu" role="menu">' +
+                                '<li><a href="${base}/platform/cms/pro/detail/' + row.id + '" data-toggle="modal" data-target="#dialogDetail">${msg["globals.button.detail"]}</a></li>' +
+                                '<li><a href="${base}/platform/cms/pro/edit/' + row.id + '" data-pjax>${msg["globals.button.update"]}</a></li>' +
+                                '<li class="divider"></li>' +
+                                '<li><a href="javascript:;" onclick="del(\'' + row.id + '\')">${msg["globals.button.delete"]}</a></li>' +
+                                '</ul></div>';
+                    },
+                    "targets": 16
+                }
+            ]
+        });
+        datatable.on('click', 'tr', function () {
+            $(this).toggleClass('selected');
+        });
+        $("#searchBtn").on('click', function () {
+            datatable.ajax.reload();
+        });
+    }
+    function del(id) {
+        var dialog = $("#dialogDelete");
+        dialog.modal("show");
+        dialog.find("#okDel").unbind("click");
+        dialog.find("#okDel").bind("click", function (event) {
+            var btn = $(this);
+            btn.button("loading");
+            $.post("${base}/platform/cms/pro/delete/" + id, {}, function (data) {
+                if (data.code == 0) {
+                    datatable.ajax.reload(null,false);
+                } else {
+                    Toast.error(data.msg);
+                }
+                btn.button("reset");
+                dialog.modal("hide");
+            }, "json");
+        });
+    }
+    function delCheck() {
+        var chks = datatable.rows('.selected').data();
+        if (chks.length > 0) {
+            var ids = [];
+            $.each(datatable.rows('.selected').data(), function (i, n) {
+                ids.push(n.id);
+            });
+            var dialog = $("#dialogDelete");
+            dialog.modal("show");
+            dialog.find("#okDel").unbind("click");
+            dialog.find("#okDel").bind("click", function (event) {
+                var btn = $(this);
+                btn.button("loading");
+                $.post("${base}/platform/cms/pro/delete", {ids: ids.toString()}, function (data) {
+                    if (data.code == 0) {
+                        datatable.ajax.reload(null,false);
+                    } else {
+                        Toast.error(data.msg);
+                    }
+                    btn.button("reset");
+                    dialog.modal("hide");
+                }, "json");
+            });
+        } else {
+            Toast.warning("${msg['globals.button.delete.select']}");
+        }
+    }
+    $(function () {
+        initDatatable();
+        $("#dialogDetail").on("hidden.bs.modal", function () {
+            $(this).removeData("bs.modal");
+        });
+    });
+</script>
+<%}%>

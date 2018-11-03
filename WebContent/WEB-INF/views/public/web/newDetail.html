@@ -1,0 +1,35 @@
+<%
+layout("../layouts/platform.html"){
+%>
+    <div class="nd-m-c">
+        <div class="cu-nav">
+            当前位置：
+            <%for(var i = (channels.~size -1) ; i >= 0 ; i --){
+            if(i == 0){
+            %>
+            ${channels[i].name}
+            <%
+            }else{
+            %>
+            <a href="${AppDomain!}${base!}/${channels[i].url}?id=${channels[i].id}" target="${channels[i].target}">${channels[i].name}</a>
+            &rarr;
+            <%}
+            }
+            %>
+        </div>
+        <div class="nd-content">
+
+            <div class="nd-c-title">
+                <div class="nd-c-t-1">
+                    ${detail.title}
+                </div>
+                <div class="nd-c-t-2">
+                    ${detail.info}
+                </div>
+            </div>
+            <div class="nd-c-c">
+                ${detail.content}
+            </div>
+        </div>
+    </div>
+<%}%>

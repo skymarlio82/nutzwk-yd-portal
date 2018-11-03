@@ -1,0 +1,45 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+    <title>${detail.title}</title>
+    <style type="text/css">
+
+        img{
+            max-width:100%;
+            height:auto;
+        }
+        .title{text-align: center;}
+        .content {
+            margin:10px;
+            position: relative;
+        }
+        p{
+            padding:0px;
+            margin:0px;
+        }
+    </style>
+</head>
+<body>
+<div class="title">
+    <h3>${detail.title}</h3>
+    <div>
+        <span>${@date.getDate(detail.publishAt,"yyyy-MM-dd")}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>${detail.author}</span>
+    </div>
+</div>
+
+<div class="content" id="content">&nbsp;&nbsp;${detail.content}</div>
+
+<script>
+    var imgs = document.getElementsByTagName("img");//.removeAttribute("width");
+    for(var i = 0 ; i < imgs.length ; i ++){
+        var obj = imgs[i];
+        obj.removeAttribute("width");
+        obj.removeAttribute("height");
+        obj.removeAttribute("style");
+    }
+//    document.querySelector("img").removeAttribute("height");
+//    document.querySelector("img").removeAttribute("style");
+</script>
+</body>
+</html>

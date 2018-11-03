@@ -1,0 +1,349 @@
+<%
+layout("/layouts/platform.html"){
+%>
+<header class="header navbar bg-white shadow">
+    <div class="btn-group tool-button">
+        <a class="btn btn-primary navbar-btn" href="${base}/platform/cms/link/link/index/${classId!}" data-pjax><i
+                class="ti-angle-left"></i> 返回</a>
+    </div>
+</header>
+
+<div class="content-wrap">
+    <div class="wrapper" style="min-height:500px;">
+        <section class="panel panel-form">
+            <form id="addForm" role="form" class="form-horizontal parsley-form" data-parsley-validate
+                  action="${base}/platform/cms/link/link/editDo" method="post">
+                <input id="id" name="id" type="hidden" value="${obj.id!}">
+                <div class="row mb10">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="classId" class="col-sm-2 control-label">所属分类</label>
+
+                            <div class="col-sm-8">
+                                <select id="classId" name="classId" data-parsley-required="true" class="form-control">
+                                    <option value="">请选择所属分类</option>
+                                    <%if(!isEmpty(list)){ for(o in list){
+                                    %>
+                                    <option value="${o.id}"
+                                    <%if(o.id==classId){%>selected<%}%>>${o.name}</option>
+                                    <%
+                                    } }%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="type" class="col-sm-2 control-label">链接类型</label>
+
+                            <div class="col-sm-8">
+                                <select id="type" name="type" data-parsley-required="true" class="form-control">
+                                    <option value="txt"
+                                    <%if(obj.type=="txt"){%>selected<%}%>>文字-文章链接</option>
+                                    <option value="img"
+                                    <%if(obj.type=="img"){%>selected<%}%>>图片-文章链接</option>
+                                    <option value="txt_link"
+                                    <%if(obj.type=="txt_link"){%>selected<%}%>>文字-外部链接</option>
+                                    <option value="img_link"
+                                    <%if(obj.type=="img_link"){%>selected<%}%>>图片-外部链接</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="target" class="col-sm-2 control-label">打开方式</label>
+
+                            <div class="col-sm-8">
+                                <select id="target" name="target" data-parsley-required="true" class="form-control">
+                                    <option value="_blank"
+                                    <%if(obj.target=="_blank"){%>selected<%}%>>新页面打开</option>
+                                    <option value="_self"
+                                    <%if(obj.target=="_self"){%>selected<%}%>>本页面打开</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">链接名称</label>
+
+                            <div class="col-sm-8">
+                                <input type="text" id="name" class="form-control" name="name"
+                                       data-parsley-required="true"
+                                       placeholder="链接名称" value="${obj.name!}"></input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">链接描述</label>
+                            <div class="col-sm-8">
+                                <textarea type="text" id="info" class="form-control" name="info"
+                                          data-parsley-required="true"
+                                          placeholder="链接描述">${obj.info}</textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" id="innerDisplay"
+                             style="display:${obj.type == 'img' || obj.type == 'txt' ? 'block':'none'};">
+                            <label for="urlSel" class="col-sm-2 control-label">链接地址</label>
+
+                            <div class="col-sm-8">
+                                <select type="text" id="urlSel" class="form-control" name="urlSel" >
+                                    <option value="${article.id!}" selected >
+                                        ${article.title!}
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="outerDisplay" style="display:${obj.type == 'img_link' || obj.type == 'txt_link' ? 'block':'none'};">
+                            <label for="urlWri" class="col-sm-2 control-label">链接地址</label>
+
+                            <div class="col-sm-8">
+                                <input type="text" id="urlWri" class="form-control" name="urlWri"
+                                       value="${obj.url!}" onkeypress="setPicUrl(this);"  onblur="setPicUrl(this);"
+                                       placeholder="http://">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" style="display: none;">
+                            <label for="url" class="col-sm-2 control-label">链接地址</label>
+
+                            <div class="col-sm-8">
+                                <input type="text" id="url" onkeypress="setPicUrl(this);" onblur="setPicUrl(this);" class="form-control" name="url" data-parsley-required="true"
+                                       value="${obj.url!}"
+                                       placeholder="http://">
+                            </div>
+                        </div>
+                        <div id="div_picurl" class="form-group" style="display: <%if(obj.type=="img" || obj.type == "img_link" ){%>block<%}else{%>none<%}%>">
+                        <label for="picurl" class="col-sm-2 control-label">上传图片</label>
+
+                        <div class="col-sm-8">
+                            <div id="queue"></div>
+                            <div>
+                                <input id="file_upload" name="file_upload" type="file" multiple="false">
+                            </div>
+                            <div id="img" style="padding: 5px;">
+                                <%if(!isEmpty(obj.picurl)){%>
+                                <img src='${obj.picurl!}' style='width:150px;'>
+                                <i class="fa fa-close" onclick="$('#picurl').val('');$('#img').html('');"></i>
+                                <%}%>
+                            </div>
+                            <input type="hidden" id="picurl" name="picurl" value="${obj.picurl!}">
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+        <div class="form-group text-center">
+            <label></label>
+
+            <div>
+                <button class="btn btn-primary btn-block btn-lg btn-parsley" data-loading-text="正在提交...">提 交</button>
+            </div>
+        </div>
+    </div>
+    </form>
+    </section>
+
+</div>
+</div>
+<script language="JavaScript">
+    function clearFile() {
+        $("#img").html("");
+        $("#queue").val("");
+        $("#picurl").val("");
+    }
+
+    function setPicUrl(obj){
+        console.log($(obj).val())
+        //$("#picurl").val($(obj).val());
+        $("#url").val($(obj).val());
+    }
+
+    $(document).ready(function () {
+
+        $("#type").on("change", function () {
+            var v = $(this).val();
+            if ('img' == v) {
+                $("#div_picurl").show();
+                $("#innerDisplay").show();
+                $("#outerDisplay").hide();
+            } else if ("txt" == v) {
+                $("#div_picurl").hide();
+                $("#innerDisplay").show();
+                $("#outerDisplay").hide();
+                clearFile();
+            } else if ("img_link" == v) {
+                $("#div_picurl").show();
+                $("#outerDisplay").show();
+                $("#innerDisplay").hide();
+            } else if ("txt_link" == v) {
+                $("#div_picurl").hide();
+                $("#outerDisplay").show();
+                $("#innerDisplay").hide();
+                clearFile();
+            }
+        });
+
+        $("#urlSel").select2({
+            ajax: {
+                url: '${base}/platform/cms/article/data',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        mp: params.term,
+                        start: 0, // search term
+                        length: 30,
+                        draw: params.draw
+                    };
+                },
+                processResults: function (data, params) {
+                    console.log(data);
+                    params.draw = params.draw || 1;
+                    var items = [];
+                    var itemData = data.data;
+                    items.push({id: "", text: "请选择链接文章地址"})
+                    for (var i = 0; i < itemData.length; i++) {
+                        var obj = {}
+                        obj.id = itemData[i].id;
+                        obj.text = itemData[i].title;
+                        items.push(obj);
+                    }
+                    return {
+                        results: items,
+                        pagination: {
+                            more: (params.draw * 30) < data.recordsTotal
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            minimumInputLength: 0,
+            templateResult: formatRepo,
+            templateSelection: formatRepoSelection
+        });
+
+        function formatRepo(repo) {
+            return repo.text;
+        }
+
+        function formatRepoSelection(repo) {
+            return repo.text;
+        }
+
+
+        $("#type").on("change", function () {
+            var v = $(this).val();
+            if ('img' == v) {
+                $("#div_picurl").show();
+            } else if ("txt" == v) {
+                $("#div_picurl").hide();
+                clearFile();
+            } else if ("img_link" == v) {
+                $("#div_picurl").show();
+            } else if ("txt_link" == v) {
+                $("#div_picurl").hide();
+                clearFile();
+            }
+        });
+
+        $("#urlSel").on("change", function () {
+
+            var type = $("#type").val();
+
+            switch (type) {
+                case "img":
+                    $("#url").val($("#urlSel").val());
+                    break;
+                case "txt":
+                    $("#url").val($("#urlSel").val());
+                    break;
+                case "txt_link":
+                    $("#url").val($("#urlWri").val());
+                    break;
+                case "img_link":
+                    $("#url").val($("#urlWri").val());
+                    break;
+            }
+
+        });
+
+        $("#urlWri").on("keypress", function () {
+
+            var type = $("#type").val();
+
+            switch (type) {
+                case "img":
+                    $("#url").val($("#urlSel").val());
+                    break;
+                case "txt":
+                    $("#url").val($("#urlSel").val());
+                    break;
+                case "txt_link":
+                    $("#url").val($("#urlWri").val());
+                    break;
+                case "img_link":
+                    $("#url").val($("#urlWri").val());
+                    break;
+            }
+
+        });
+
+
+        $('#file_upload').uploadifive({
+            'auto': true,
+            'multi': false,
+            'width': '100%',
+            'height': '35',
+            'buttonText': '请选择图片',
+            'fileType': 'image/jpg,image/jpeg,image/png',
+            'fileSizeLimit': 1024,
+            'queueSizeLimit': 1,
+            'formData': {},
+            'queueID': 'queue',
+            'uploadScript': '${base}/open/file/upload/image',
+            'onUploadComplete': function (file, data) {
+                data = JSON.parse(data);
+                if (data.code == 0) {
+                    Toast.success(data.msg);
+                    $("#img").html("<img src='" + data.data + "' style='width:150px;height:95px;'>");
+                    $("#picurl").val(data.data);
+                } else {
+                    clearFile();
+                    Toast.error(data.msg);
+                }
+            },
+            'onDrop': function (file, fileDropCount) {
+                clearFile();
+            },
+            'onClearQueue': function (queue) {
+                clearFile();
+            },
+            'onCancel': function () {
+                clearFile();
+            }
+        });
+        $('#addForm').ajaxForm({
+            dataType: 'json',
+            beforeSubmit: function (arr, form, options) {
+                console.log(arr);
+                form.find("button:submit").button("loading");
+            },
+            success: function (data, statusText, xhr, form) {
+                if (data.code == 0) {
+                    Toast.success(data.msg);
+                    //刷新父级菜单
+                    //form.resetForm();
+                } else {
+                    Toast.error(data.msg);
+                }
+                form.find("button:submit").button("reset");
+            }
+        });
+    });
+</script>
+
+<%}%>

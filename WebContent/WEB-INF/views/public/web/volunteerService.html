@@ -1,0 +1,305 @@
+<%
+layout("../layouts/platform.html"){
+%>
+<div class="content">
+    <!-- 轮播 -->
+    <div class="banner-volunteer">
+        <div class="banner">
+            <div id="myCarousel" class="carousel slide">
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators">
+                    <% for(item in banner!){ %>
+                    <li data-target="#myCarousel" data-slide-to="0" class=" ${itemLP.index == 1?'active':''}"></li>
+                    <%}%>
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+                    <% for(b in banner!){
+
+                    var finalUrl = "";
+                    if(b.type == "img" || b.type == "img_link"){
+                    finalUrl = base!+"/article/detail?id="+b.url;
+                    }else{
+                    finalUrl = b.url;
+                    }%>
+                    <div class="item ${bLP.index == 1?'active':''}">
+                        <a href="${b.url}" target="${b.target}">
+                            <img src="${base!}${b.picurl}" alt="${b.name}">
+                        </a>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+            <div id="login">
+
+            </div>
+        </div>
+    </div>
+    <!--登录-->
+    <div class="volunteer-login">
+        <div class="v-userFrom">
+            <% for(item in teams){ %>
+            <div class="v-u-team">
+                <div class="v-u-t-img">
+                    <a href='${AppDomain!}${base!}/team/detail?channelId=${nav.id}&teamId=${item.id}'>
+                    <img src="${base!}${item.logo}" onerror="errorImg(this)"  alt="${item.groupName}">
+                    </a>
+                    <span>
+                        <a target="_blank" href='${AppDomain!}${base!}/team/detail?id=12312&channelId=${nav.id}&teamId=${item.id}'>
+                        ${item.groupName}</a>
+                    </span>
+                </div>
+            </div>
+            <%}%>
+            <div class="v-u-more"><a href="${AppDomain!}${base!}/team/list?&channelId=${nav.id}&type=map&id=12312" target="_blank">更多>> </a>
+            </div>
+
+        </div>
+        <div class="v-loginFrom loginform i-c">
+            <div class="v-l-title">
+                <span class="v1">志愿者登录</span>
+                <span class="vt"><a href="${base}/sysadmin" style="color: #EB6A18;" target="_blank">志愿组织登录</a></span>
+            </div>
+            <div class="ed-box-c user" style="height: 221px;">
+                <!-- <form action="${base!}/home/sign">-->
+                <div class="formbox">
+                    <% if(session.wx_login != null){ %>
+
+                    <img src="${base!}/assets/img/fl_03.png" alt="">
+
+                    <%}else{%>
+                    <input type="hidden" value="home/index" name="url">
+                    <div class="signBox">
+                        <div class="username" style = "background: url('/assets/img/loginback.png') no-repeat;background-size:100% 100%;">
+                            <input type="text" name="username">
+                        </div>
+                        <div class="pass" style="background: url('/assets/img/passback.png') no-repeat ;background-size:100% 100%;">
+                            <input type="password" name="pass">
+                        </div>
+                    </div>
+                    <div class="sign-btn">
+                        <button onclick="login()">登录</button>
+                    </div>
+                    <%}%>
+                </div>
+                <div class="btn_list">
+                    <a href="${base!}/home/uregister" class="re">志愿者注册</a>
+                    <a href="${base!}/home/register" class="tre">志愿团队注册</a>
+                </div>
+                <!--</form>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="volunteer-activity">
+        <div class="v-a-active">
+            <div class="v-a-a-act">
+                <div class="v-a-a-a-title">
+                    <div class="v-a-a-a-t-name">
+                        ${act.name}
+                    </div>
+                    <div class="v-a-a-a-t-more">
+                        <a href="${AppDomain!}${base}/article/newsList?id=${act.id}" target="_blank">更多》</a>
+                    </div>
+                </div>
+                <div class="v-a-a-a-content">
+                    <div class="v-a-a-a-c-img">
+                        <% if(acts.~size > 0){
+                        %>
+                        <a href="${AppDomain!}${base}/article/detail?id=${acts[0].id}"  target="_blank">
+                            <img src="${AppDomain!}${base!}${acts[0].picurl!}" alt="${acts[0].title!}">
+                        </a>
+                        <div class="c-title">${acts[0].title!}</div>
+                        <%}%>
+                    </div>
+                    <div class="v-text-box">
+
+                        <% for(var i = 1 ;i < acts.~size ; i ++){
+                        var item = acts[i];
+                        %>
+                        <a href="${AppDomain!}${base}/article/detail?id=${item.id}"  target="_blank" >
+                            <div class="cli">
+                                <div class="cli-title">
+                                    ${item.title}
+                                </div>
+                                <div class="cli-date">
+                                    [${@date.getDate(item.opat,"yyyy.MM.dd")}]
+                                </div>
+                            </div>
+                        </a>
+                        <%}%>
+
+                    </div>
+                </div>
+            </div>
+            <div class="v-a-a-pro">
+                <div class="v-a-a-p-title">
+                    <div class="v-a-a-a-t-name">
+                        志愿项目
+                    </div>
+                    <div class="v-a-a-a-t-more">
+                        <a href="${base!}/pro/list?channelId=560a0eb542d445189fc7152faeb26adc&id=123213" target="_blank">更多》</a>
+                    </div>
+                </div>
+                <div class="v-a-a-p-box">
+
+                    <% for(item in proList!){ %>
+                    <div class="v-a-a-p-b-zhibo">
+                        <div class="z-video" data-pro-id = "${item.id}">
+                            <img src="${item.logo}" onerror="errorImg(this)" alt="">
+                            <a>${item.pname}</a>
+                            <div class="target">
+                                <div class="target-desc">
+                                    目标：岗位${item.pnum!}人
+                                </div>
+                                <div class="target-btn">
+
+                                </div>
+                            </div>
+                            <div class="pro-progress">
+                                <div class="cur-progress">
+
+                                </div>
+                            </div>
+                            <div class="pro-s-info">
+                                <div class="pro-s-i-pro">
+                                    <div class="psipd">
+                                        项目进度
+                                    </div>
+                                    <div class="psipdp">
+                                        50%
+                                    </div>
+                                </div>
+                                <div class="pro-s-i-pro">
+                                    <div class="psipd">
+                                        报名人数
+                                    </div>
+                                    <div class="psipdp">
+                                        ${item.signcount!}
+                                    </div>
+                                </div>
+                                <div class="pro-s-i-pro">
+                                    <div class="psipd">
+                                        截止日期
+                                    </div>
+                                    <div class="psipdp">
+                                        <!--${item.recruitEndTime}-->
+                                        ${@date.getDate(item.recruitEndTime,"MM-dd")}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <%}%>
+
+                </div>
+            </div>
+        </div>
+        <div class="v-a-good">
+            <div class="v-a-g-loginFrom">
+                <div class="v-l-title" style="position:relative;">
+                    <span class="v1">好人好事评选</span>
+                    <span class="v2" style = "position:absolute;right: 10px;color:#000"><a href="${base!}/home/goodPeople?id=52eb3bb2e45c4ebc9bcc9f6112c550dd" target="_blank">更多》</a></span>
+                </div>
+                <div class="v-box-c">
+                    <div class="c-b-story">
+                        <% for( var i = 0 ; (i < 1 && i < gpList.~size) ; i ++ ) {%>
+                            <a href="${AppDomain!}${base!}/article/detail?id=${gpList[i].id}" target="_blank">
+                            <img src="${gpList[i].picurl}" />
+                            </a>
+                        <%} %>
+                        <% for( var i = 0 ; (i < gpList.~size && i < 1) ; i ++ ) {%>
+                        <a href="${AppDomain!}${base!}/article/detail?id=${gpList[i].id}" target="_blank">
+                            <p style="color:#F0904F;font-size: 20px;">${gpList[i].title}</p>
+                        </a>
+                        <p style="color: #000;">${gpList[i].info}</p>
+                        <% } %>
+                        <!--<p class="c-b-s ">普陀区大孝子之一动人故事动人故事动人故事</p>-->
+                    </div>
+                    <div class="c-b-story2">
+                        <% for( var i = 1 ; i < gpList.~size && i < 3 ; i ++ ) {%>
+                        <div class="c-b-s2" style="height: 30px;line-height: 30px;padding-left: 10px;"><img src="${base}/assets/img/dasanjiao.png">&nbsp;<a target="_blank"
+                                href="${AppDomain!}${base!}/article/detail?id=${gpList[i].id}" style="font-size: 14px;color: #f0904f;">${gpList[i].title}</a>
+                        </div>
+                        <% } %>
+                        <!-- <div class="c-b-s2"><img src="${base}/img/dasanjiao.png">&nbsp;<a
+                                 href="javascript:">是安全局动人故事动人故事动人故事...</a></divc-b-s>-->
+                        <% for(item in adRightVideo){ %>
+                        <a href="${item.url}" target="_blank">
+                            <img class="img" src="${item.picurl}"/>
+                            <p style="text-align: center;font-size: 13px;color: #EA9942">${item.name}</p>
+                        </a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+
+
+    </div>
+
+
+    <div class="volunteer-brandPro">
+
+        <div class="v-b-p">
+            <a href="javascript:">&nbsp;品牌项目</a>
+        </div>
+        <div class="v-b-p2">
+            <img src="${base!}/assets/img/left-btn.png"
+                 style="width: 17px; height: 38px;margin:60px 0px 0px 0px;cursor: pointer"/>
+            <% for(item in ppList!){ %>
+            <div class="v-b-p-i"><img src="${base!}${item.picurl}"/><a
+                    href="${AppDomain!}${base!}/article/detail?id=${item.id}" target="_blank">${item.title}</a></div>
+            <%}%>
+            <!--<div class="v-b-p-i"><img src="img/volun_03.png" /><a>桃浦文化馆两支部“两学一做”</a></div>
+            <div class="v-b-p-i"><img src="img/volun_03.png" /><a>桃浦文化馆两支部“两学一做”</a></div>
+            <div class="v-b-p-i"><img src="img/volun_03.png" /><a>桃浦文化馆两支部“两学一做”</a></div>
+            <div class="v-b-p-i"><img src="img/volun_03.png" /><a>桃浦文化馆两支部“两学一做”</a></div>-->
+            <img src="${base!}/assets/img/right-btn.png"
+                 style="width: 17px; height: 38px;margin:60px 0px 0px 24px;cursor: pointer"/>
+        </div>
+    </div>
+    <div class="volunteer-link">
+        <div class="v-link">
+            <div class="v-l-link">
+                <a href="javascript:">友情链接 </a>
+            </div>
+            <div class="v-l-info">
+                <select class="jump_">
+                    <option value="">--请选择--</option>
+                    <option onclick="jump('http://sh.chinavolunteer.cn/')" value="http://sh.chinavolunteer.cn/">
+                        —上海市志愿者网—
+                    </option>
+                </select>
+                <select class="jump_">
+                    <option value="">--请选择--</option>
+                    <option onclick="jump('http://sh.wenming.cn/wmw/')" value="http://sh.wenming.cn/wmw/">—上海文明网—
+                    </option>
+                </select>
+                <select class="jump_">
+                    <option value="">--请选择--</option>
+                    <option onclick="jump('http://www.zsptwm.cn/')" value="http://www.zsptwm.cn/">—普陀文明网—</option>
+                </select>
+                <select class="jump_">
+                    <option value="">--请选择--</option>
+                    <option onclick="jump('http://www.sfic.org.cn/')" value="http://www.sfic.org.cn/">—上海市工商业联合会—
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $(".z-video").on("click",function(e){
+            var id = $(this).attr("data-pro-id");
+           window.open("${base}/pro/desc?channelId=${id}&id="+id);
+        });
+    })
+</script>
+
+<%}%>

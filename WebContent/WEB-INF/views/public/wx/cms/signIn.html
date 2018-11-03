@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0"/>
+    <title>${config.bargainName}</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300"/>
+    <link rel="stylesheet" href="${base}/assets/countdown/jquery.countdown.css"/>
+    <link rel="stylesheet" href="${base}/assets/css/animate.css">
+    <link rel="stylesheet" href="${base}/assets/css/mui.min.css">
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+        .space {
+            padding-left: 5px;
+            font-size: 10px;
+            padding-right: 5px;
+        }
+
+        .timer {
+            position: relative;
+            background-color: #FFFFFF;
+            border-left: solid 2px #CCCCCB;
+            border-top: solid 2px #CCCCCB;
+            border-radius: 5px;
+            margin: -1px;
+        }
+
+        .timer p {
+            margin-top: 0px;
+            color: #000;
+        }
+
+        .timerMarginBorder {
+            position: relative;
+            width: 76%;
+            margin: -6px auto;
+            border: solid 18px #FFBB45;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        .timerBorder {
+            position: relative;
+            padding-bottom: 20px;
+            border: solid 4px #DC8F23;
+            border-radius: 5px;
+            margin: -2px;
+        }
+
+        body {
+            background-color: #FF6C00;
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .clearfix {
+            clear: both;
+        }
+
+        .whiteDiv {
+            background: #FFFFFF;
+        }
+
+        .lefttop {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            top: -12px;
+            left: -12px;
+        }
+
+        .righttop {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            top: -12px;
+            right: -12px;
+        }
+
+        .leftbottom {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            bottom: -12px;
+            left: -12px;
+        }
+
+        .rightbottom {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            bottom: -12px;
+            right: -12px;
+        }
+
+        .basicborder {
+            border: solid 2px #310F14;
+            color: #310F14;
+            border-radius: 10px;
+            background: #FEE12E;
+        }
+
+        .join {
+            text-align: center;
+            font-size: 30px;
+            padding-top: 5px;
+            font-weight: bold;
+            padding-bottom: 5px;
+            width: 90%;
+            margin-top: 30px;
+            z-index: 2;
+        }
+
+        .actinfo {
+            text-align: center;
+            width: 92%;
+            position: relative;
+            margin: 60px auto;
+            padding-bottom: 10px;
+        }
+
+        .foodDesc {
+            text-align: right;
+            position: relative;
+            z-index: 2;
+            padding-top: 14px;
+            border: solid 4px #2E0E15;
+            width: 90%;
+            border-radius: 10px;
+            background: #FF6C00;
+            color: #fff;
+            margin: 20px auto;
+            margin-bottom: 10px;
+        }
+
+        .foodTitle {
+            text-align: left;
+        }
+
+        .foodTitle .title {
+            padding-left: 20px;
+            font-size: 22px;
+            /*width: 257px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;*/
+        }
+
+        .actinfo img {
+            border-radius: 10px;
+            width: 95%;
+            margin-top: 10px;
+            height: auto;
+        }
+
+        .actinfo table {
+            width: 95%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .actinfo table img {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+        }
+
+        .actinfo table tr.myTr {
+            border-top: solid 1px #310F14;
+        }
+
+        .foodPrice {
+            position: absolute;
+            top: 50px;
+            text-align: left;
+            font-size: 22px;
+            line-height: 30px;
+            padding-left: 20px;
+        }
+
+        .foodPrice .yuan {
+            color: #823606;
+            font-size: 12px;
+            text-decoration: line-through;
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        .foodPrice p {
+            font-size: 20px;
+            text-align: left;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            color: #823606;
+            width: 257px;
+        }
+
+        .wenzi {
+            text-align: left;
+            padding: 15px;
+        }
+
+        .dmleft {
+            width: 0;
+            height: 0;
+            border-bottom: 40px solid transparent;
+            border-left: 120px solid #FB9006;
+            margin-top: -8px;
+            float: left;
+        }
+
+        .dmright {
+            width: 0;
+            height: 0;
+            border-bottom: 40px solid transparent;
+            border-right: 120px solid #FB9006;
+            margin-top: -8px;
+            margin-right: 0px;
+            float: right;
+
+        }
+
+        .acttitle {
+            background: url(${base}/assets/img/65.png) no-repeat 50% 50%;
+            background-size: cover;
+            width: 77%;
+            font-family: 微软雅黑;
+            font-size: 25px;
+            line-height: 40px;
+            padding-top: 10px;
+            color: #fff;
+            margin: -32px auto;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="orange"
+     style="position:absolute;right: 0px;top: 0px;width: 40px;height: 40px;z-index: 2;background: #FF6C00;border-radius:100%;"></div>
+<img src="${base}/assets/img/bg.jpg" style="text-align:center;margin:0 auto;max-width:720px;z-index: 1;"
+     width="100%"
+     alt="">
+<div class="dmleft">
+</div>
+<div class="dmright">
+</div>
+<div class="timerMarginBorder wow  " style="z-index: 2;background: #FF6C00;" data-wow-delay="0.1s">
+    <div class="lefttop whiteDiv"></div>
+    <div class="righttop whiteDiv"></div>
+    <div class="leftbottom whiteDiv"></div>
+    <div class="rightbottom whiteDiv"></div>
+    <div class="timerBorder wow zoomIn">
+        <div class="timer">
+            <p style="text-align: center;font-size: 16px;margin-bottom: 24px">开始倒计时</p>
+            <div id="countdown"></div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="foodDesc  wow fadeInUp">
+    <div class="foodTitle">
+        <div class="title">老板娘烤肉店“全牛宴”</div>
+    </div>
+    <div class="foodPrice">砍后价：￥ <span>98.8</span><span class="yuan">￥158</span>
+        <p>已有 <span>${count}</span> 人参与砍价</p>
+    </div>
+    <img src="${base}/assets/img/renzhe.jpg" style="width: 30%" alt="">
+</div>
+<div class="actinfo basicborder" style="z-index: 2;">
+    <div class="acttitle">
+        参砍榜
+    </div>
+    <div class="search" style="text-align: center">
+        <input type="search" id="searchInput" autofocus="" onkeyup="searchSign()">
+    </div>
+    <table id="searchTable">
+        <% for(obj in bargains){
+        %>
+        <tr class=" myTr ">
+            <td rowspan="2"><img src="${obj.headimgurl}"></td>
+            <td rowspan="1" class="phone"
+                style="text-align: left;max-width:100px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                ${obj.phone}
+            </td>
+            <td rowspan="2">已砍￥${obj.price}</td>
+            <td rowspan="2" attr-id="${obj.id}">${obj.signIn == null || obj.signIn == 0 ?'<button onclick=signIn(this)>消费</button>':'已消费'}
+            </td>
+        </tr>
+        <tr >
+            <td rowspan="1" class="name"
+                style="text-align: left;max-width:100px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                ${obj.name}
+            </td>
+        </tr>
+        <% }
+        %>
+    </table>
+</div>
+<div class="mui-popup mui-popup-in" style="display: none;;">
+    <div class="mui-popup-inner">
+
+        <div class="mui-popup-title">我要参与</div>
+        <div class="mui-popup-text">请填写以下信息参与活动</div>
+        <div class="mui-popup-input"><input type="text" id="phone" autofocus="" placeholder="请输入手机号码"></div>
+        <div class="mui-popup-input"><input type="text" id="realyname" placeholder="请输入真实姓名"></div>
+    </div>
+    <div class="mui-popup-buttons"><span class="mui-popup-button cancle">取消</span><span
+            class="mui-popup-button mui-popup-button-bold">确定</span></div>
+</div>
+<div class="mui-popup-backdrop mui-active" style="display: none;;"></div>
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="${base}/assets/countdown/jquery.countdown.js"></script>
+<script src="${base}/assets/js/wow.min.js"></script>
+<script src="${base}/assets/js/mui.min.js"></script>
+<script>
+    var baseUrl = "${base}/";
+    var ts = ${config.endTime};
+    ts = ts * 1000;
+    //    var ts = (new Date()).getTime();
+    var currentTime = (new Date()).getTime();
+    if (ts <= currentTime) {
+        $(".timer").find("p").text("活动已结束");
+        $(".join").text("已结束");
+        $(".join").attr("disabled", "disabled");
+        $(".join").on("click", function () {
+            mui.toast("当前活动已结束");
+        });
+    }
+    $('#countdown').countdown({
+        timestamp: ts,
+        callback: function (days, hours, minutes, seconds) {
+        }
+    });
+
+    function signIn(obj) {
+        var $btn = $(obj);
+        var id = $(obj).parent().attr("attr-id");
+
+        $.ajax({
+            url: baseUrl + "public/wx/wechat/act/signData?id=" + id,
+            type: "get",
+            success: function (data) {
+                if (data.code == 0) {
+                    $btn.parent().text("已消费");
+                } else {
+                    mui.toast(data.msg);
+                }
+            }, error: function () {
+                mui.toast("网络连接失败！！！")
+            }
+        })
+    }
+
+    function searchSign() {
+
+        var searchKey = $("#searchInput").val();
+        if (searchKey.trim() == "") {
+            $("#searchTable").find("tr").show();
+            return;
+        }
+        $("#searchTable").find("tr").hide();
+
+        $("#searchTable").find("tr").each(function () {
+
+            var phone = $(this).find(".phone").text();
+            var name = $(this).find(".name").text();
+
+            if (isContains(phone, searchKey)) {
+                $(this).show();
+                $(this).next("tr").show();
+            }
+
+            if (isContains(name, searchKey)) {
+                $(this).show();
+                $(this).prev("tr").show();
+            }
+        });
+    }
+
+    function isContains(str, substr) {
+        return new RegExp(substr).test(str);
+    }
+</script>
+<script src="${base}/assets/js/script.js"></script>
+</body>
+</html>
+

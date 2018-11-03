@@ -1,0 +1,254 @@
+<%
+layout("/layouts/platform.html"){
+%>
+<section class="content-wrap bg-white">
+    <header class="header navbar bg-white shadow">
+        <div class="btn-group tool-button">
+            <button class="btn btn-danger navbar-btn" onclick="delCheck()"><i class="ti-close"></i> ${msg['globals.button.delete.more']}</button>
+            <a href="/platform/cms/vote/add" class="btn btn-primary navbar-btn" ><i class="ti-add"></i> 新增投票</a>
+        </div>
+        <div class="pull-right offscreen-right">
+            <button class="btn btn-primary navbar-btn" onclick="sublime.toggleFilter('.cd-panel')"><i
+                    class="fa fa-sliders"></i> 筛选
+            </button>
+        </div>
+    </header>
+    <div class=panel-body style="padding-top: 50px;">
+        <div class="table-responsive no-border">
+            <table class="table table-bordered table-striped mg-t datatable">
+                <thead>
+                    <tr>
+                            <th>${msg['cms.vote.column.aid']}</th>
+                            <th>${msg['cms.vote.column.votepeople']}</th>
+                            <th>${msg['cms.vote.column.votetype']}</th>
+                            <th>${msg['cms.vote.column.votecontent']}</th>
+                            <th>${msg['cms.vote.column.voteDate']}</th>
+                            <th>${msg['globals.table.column.operation']}</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="cd-panel from-right">
+            <header class="cd-panel-header">
+                <h4>高级筛选</h4>
+            </header>
+            <div class="cd-panel-container">
+                <div class="cd-panel-content shadow">
+
+                    <div class="form-group">
+                        <label for="aid">${msg['cms.vote.column.aid']}</label>
+                        <select  id="aid" class="form-control" name="aid" data-parsley-required="ture">
+                            <option > 请选择</option>
+                            <% for( item in articles ){%>
+                            <option value="${item.id}">${item.title}</option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="votepeople">${msg['cms.vote.column.votepeople']}</label>
+                        <select  id="votepeople" class="form-control" name="votepeople" data-parsley-required="ture">
+                            <option > 请选择</option>
+                                <% for( item in users ){%>
+                                <option value="${item.id}">${item.username}</option>
+                                <%}%>
+                            <% for( item in userTeams ){%>
+                            <option value="${item.id}">${item.groupName}</option>
+                            <%}%>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                    <label for="votetype">${msg['cms.vote.column.votetype']}</label>
+                        <select  id="votetype" class="form-control" name="votetype" data-parsley-required="ture">
+                            <option > 请选择 </option>
+                            <option value="0"> 志愿者投票 </option>
+                            <option value="1"> 团体投票 </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="votecontent">${msg['cms.vote.column.votecontent']}</label>
+                        <input type="text" id="votecontent" name="votecontent" onclick="this.value=''" class="form-control" placeholder="${msg['cms.vote.column.votecontent']}">
+                    </div>
+
+                    <div class="form-group">
+                    <label for="voteDate">${msg['cms.vote.column.voteDate']}</label>
+                        <div class="input-group date form_datetime "
+                             style="padding-left: 16px;padding-right: 16px;" data-date="1979-09-16T05:25:07Z"
+                             data-date-format="dd MM yyyy - HH:ii p" data-link-field="at">
+                            <input type="text" size="16" id="voteDate" readonly class="form-control" name="voteDate"
+                                   data-parsley-required="true">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                        </div>
+                    </div>
+                    <button id="searchBtn" type="button" class="btn btn-default">查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="dialogDelete" class="modal fade bs-modal-sm" tabindex="-2" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">${msg['globals.button.delete']}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        ${msg['globals.button.delete.notice']}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">${msg['globals.button.cancel']}</button>
+                <button id="okDel" type="button" class="btn btn-primary" data-loading-text="${msg['globals.button.delete.tip']}">${msg['globals.button.confirm']}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dialogDetail" class="modal fade bs-modal-sm" tabindex="-3" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<script language="JavaScript">
+    var datatable;
+    function initDatatable() {
+        $(".form_datetime").datetimepicker({minView: "month", format: 'yyyy-mm-dd',})
+        datatable = $('.datatable').DataTable({
+            "dom": '<"toolbar">frtip',
+            "searching":false,
+            "processing": false,
+            "serverSide": true,
+            "select": true,
+            "ordering": true,
+            "language": {
+                "url": "${base}/assets/plugins/datatables/${lang}.json"
+            },
+            "preDrawCallback": function () {
+                sublime.showLoadingbar($(".main-content"));
+            },
+            "drawCallback": function () {
+                sublime.closeLoadingbar($(".main-content"));
+            },
+            "ajax": {
+                "url": "${base}/platform/cms/vote/data",
+                "type": "post",
+                "data": function (d) {
+                    d.aid=$('#aid').val();
+                    d.votepeople=$('#votepeople').val();
+                    d.votetype=$('#votetype').val();
+                    d.votecontent=$('#votecontent').val();
+                    d.voteDate=$('#voteDate').val();
+                }
+            },
+            "order": [[0, "desc"]],
+            "columns": [
+                    {"data": "aid", "bSortable": true},
+                    {"data": "votepeople", "bSortable": true},
+                    {"data": "votetype", "bSortable": true},
+                    {"data": "votecontent", "bSortable": true},
+                    {"data": "votedate", "bSortable": true},
+            ],
+            "columnDefs": [
+                {
+                    "render": function (data, type, row) {
+
+                        if (row.votetype=='0'){
+                            console.log(row.votetype)
+                            return row.username
+                        }
+                        return row.groupname
+                    },
+                    "targets": 1
+                },
+                {
+                    "render": function (data, type, row) {
+
+                        if (data=='0'){
+                            return "志愿者投票";
+                        }
+                        return "团体投票";
+                    },
+                    "targets": 2
+                },
+                {
+                    "render": function (data, type, row) {
+
+                        return '<div class="btn-group"><button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">' +
+                                ' <i class="ti-settings"></i> <span class="ti-angle-down"></span></button><ul class="dropdown-menu" role="menu">' +
+                                '<li><a href="${base}/platform/cms/vote/detail/' + row.id + '" data-toggle="modal" data-target="#dialogDetail">${msg["globals.button.detail"]}</a></li>' +
+                                '<li class="divider"></li>' +
+                                '<li><a href="javascript:;" onclick="del(\'' + row.id + '\')">${msg["globals.button.delete"]}</a></li>' +
+                                '</ul></div>';
+                    },
+                    "targets": 5
+                }
+            ]
+        });
+        datatable.on('click', 'tr', function () {
+            $(this).toggleClass('selected');
+        });
+        $("#searchBtn").on('click', function () {
+            datatable.ajax.reload();
+        });
+    }
+
+
+
+    function del(id) {
+        var dialog = $("#dialogDelete");
+        dialog.modal("show");
+        dialog.find("#okDel").unbind("click");
+        dialog.find("#okDel").bind("click", function (event) {
+            var btn = $(this);
+            btn.button("loading");
+            $.post("${base}/platform/cms/vote/delete/" + id, {}, function (data) {
+                if (data.code == 0) {
+                    datatable.ajax.reload(null,false);
+                } else {
+                    Toast.error(data.msg);
+                }
+                btn.button("reset");
+                dialog.modal("hide");
+            }, "json");
+        });
+    }
+    function delCheck() {
+        var chks = datatable.rows('.selected').data();
+        if (chks.length > 0) {
+            var ids = [];
+            $.each(datatable.rows('.selected').data(), function (i, n) {
+                ids.push(n.id);
+            });
+            var dialog = $("#dialogDelete");
+            dialog.modal("show");
+            dialog.find("#okDel").unbind("click");
+            dialog.find("#okDel").bind("click", function (event) {
+                var btn = $(this);
+                btn.button("loading");
+                $.post("${base}/platform/cms/vote/delete", {ids: ids.toString()}, function (data) {
+                    if (data.code == 0) {
+                        datatable.ajax.reload(null,false);
+                    } else {
+                        Toast.error(data.msg);
+                    }
+                    btn.button("reset");
+                    dialog.modal("hide");
+                }, "json");
+            });
+        } else {
+            Toast.warning("${msg['globals.button.delete.select']}");
+        }
+    }
+    $(function () {
+        initDatatable();
+        $("#dialogDetail").on("hidden.bs.modal", function () {
+            $(this).removeData("bs.modal");
+        });
+    });
+</script>
+<%}%>

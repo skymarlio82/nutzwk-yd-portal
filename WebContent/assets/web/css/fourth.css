@@ -1,0 +1,24 @@
+*{margin: 0;padding: 0}
+.wenmin{width: 80%;height: 1300px;margin: 0 auto;}
+.wenmin_0{width: 100%;height: 100%;}
+.wenmin_1{width: 85%;height:20%;margin: 3% auto;}
+.wenmin_1 img{width: 100%;height: 100%}
+.wenmin_2{width:85%;height:65%; margin: 0 auto;position: relative}
+.wenmin2_1{width: 100%;height: 4%;}
+.wenmin2_1 li{list-style: none;float: left;height: 100%;width: 24%;text-align: center;color: #fff;line-height: 30px;cursor: pointer;}
+.list{margin-left: 1.3%;background-color:#A1A1A1;}
+.list1{background-image: url(../img/01_04.png);background-size: 100% 100%}
+.wenmin2_1 li:hover{background-image: url(../img/01_04.png);background-size: 100% 100%}
+.wenmin2_2{width: 73%;height: 91%;margin-top: 4%}
+.wenmin2_2 li{list-style: none;width: 100%;height: 23%;}
+.wenmin2_2 li img{height: 100%;width: 33%;float: left}
+.wenmin2_2txt{width: 65%;height: 100%;float: right}
+.wenmin2_2txt span{float: right;color:#D7D7D7;font-size: 11px;padding-top: 70px;}
+.listimg{margin-top: 3%}
+.wenmin2_3{width: 24%;height: 91%;position: absolute;right: 0;top: 8.5%;text-align: center}
+.wenmin2_3 p{font-size: 13px;padding-bottom: 10px}
+.wenmin2_3 img{width: 100%;height:23% }
+.img_li{margin-top: 5%}
+.wenmin_3{width: 60%;height: 5%;line-height: 40px;margin-left: 20%;margin-top: 6%}
+.wenmin_3 li{list-style: none;float: left;width: 20px;height: 20px;border: 1px solid #DEDEDE;text-align: center;line-height: 20px;margin-left: 3%;cursor:pointer;font-size: 15px;color: #0161D1}
+.list5{width:80px !important;color: #01379B;font-weight: bold}

@@ -1,0 +1,466 @@
+<%
+layout("/layouts/platform.html"){
+%>
+<section class="content-wrap bg-white">
+    <header class="header navbar bg-white shadow">
+        <div class="btn-group tool-button">
+            <a id="add" class="btn btn-primary navbar-btn" href="${base}/platform/cms/user/add" data-pjax>
+                <i class="ti-plus"></i> ${msg['globals.button.add']}
+            </a>
+            <button class="btn btn-danger navbar-btn" onclick="delCheck()"><i class="ti-close"></i>
+                ${msg['globals.button.delete.more']}
+            </button>
+        </div>
+        <div class="pull-right offscreen-right">
+            <button class="btn btn-primary navbar-btn" onclick="sublime.toggleFilter('.cd-panel')"><i
+                    class="fa fa-sliders"></i> 筛选
+            </button>
+        </div>
+    </header>
+    <div class=panel-body style="padding-top: 50px;">
+        <div class="table-responsive no-border">
+            <table class="table table-bordered table-striped mg-t datatable">
+                <thead>
+                <tr>
+                    <th>${msg['cms.user.column.vid']}</th>
+                    <th>${msg['cms.user.column.username']}</th>
+                    <!-- <th>${msg['cms.user.column.headUrl']}</th>-->
+                    <!--<th>${msg['cms.user.column.password']}</th>-->
+                    <th>${msg['cms.user.column.email']}</th>
+                    <th>${msg['cms.user.column.contry']}</th>
+                    <!--<th>${msg['cms.user.column.realyName']}</th>-->
+                    <!--<th>${msg['cms.user.column.cardType']}</th>-->
+                    <th>${msg['cms.user.column.cardId']}</th>
+                    <th>${msg['cms.user.column.gender']}</th>
+                    <!--<th>${msg['cms.user.column.uboth']}</th>-->
+                    <!--<th>${msg['cms.user.column.ubation']}</th>
+                    <th>${msg['cms.user.column.placeOforigin']}</th>-->
+                    <th>${msg['cms.user.column.mp']}</th>
+                    <th>${msg['cms.user.column.tel']}</th>
+                    <!--<th>${msg['cms.user.column.qq']}</th>-->
+                    <!--<th>${msg['cms.user.column.weibo']}</th>-->
+                    <!--<th>${msg['cms.user.column.region']}</th>-->
+                    <!--<th>${msg['cms.user.column.address']}</th>-->
+                    <!--<th>${msg['cms.user.column.youCode']}</th>-->
+                    <!--<th>${msg['cms.user.column.political']}</th>-->
+                    <!--<th>${msg['cms.user.column.education']}</th>-->
+                    <!-- <th>${msg['cms.user.column.employmentStatus']}</th>-->
+                    <th>${msg['cms.user.column.invatToPro']}</th>
+                    <th>${msg['cms.user.column.invatToregion']}</th>
+                    <th>${msg['cms.user.column.invatType']}</th>
+                    <th>${msg['cms.user.column.serviceRegion']}</th>
+                    <th>${msg['cms.user.column.authStatus']}</th>
+                    <th>${msg['cms.user.column.authReason']}</th>
+                    <th>${msg['cms.user.column.serviceTime']}</th>
+                    <th>${msg['globals.table.column.operation']}</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="cd-panel from-right">
+            <header class="cd-panel-header">
+                <h4>高级筛选</h4>
+            </header>
+            <div class="cd-panel-container">
+                <div class="cd-panel-content shadow">
+
+                    <div class="form-group">
+                        <label for="vid">${msg['cms.user.column.vid']}</label>
+                        <input type="text" id="vid" name="vid" onclick="this.value=''" class="form-control"
+                               placeholder="${msg['cms.user.column.vid']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">${msg['cms.user.column.username']}</label>
+                        <input type="text" id="username" name="username" onclick="this.value=''" class="form-control"
+                               placeholder="${msg['cms.user.column.username']}">
+                    </div>
+                    <!--<div class="form-group">
+                        <label for="headUrl">${msg['cms.user.column.headUrl']}</label>
+                        <input type="text" id="headUrl" name="headUrl" onclick="this.value=''" class="form-control" placeholder="${msg['cms.user.column.headUrl']}">
+                    </div>-->
+
+                    <div class="form-group">
+                        <label for="email">${msg['cms.user.column.email']}</label>
+                        <input type="text" id="email" name="email" onclick="this.value=''" class="form-control"
+                               placeholder="${msg['cms.user.column.email']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="contry">${msg['cms.user.column.contry']}</label>
+                        <input type="text" id="contry" name="contry" onclick="this.value=''" class="form-control"
+                               placeholder="${msg['cms.user.column.contry']}">
+                    </div>
+                    <!--<div class="form-group">
+                        <label for="realyName">${msg['cms.user.column.realyName']}</label>
+                        <input type="text" id="realyName" name="realyName" onclick="this.value=''" class="form-control" placeholder="${msg['cms.user.column.realyName']}">
+                    </div>-->
+                    <!-- <div class="form-group">
+                         <label for="cardType">${msg['cms.user.column.cardType']}</label>
+                         <select id="cardType" class="form-control" name="cardType" data-parsley-required="true ,"width":"80px"">
+                             <option> 请选择</option>
+                             <%for(item in cardtype){%>
+
+                             <option value = "${item.code}">${item.code},${item.name}</option>
+                             <%}%>
+                         </select>
+                     </div>-->
+                    <div class="form-group">
+                        <label for="cardId">${msg['cms.user.column.cardId']}</label>
+                        <input type="text" id="cardId" name="cardId" onclick="this.value=''" class="form-control"
+                               placeholder="${msg['cms.user.column.cardId']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">${msg['cms.user.column.gender']}</label>
+                        <input type="text" id="gender" name="gender" onclick="this.value=''" class="form-control"
+                               placeholder="${msg['cms.user.column.gender']}">
+                    </div>
+                    <!--  <div class="form-group">
+                          <label for="uboth">${msg['cms.user.column.uboth']}</label>
+                          <div class=" input-group date form_datetime "
+                               style="padding-left: 16px;padding-right: 16px;" data-date="1979-09-16T"
+                               data-date-format="dd MM yyyy - HH:ii p" data-link-field="at">
+                              <input type="text" size="16" id="uboth" readonly class="form-control" name="uboth"
+                                     data-parsley-required="true ,"width":"80px"">
+                              <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                              <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                          </div>
+                      </div>-->
+                    <!--     <div class="form-group">
+                             <label for="placeOforigin">${msg['cms.user.column.placeOforigin']}</label>
+                             <input type="text" id="placeOforigin" name="placeOforigin" onclick="this.value=''" class="form-control" placeholder="${msg['cms.user.column.placeOforigin']}">
+                         </div>-->
+                    <div class="form-group">
+                        <label for="mp">${msg['cms.user.column.mp']}</label>
+                        <input type="text" id="mp" name="mp" onclick="this.value=''" class="form-control"
+                               placeholder="${msg['cms.user.column.mp']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="tel">${msg['cms.user.column.tel']}</label>
+                        <input type="text" id="tel" name="tel" onclick="this.value=''" class="form-control"
+                               placeholder="${msg['cms.user.column.tel']}">
+                    </div>
+                    <!--<div class="form-group">
+                        <label for="qq">${msg['cms.user.column.qq']}</label>
+                        <input type="text" id="qq" name="qq" onclick="this.value=''" class="form-control" placeholder="${msg['cms.user.column.qq']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="weibo">${msg['cms.user.column.weibo']}</label>
+                        <input type="text" id="weibo" name="weibo" onclick="this.value=''" class="form-control" placeholder="${msg['cms.user.column.weibo']}">
+                    </div>-->
+                    <!-- <div class="form-group">
+                         <label for="region">${msg['cms.user.column.region']}</label>
+                         <select id="region" class="form-control" name="region" data-parsley-required="true ,"width":"80px"">
+                             <option> 请选择</option>
+                             <%for(item in region){%>
+                             <option value = "${item.code}">${item.name}</option>
+                             <%}%>
+                         </select>
+
+                     </div>-->
+                    <div class="form-group">
+                        <label for="address">${msg['cms.user.column.address']}</label>
+                        <input type="text" id="address" name="address" onclick="this.value=''" class="form-control"
+                               placeholder="${msg['cms.user.column.address']}">
+                    </div>
+                    <!--<div class="form-group">-->
+                    <!--<label for="youCode">${msg['cms.user.column.youCode']}</label>-->
+                    <!--<input type="text" id="youCode" name="youCode" onclick="this.value=''" class="form-control" placeholder="${msg['cms.user.column.youCode']}">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">
+                        <label for="political">${msg['cms.user.column.political']}</label>
+                        <input type="text" id="political" name="political" onclick="this.value=''" class="form-control" placeholder="${msg['cms.user.column.political']}">
+                    </div>
+-->
+                    <!-- <div class="form-group">
+                         <label for="education">${msg['cms.user.column.education']}</label>
+                         <select id="education" class="form-control" name="education" data-parsley-required="true ,"width":"80px"">
+                             <option> 请选择</option>
+                             <%for(item in education){%>
+                             <option value = "${item.code}">${item.name}</option>
+                             <%}%>
+                         </select>
+                     </div>-->
+                    <!--  <div class="form-group">
+                          <label for="employmentStatus">${msg['cms.user.column.employmentStatus']}</label>
+                          <select id="employmentStatus" class="form-control" name="employmentStatus" data-parsley-required="true ,"width":"80px"">
+                              <option> 请选择</option>
+                              <%for(item in employmentStatus){%>
+                              <option value = "${item.code}">${item.name}</option>
+                              <%}%>
+                          </select>
+                      </div>-->
+                    <div class="form-group">
+                        <label for="invatToPro">${msg['cms.user.column.invatToPro']}</label>
+                        <input type="text" id="invatToPro" name="invatToPro" onclick="this.value=''"
+                               class="form-control" placeholder="${msg['cms.user.column.invatToPro']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="invatToregion">${msg['cms.user.column.invatToregion']}</label>
+                        <select id="invatToregion" class="form-control" name="invatToregion"
+                                data-parsley-required="true ,"width":"80px"">
+                            <option> 请选择</option>
+                            <%for(item in region){%>
+                            <option value="${item.code}">${item.name}</option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="invatType">${msg['cms.user.column.invatType']}</label>
+                        <select id="invatType" class="form-control" name="invatType" data-parsley-required="true ,"width":"80px"">
+                            <option> 请选择</option>
+                            <%for(item in invatType){%>
+                            <option value="${item.code}">${item.name}</option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceRegion">${msg['cms.user.column.serviceRegion']}</label>
+                        <select id="serviceRegion" class="form-control" name="serviceRegion"
+                                data-parsley-required="true ,"width":"80px"">
+                            <option> 请选择</option>
+                            <%for(item in region){%>
+                            <option value="${item.code}">${item.name}</option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="authStatus">${msg['cms.user.column.authStatus']}</label>
+
+                        <select id="authStatus" class="form-control" name="authStatus" data-parsley-required="true ,"width":"80px"">
+                            <option> 请选择</option>
+                            <%for(item in authState){%>
+                            <option value="${item.code}">${item.name}</option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="authReason">${msg['cms.user.column.authReason']}</label>
+                        <input type="text" id="authReason" name="authReason" onclick="this.value=''"
+                               class="form-control" placeholder="${msg['cms.user.column.authReason']}">
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceTime">${msg['cms.user.column.serviceTime']}</label>
+                        <input type="text" id="serviceTime" name="serviceTime" onclick="this.value=''"
+                               class="form-control" placeholder="${msg['cms.user.column.serviceTime']}">
+                    </div>
+                    <button id="searchBtn" type="button" class="btn btn-default">查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="dialogDelete" class="modal fade bs-modal-sm" tabindex="-2" role="dialog" aria-hidden="true ,"width":"80px"">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true ,"width":"80px"">×</button>
+                <h4 class="modal-title">${msg['globals.button.delete']}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        ${msg['globals.button.delete.notice']}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">${msg['globals.button.cancel']}
+                </button>
+                <button id="okDel" type="button" class="btn btn-primary"
+                        data-loading-text="${msg['globals.button.delete.tip']}">${msg['globals.button.confirm']}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dialogDetail" class="modal fade bs-modal-sm" tabindex="-3" role="dialog" aria-hidden="true ,"width":"80px"">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<script language="JavaScript">
+    var datatable;
+
+    function initDatatable() {
+        $(".form_datetime").datetimepicker({minView: "month", format: 'yyyy-mm-dd',})
+        datatable = $('.datatable').DataTable({
+            "dom": '<"toolbar">frtip',
+            "searching": false,
+            "processing": false,
+            "serverSide": true ,"width":"80px",
+            "select": true ,"width":"80px",
+            "ordering": true ,"width":"80px",
+            "language": {
+                "url": "${base}/assets/plugins/datatables/${lang}.json"
+            },
+            "preDrawCallback": function () {
+                sublime.showLoadingbar($(".main-content"));
+            },
+            "drawCallback": function () {
+                sublime.closeLoadingbar($(".main-content"));
+            },
+            "ajax": {
+                "url": "${base}/platform/cms/user/data",
+                "type": "post",
+                "data": function (d) {
+                    d.username = $('#username').val();
+                    d.gender = $('#gender').val();
+                    d.vid = $('#vid').val();
+                    d.email = $('#email').val();
+                    d.contry = $('#contry').val();
+                    /*d.realyName= $('#username').val();*/
+                    /*d.cardType= $('#cardType').val();*/
+                    d.cardId = $('#cardId').val();
+                    /*d.uboth= $('#uboth').val();*/
+                    /*d.ubation= $('#ubation').val();*/
+                    /*d.placeOforigin= $('#placeOforigin').val();*/
+                    d.mp = $('#mp').val();
+                    d.tel = $('#tel').val();
+                    /*d.qq= $('#qq').val();*/
+                    /*d.weibo= $('#weibo').val();*/
+                    /*d.region= $('#region').val();*/
+                    d.address = $('#address').val();
+                    /*d.youCode= $('#youCode').val();
+                    d.education= $('#education').val();
+                    d.employmentStatus= $('#employmentStatus').val();*/
+                    d.invatToPro = $('#invatToPro').val();
+                    d.invatToregion = $('#invatToregion').val();
+                    d.invatType = $('#invatType').val();
+                    d.serviceRegion = $('#serviceRegion').val();
+                    d.authStatus = $('#authStatus').val();
+                    d.authReason = $('#authReason').val();
+                    d.serviceTime = $('#serviceTime').val();
+                    d.political = $('#political').val();
+                }
+            },
+            "order": [[0, "desc"]],
+            "columns": [
+                {"data": "vid", "bSortable": true ,"width":"80px"},
+                {"data": "username", "bSortable": true ,"width":"80px"},
+                /*{"data": "headurl", "bSortable": true ,"width":"80px"},*/
+                /*{"data": "password", "bSortable": false},*/
+                {"data": "email", "bSortable": true ,"width":"80px"},
+                {"data": "contry", "bSortable": true ,"width":"80px"},
+                /*{"data": "realyname", "bSortable": true ,"width":"80px"},*/
+                /*{"data": "cardtype", "bSortable": true ,"width":"80px"},*/
+                {"data": "cardid", "bSortable": true ,"width":"80px"},
+                {"data": "gender", "bSortable": true ,"width":"80px"},
+                /*{"data": "uboth", "bSortable": true ,"width":"80px"},*/
+                /*{"data": "ubation", "bSortable": true ,"width":"80px"},
+                {"data": "placeoforigin", "bSortable": true ,"width":"80px"},*/
+                {"data": "mp", "bSortable": true ,"width":"80px"},
+                {"data": "tel", "bSortable": true ,"width":"80px"},
+                /*{"data": "qq", "bSortable": true ,"width":"80px"},*/
+                /*{"data": "weibo", "bSortable": true ,"width":"80px"},*/
+                /*{"data": "region", "bSortable": true ,"width":"80px"},*/
+               /* {"data": "address", "bSortable": true ,"width":"80px"},*/
+                /*{"data": "youcode", "bSortable": true ,"width":"80px"},*/
+                /*{"data": "political", "bSortable": true ,"width":"80px"},*/
+                /*{"data": "education", "bSortable": true ,"width":"80px"},*/
+                /*{"data": "employmentstatus", "bSortable": true ,"width":"80px"},*/
+                {"data": "invattopro", "bSortable": true ,"width":"80px"},
+                {"data": "invattoregion", "bSortable": true ,"width":"80px"},
+                {"data": "invattype", "bSortable": true ,"width":"80px"},
+                {"data": "serviceregion", "bSortable": true ,"width":"80px"},
+                {"data": "authstatus", "bSortable": true ,"width":"80px"},
+                {"data": "authreason", "bSortable": true ,"width":"80px"},
+                {"data": "servicetime", "bSortable": true ,"width":"80px"},
+            ],
+            "columnDefs": [
+                {
+                    "render": function (data, type, row) {
+                        if (data == '0') {
+                            return "男";
+                        }
+                        return "女";
+                    },
+                    "targets": 5
+                },
+                {
+                    "render": function (data, type, row) {
+                        if (data == "0")
+                            return "待审核";
+                        if (data == "1")
+                            return "审核通过";
+                        if (data == "2")
+                            return "审核失败";
+                    }, "targets": 12
+                },
+                {
+                    "render": function (data, type, row) {
+                        return '<div class="btn-group"><button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">' +
+                            ' <i class="ti-settings"></i> <span class="ti-angle-down"></span></button><ul class="dropdown-menu" role="menu">' +
+                            '<li><a href="${base}/platform/cms/user/detail/' + row.id + '" data-toggle="modal" data-target="#dialogDetail">${msg["globals.button.detail"]}</a></li>' +
+                            '<li><a href="${base}/platform/cms/user/edit/' + row.id + '" data-pjax>${msg["globals.button.update"]}</a></li>' +
+                            '<li><a href="${base}/platform/cms/user/auth/' + row.id + '" data-pjax>审核</a></li>' +
+                            '<li class="divider"></li>' +
+                            '<li><a href="javascript:;" onclick="del(\'' + row.id + '\')">${msg["globals.button.delete"]}</a></li>' +
+                            '</ul></div>';
+                    },
+                    "targets": 15
+                }
+            ]
+        });
+        datatable.on('click', 'tr', function () {
+            $(this).toggleClass('selected');
+        });
+        $("#searchBtn").on('click', function () {
+            datatable.ajax.reload();
+        });
+    }
+
+    function del(id) {
+        var dialog = $("#dialogDelete");
+        dialog.modal("show");
+        dialog.find("#okDel").unbind("click");
+        dialog.find("#okDel").bind("click", function (event) {
+            var btn = $(this);
+            btn.button("loading");
+            $.post("${base}/platform/cms/user/delete/" + id, {}, function (data) {
+                if (data.code == 0) {
+                    datatable.ajax.reload(null, false);
+                } else {
+                    Toast.error(data.msg);
+                }
+                btn.button("reset");
+                dialog.modal("hide");
+            }, "json");
+        });
+    }
+
+    function delCheck() {
+        var chks = datatable.rows('.selected').data();
+        if (chks.length > 0) {
+            var ids = [];
+            $.each(datatable.rows('.selected').data(), function (i, n) {
+                ids.push(n.id);
+            });
+            var dialog = $("#dialogDelete");
+            dialog.modal("show");
+            dialog.find("#okDel").unbind("click");
+            dialog.find("#okDel").bind("click", function (event) {
+                var btn = $(this);
+                btn.button("loading");
+                $.post("${base}/platform/cms/user/delete", {ids: ids.toString()}, function (data) {
+                    if (data.code == 0) {
+                        datatable.ajax.reload(null, false);
+                    } else {
+                        Toast.error(data.msg);
+                    }
+                    btn.button("reset");
+                    dialog.modal("hide");
+                }, "json");
+            });
+        } else {
+            Toast.warning("${msg['globals.button.delete.select']}");
+        }
+    }
+
+    $(function () {
+        initDatatable();
+        $("#dialogDetail").on("hidden.bs.modal", function () {
+            $(this).removeData("bs.modal");
+        });
+    });
+</script>
+<%}%>
